@@ -103,7 +103,8 @@ public class DlgMenu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_EstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EstoqueActionPerformed
-        // TODO add your handling code here:
+        DlgCadastroProdutos cadastro = new DlgCadastroProdutos(true);
+        cadastro.setVisible(true);
     }//GEN-LAST:event_jButton_EstoqueActionPerformed
 
     private void jButton_AereoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AereoActionPerformed

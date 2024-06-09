@@ -68,7 +68,6 @@ public class DlgAereo extends javax.swing.JDialog {
         jButton_BLC37 = new javax.swing.JButton();
         jButton_BLC38 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         jButton7.setText("BLC 1");
         jButton7.setMaximumSize(new java.awt.Dimension(65, 15));
@@ -81,214 +80,243 @@ public class DlgAereo extends javax.swing.JDialog {
 
         jLabel1.setText("CAIXAS");
 
-        jButton_BLC16.setText("BLC 16");
+        jButton_BLC16.setText("16");
+        jButton_BLC16.setBorder(null);
         jButton_BLC16.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC16.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC16.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC17.setText("BLC 17");
+        jButton_BLC17.setText("17");
+        jButton_BLC17.setBorder(null);
         jButton_BLC17.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC17.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC17.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC18.setText("BLC 18");
+        jButton_BLC18.setText("18");
+        jButton_BLC18.setBorder(null);
         jButton_BLC18.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC18.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC18.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC19.setText("BLC 19");
+        jButton_BLC19.setText("19");
+        jButton_BLC19.setBorder(null);
         jButton_BLC19.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC19.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC19.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC20.setText("BLC 20");
+        jButton_BLC20.setText("20");
+        jButton_BLC20.setBorder(null);
         jButton_BLC20.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC20.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC20.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC21.setText("BLC 21");
+        jButton_BLC21.setText("21");
+        jButton_BLC21.setBorder(null);
         jButton_BLC21.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC21.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC21.setPreferredSize(new java.awt.Dimension(70, 15));
-        jButton_BLC21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_BLC21ActionPerformed(evt);
-            }
-        });
 
-        jButton_BLC22.setText("BLC 22");
+        jButton_BLC22.setText("22");
+        jButton_BLC22.setBorder(null);
         jButton_BLC22.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC22.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC22.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC23.setText("BLC 23");
+        jButton_BLC23.setText("23");
+        jButton_BLC23.setBorder(null);
         jButton_BLC23.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC23.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC23.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC24.setText("BLC 24");
+        jButton_BLC24.setText("24");
+        jButton_BLC24.setBorder(null);
         jButton_BLC24.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC24.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC24.setPreferredSize(new java.awt.Dimension(70, 15));
-        jButton_BLC24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_BLC24ActionPerformed(evt);
-            }
-        });
 
-        jButton_BLC25.setText("BLC 25");
+        jButton_BLC25.setText("25");
+        jButton_BLC25.setBorder(null);
         jButton_BLC25.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC25.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC25.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC26.setText("BLC 26");
+        jButton_BLC26.setText("26");
+        jButton_BLC26.setBorder(null);
         jButton_BLC26.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC26.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC26.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC27.setText("BLC 27");
+        jButton_BLC27.setText("27");
+        jButton_BLC27.setBorder(null);
         jButton_BLC27.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC27.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC27.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC28.setText("BLC 28");
+        jButton_BLC28.setText("28");
+        jButton_BLC28.setBorder(null);
         jButton_BLC28.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC28.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC28.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC29.setText("BLC 29");
+        jButton_BLC29.setText("29");
+        jButton_BLC29.setBorder(null);
         jButton_BLC29.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC29.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC29.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC30.setText("BLC 30");
+        jButton_BLC30.setText("30");
+        jButton_BLC30.setBorder(null);
         jButton_BLC30.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC30.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC30.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC31.setText("BLC 31");
+        jButton_BLC31.setText("31");
+        jButton_BLC31.setBorder(null);
         jButton_BLC31.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC31.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC31.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC35.setText("BLC 35");
+        jButton_BLC35.setText("35");
+        jButton_BLC35.setBorder(null);
         jButton_BLC35.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC35.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC35.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC32.setText("BLC 32");
+        jButton_BLC32.setText("32");
+        jButton_BLC32.setBorder(null);
         jButton_BLC32.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC32.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC32.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC33.setText("BLC 33");
+        jButton_BLC33.setText("33");
+        jButton_BLC33.setBorder(null);
         jButton_BLC33.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC33.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC33.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC34.setText("BLC 34");
+        jButton_BLC34.setText("34");
+        jButton_BLC34.setBorder(null);
         jButton_BLC34.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC34.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC34.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC11.setText("BLC 11");
+        jButton_BLC11.setText("11");
+        jButton_BLC11.setBorder(null);
         jButton_BLC11.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC11.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC11.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC12.setText("BLC 12");
+        jButton_BLC12.setText("12");
+        jButton_BLC12.setBorder(null);
         jButton_BLC12.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC12.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC12.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC13.setText("BLC 13");
+        jButton_BLC13.setText("13");
+        jButton_BLC13.setBorder(null);
         jButton_BLC13.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC13.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC13.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC14.setText("BLC 14");
+        jButton_BLC14.setText("14");
+        jButton_BLC14.setBorder(null);
         jButton_BLC14.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC14.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC14.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC15.setText("BLC 15");
+        jButton_BLC15.setText("15");
+        jButton_BLC15.setBorder(null);
         jButton_BLC15.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC15.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC15.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC01.setText("BLC 01");
+        jButton_BLC01.setText("01");
+        jButton_BLC01.setBorder(null);
         jButton_BLC01.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC01.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC01.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC01.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC01ActionPerformed(evt);
+            }
+        });
 
-        jButton_BLC02.setText("BLC 02");
+        jButton_BLC02.setText("02");
+        jButton_BLC02.setBorder(null);
         jButton_BLC02.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC02.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC02.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC03.setText("BLC 03");
+        jButton_BLC03.setText("03");
         jButton_BLC03.setToolTipText("");
+        jButton_BLC03.setBorder(null);
         jButton_BLC03.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC03.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC03.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC04.setText("BLC 04");
+        jButton_BLC04.setText("04");
+        jButton_BLC04.setBorder(null);
         jButton_BLC04.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC04.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC04.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC05.setText("BLC 05");
+        jButton_BLC05.setText("05");
+        jButton_BLC05.setBorder(null);
         jButton_BLC05.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC05.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC05.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC06.setText("BLC 06");
+        jButton_BLC06.setText("06");
+        jButton_BLC06.setBorder(null);
         jButton_BLC06.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC06.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC06.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC07.setText("BLC 07");
+        jButton_BLC07.setText("07");
+        jButton_BLC07.setBorder(null);
         jButton_BLC07.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC07.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC07.setPreferredSize(new java.awt.Dimension(70, 15));
-        jButton_BLC07.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_BLC07ActionPerformed(evt);
-            }
-        });
 
-        jButton_BLC08.setText("BLC 08");
+        jButton_BLC08.setText(" 08");
+        jButton_BLC08.setBorder(null);
         jButton_BLC08.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC08.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC08.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC09.setText("BLC 09");
+        jButton_BLC09.setText("09");
+        jButton_BLC09.setBorder(null);
         jButton_BLC09.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC09.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC09.setPreferredSize(new java.awt.Dimension(70, 15));
 
-        jButton_BLC10.setText("BLC 10");
+        jButton_BLC10.setText("10");
+        jButton_BLC10.setBorder(null);
         jButton_BLC10.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC10.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC10.setPreferredSize(new java.awt.Dimension(70, 15));
 
         jLabel2.setText("CORREDOR");
 
+        jButton_BLC36.setText("36");
+        jButton_BLC36.setBorder(null);
         jButton_BLC36.setMaximumSize(new java.awt.Dimension(15, 70));
         jButton_BLC36.setMinimumSize(new java.awt.Dimension(15, 70));
         jButton_BLC36.setPreferredSize(new java.awt.Dimension(15, 70));
 
+        jButton_BLC37.setText("37");
+        jButton_BLC37.setBorder(null);
         jButton_BLC37.setMaximumSize(new java.awt.Dimension(15, 70));
         jButton_BLC37.setMinimumSize(new java.awt.Dimension(15, 70));
         jButton_BLC37.setPreferredSize(new java.awt.Dimension(15, 70));
 
+        jButton_BLC38.setText("38");
+        jButton_BLC38.setBorder(null);
         jButton_BLC38.setMaximumSize(new java.awt.Dimension(15, 70));
         jButton_BLC38.setMinimumSize(new java.awt.Dimension(15, 70));
         jButton_BLC38.setPreferredSize(new java.awt.Dimension(15, 70));
 
         jLabel3.setText("FUNDO");
-
-        jLabel4.setText("36    37    38");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -342,14 +370,11 @@ public class DlgAereo extends javax.swing.JDialog {
                                 .addComponent(jLabel3))
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)))
                 .addGap(10, 10, 10))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -360,13 +385,11 @@ public class DlgAereo extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -449,19 +472,15 @@ public class DlgAereo extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_BLC24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC24ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_BLC24ActionPerformed
-
-    private void jButton_BLC07ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC07ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_BLC07ActionPerformed
-
-    private void jButton_BLC21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC21ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_BLC21ActionPerformed
+    private void jButton_BLC01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC01ActionPerformed
+        String nomeBloco = "BLC01"; 
+        int numeroBloco = 1;
+        DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+        tela4.setVisible(true);
+    }//GEN-LAST:event_jButton_BLC01ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,6 +529,5 @@ public class DlgAereo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
