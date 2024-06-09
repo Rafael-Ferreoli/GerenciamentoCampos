@@ -316,7 +316,7 @@ public class DlgCadastroProdutos extends javax.swing.JDialog {
 
         } else {
             System.out.println("produto inexistente");
-            JOptionPane.showMessageDialog(this, "A matrícula informada não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
+            JOptionPane.showMessageDialog(this, "O código informado não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
         }
     }//GEN-LAST:event_jButton_CadastroProduto_EditarActionPerformed
 

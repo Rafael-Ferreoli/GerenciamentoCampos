@@ -9,6 +9,9 @@ package com.mycompany.camposdistribuidora.GUI;
  * @author rafae
  */
 public class DlgAereo extends javax.swing.JDialog {
+    
+    private String nomeBloco;
+    private int numeroBloco;
 
     /**
      * Creates new form DlgAereo
@@ -77,6 +80,7 @@ public class DlgAereo extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(216, 546));
         setMinimumSize(new java.awt.Dimension(216, 546));
+        setModal(true);
 
         jLabel1.setText("CAIXAS");
 
@@ -476,8 +480,8 @@ public class DlgAereo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_BLC01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC01ActionPerformed
-        String nomeBloco = "BLC01"; 
-        int numeroBloco = 1;
+        nomeBloco = "BLC01"; 
+        numeroBloco = 0;
         DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
         tela4.setVisible(true);
     }//GEN-LAST:event_jButton_BLC01ActionPerformed

@@ -4,29 +4,68 @@
  */
 package com.mycompany.camposdistribuidora.GUI;
 
+import com.mycompany.camposdistribuidora.Etiqueta;
+import com.mycompany.camposdistribuidora.GerenciadorEtiquetas;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rafae
  */
 public class DlgBloco extends javax.swing.JDialog {
 
+    private GerenciadorEtiquetas gerente;
+    private String produtoSelecionado;
+    private String numeroEtiqueta;
+    private int numeroEtiquetaInt;
+    private int numeroBlocoAtual;
+    private LocalDate dataFormatada = null;
     /**
      * Creates new form DlgBloco
      */
-    public DlgBloco(String nomeBloco,int numeroBloco, boolean modal) {      
+    public DlgBloco(String nomeBloco, int numeroBloco, boolean modal) {
+        this.produtoSelecionado = "";
+        this.gerente = new GerenciadorEtiquetas();
         initComponents();
         jLabel_NomeBloco.setText(nomeBloco);
         setNumEtq(numeroBloco);
-    }
-    
-    public void setNumEtq(int numeroBloco){
-        jLabel_PrimeiraEtqBloco.setText(String.valueOf(numeroBloco*1));
-        jLabel_SegundaEtqBloco.setText(String.valueOf(numeroBloco*2));
-        jLabel_TerceiraEtqBloco.setText(String.valueOf(numeroBloco*3));
-        jLabel_QuartaEtqBloco.setText(String.valueOf(numeroBloco*4));
-        jLabel_QuintaEtqBloco.setText(String.valueOf(numeroBloco*5));
-        jLabel_SextaEtqBloco.setText(String.valueOf(numeroBloco*6));
+        numeroBlocoAtual = numeroBloco;
 
+    }
+
+    public void setNumEtq(int numeroBloco) {
+        jLabel_PrimeiraEtqBloco.setText(String.valueOf(numeroBloco + 1));
+        jLabel_SegundaEtqBloco.setText(String.valueOf(numeroBloco + 2));
+        jLabel_TerceiraEtqBloco.setText(String.valueOf(numeroBloco + 3));
+        jLabel_QuartaEtqBloco.setText(String.valueOf(numeroBloco + 4));
+        jLabel_QuintaEtqBloco.setText(String.valueOf(numeroBloco + 5));
+        jLabel_SextaEtqBloco.setText(String.valueOf(numeroBloco + 6));
+
+    }
+
+    private boolean codigoInternoExiste(String codigoInterno) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("ListagemProdutos.csv"))) {
+            String line;
+            // Ignora o cabeçalho
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length >= 2 && parts[1].equals(codigoInterno)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -48,88 +87,282 @@ public class DlgBloco extends javax.swing.JDialog {
         jLabel_PrimeiraEtqBloco = new javax.swing.JLabel();
         jLabel_TerceiraEtqBloco = new javax.swing.JLabel();
         jLabel_SextaEtqBloco = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea6 = new javax.swing.JTextArea();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(603, 473));
-        setMinimumSize(new java.awt.Dimension(603, 473));
+        setMaximumSize(new java.awt.Dimension(350, 473));
+        setMinimumSize(new java.awt.Dimension(350, 473));
+        setModal(true);
 
         jLabel_NomeBloco.setText("nome");
 
         jLabel_QuintaEtqBloco.setText("etq5");
+        jLabel_QuintaEtqBloco.setMaximumSize(new java.awt.Dimension(35, 25));
+        jLabel_QuintaEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
+        jLabel_QuintaEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
 
         jLabel_QuartaEtqBloco.setText("etq4");
+        jLabel_QuartaEtqBloco.setMaximumSize(new java.awt.Dimension(35, 25));
+        jLabel_QuartaEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
+        jLabel_QuartaEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
 
         jLabel_SegundaEtqBloco.setText("etq2");
+        jLabel_SegundaEtqBloco.setMaximumSize(new java.awt.Dimension(35, 25));
+        jLabel_SegundaEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
+        jLabel_SegundaEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
 
         jLabel_PrimeiraEtqBloco.setText("etq1");
+        jLabel_PrimeiraEtqBloco.setMaximumSize(new java.awt.Dimension(35, 25));
+        jLabel_PrimeiraEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
+        jLabel_PrimeiraEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
 
         jLabel_TerceiraEtqBloco.setText("etq3");
+        jLabel_TerceiraEtqBloco.setMaximumSize(new java.awt.Dimension(35, 25));
+        jLabel_TerceiraEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
+        jLabel_TerceiraEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
 
         jLabel_SextaEtqBloco.setText("etq6");
+        jLabel_SextaEtqBloco.setMaximumSize(new java.awt.Dimension(35, 25));
+        jLabel_SextaEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
+        jLabel_SextaEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea1.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea2.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jTextArea3.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea3.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jTextArea4.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea4.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane4.setViewportView(jTextArea4);
+
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jTextArea5.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea5.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane5.setViewportView(jTextArea5);
+
+        jTextArea6.setColumns(20);
+        jTextArea6.setRows(5);
+        jTextArea6.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea6.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane6.setViewportView(jTextArea6);
+
+        jButton11.setText("add");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("remo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
             .addComponent(jSeparator2)
             .addComponent(jSeparator3)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_NomeBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton12)
+                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_QuintaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_SextaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_QuartaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_TerceiraEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_QuartaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_PrimeiraEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_SegundaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_TerceiraEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_PrimeiraEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_SegundaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel_QuintaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_SextaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_NomeBloco, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_NomeBloco)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton11)
+                            .addComponent(jButton12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_QuintaEtqBloco)
-                    .addComponent(jLabel_SextaEtqBloco))
-                .addGap(116, 116, 116)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_QuartaEtqBloco)
-                    .addComponent(jLabel_TerceiraEtqBloco))
-                .addGap(116, 116, 116)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_PrimeiraEtqBloco)
-                    .addComponent(jLabel_SegundaEtqBloco))
-                .addGap(116, 116, 116))
+                    .addComponent(jLabel_QuintaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_SextaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_QuartaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_TerceiraEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_SegundaEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_PrimeiraEtqBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        boolean inputValido = false;
+
+        while (!inputValido) {
+            try {
+                // Verifica se o código interno existe na lista de produtos
+                this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto a ser adicionado a etiqueta:", "");
+                if (!codigoInternoExiste(this.produtoSelecionado)) {
+                    // Produto não encontrado, exibe mensagem de erro e sai do loop
+                    JOptionPane.showMessageDialog(this, "Produto não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
+                } else {
+                    // Produto encontrado, continua com o processo
+                    System.out.println("Produto encontrado: " + this.produtoSelecionado);
+                }
+                // Solicita o número da etiqueta
+                this.numeroEtiqueta = JOptionPane.showInputDialog("Informe o número da etiqueta do bloco a ser adicionado o produto:", "");
+                if (this.numeroEtiqueta == null) {
+                    // Usuário cancelou a entrada, saindo do loop
+                    break;
+                }
+                // Converte a string numeroEtiqueta para inteiro
+                numeroEtiquetaInt = Integer.parseInt(this.numeroEtiqueta);
+                // Verifica se a etiqueta está no intervalo correto
+                if (numeroEtiquetaInt >= numeroBlocoAtual + 1 && numeroEtiquetaInt <= numeroBlocoAtual + 6) {
+                    // Solicita a data
+                    String data = JOptionPane.showInputDialog("Informe a data (no formato dd/mm/aaaa):", "");
+                    if (data == null) {
+                        // Usuário cancelou a entrada, saindo do loop
+                        break;
+                    }
+
+
+                    try {
+                        // Converte a String de data para um objeto LocalDate
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        dataFormatada = LocalDate.parse(data, formatter);
+
+                        // Data está no formato correto
+                        JOptionPane.showMessageDialog(this, "Data informada: " + dataFormatada, "Data Informada", JOptionPane.INFORMATION_MESSAGE);
+
+                        // Aqui você pode adicionar o código para processar a data
+                        inputValido = true;  // Dados válidos, saindo do loop
+                    } catch (DateTimeParseException e) {
+                        // Tratamento de erro se a entrada do usuário não estiver no formato esperado
+                        JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/mm/aaaa.", "Data Inválida", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    // Aqui você pode adicionar o código para processar a data e o produto
+                    // Cria uma nova etiqueta com os dados inseridos
+                    Etiqueta novaEtiqueta = new Etiqueta(this.produtoSelecionado, dataFormatada, numeroEtiquetaInt);
+
+                    // Adiciona a nova etiqueta à lista de etiquetas
+                    this.gerente.adicionarEtiqueta(novaEtiqueta);
+
+                    // Salva as etiquetas no arquivo após adicionar a nova etiqueta
+                    this.gerente.salvarNoArquivo("ListagemEtiquetas.csv");
+
+                    // Informa ao usuário que a etiqueta foi adicionada com sucesso
+                    JOptionPane.showMessageDialog(this, "Etiqueta adicionada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                    inputValido = true;  // Dados válidos, saindo do loop
+                } else {
+                    // Etiqueta fora do intervalo, reiniciando o processo
+                    JOptionPane.showMessageDialog(this, "A etiqueta informada não foi encontrada nesse bloco.", "Etiqueta Inválida", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException e) {
+                // Tratamento de erro caso a conversão para inteiro falhe, reiniciando o processo
+                JOptionPane.showMessageDialog(this, "Número de etiqueta inválido. Insira um número inteiro.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                Logger.getLogger(DlgBloco.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+/**
+ * @param args the command line arguments
+ */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JLabel jLabel_NomeBloco;
     private javax.swing.JLabel jLabel_PrimeiraEtqBloco;
     private javax.swing.JLabel jLabel_QuartaEtqBloco;
@@ -137,8 +370,20 @@ public class DlgBloco extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel_SegundaEtqBloco;
     private javax.swing.JLabel jLabel_SextaEtqBloco;
     private javax.swing.JLabel jLabel_TerceiraEtqBloco;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JTextArea jTextArea6;
     // End of variables declaration//GEN-END:variables
 }

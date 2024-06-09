@@ -34,6 +34,7 @@ public class DlgMenu extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(216, 216));
         setMinimumSize(new java.awt.Dimension(216, 216));
+        setModal(true);
 
         jButton_Estoque.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton_Estoque.setText("Estoque");
