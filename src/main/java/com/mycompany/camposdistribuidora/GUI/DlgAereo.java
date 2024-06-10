@@ -4,6 +4,10 @@
  */
 package com.mycompany.camposdistribuidora.GUI;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rafae
@@ -480,10 +484,14 @@ public class DlgAereo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_BLC01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC01ActionPerformed
-        nomeBloco = "BLC01"; 
-        numeroBloco = 0;
-        DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
-        tela4.setVisible(true);
+        try {
+            nomeBloco = "BLC01";
+            numeroBloco = 0;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton_BLC01ActionPerformed
 
     /**

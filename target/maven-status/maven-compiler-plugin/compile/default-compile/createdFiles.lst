@@ -1,6 +1,7 @@
 com\mycompany\camposdistribuidora\GUI\FrHome$2.class
 com\mycompany\camposdistribuidora\File\FilePersistence.class
 com\mycompany\camposdistribuidora\GUI\DlgCadastroProdutos$3.class
+com\mycompany\camposdistribuidora\GUI\DlgBloco$2.class
 com\mycompany\camposdistribuidora\File\SerializadorCSVEtiquetas.class
 com\mycompany\camposdistribuidora\Cadastro.class
 com\mycompany\camposdistribuidora\GerenciadorCadastros.class

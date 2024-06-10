@@ -56,13 +56,25 @@ public class GerenciadorEtiquetas {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder saida = new StringBuilder();
-        for (Etiqueta etiqueta : etiquetas) {
-            saida.append(etiqueta.toString()).append("\n");
+    public String[] toStringArray() {
+        StringBuilder[] textAreas = new StringBuilder[6];
+        for (int i = 0; i < textAreas.length; i++) {
+            textAreas[i] = new StringBuilder();
         }
-        return saida.toString();
+
+        for (Etiqueta etiqueta : etiquetas) {
+            int index = etiqueta.getNumEtiqueta()- 1;
+            if (index >= 0 && index < textAreas.length) {
+                textAreas[index].append(etiqueta.toString()).append("\n");
+            }
+        }
+
+        String[] textAreasText = new String[textAreas.length];
+        for (int i = 0; i < textAreas.length; i++) {
+            textAreasText[i] = textAreas[i].toString();
+        }
+
+        return textAreasText;
     }
 
     public void salvarNoArquivo(String pathFile) throws IOException {

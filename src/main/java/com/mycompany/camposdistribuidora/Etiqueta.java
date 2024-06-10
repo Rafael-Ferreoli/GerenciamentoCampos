@@ -16,6 +16,11 @@ public class Etiqueta {
         this.data = data;
         this.numEtiqueta = numEtiqueta;
     }
+    
+    @Override
+    public String toString() {
+        return " Cod Interno: " + codigoInterno + "\n Data Validade: " + data + "\n Num Etiqueta: " + numEtiqueta + "\n ********************";
+    }
 
     public String getCodigoInterno() {
         return codigoInterno;

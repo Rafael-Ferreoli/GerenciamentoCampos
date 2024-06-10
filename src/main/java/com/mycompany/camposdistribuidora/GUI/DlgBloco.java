@@ -7,6 +7,7 @@ package com.mycompany.camposdistribuidora.GUI;
 import com.mycompany.camposdistribuidora.Etiqueta;
 import com.mycompany.camposdistribuidora.GerenciadorEtiquetas;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -28,17 +29,45 @@ public class DlgBloco extends javax.swing.JDialog {
     private int numeroEtiquetaInt;
     private int numeroBlocoAtual;
     private LocalDate dataFormatada = null;
+    String[] etiquetasText;
+
     /**
      * Creates new form DlgBloco
      */
-    public DlgBloco(String nomeBloco, int numeroBloco, boolean modal) {
+    public DlgBloco(String nomeBloco, int numeroBloco, boolean modal) throws FileNotFoundException {
         this.produtoSelecionado = "";
         this.gerente = new GerenciadorEtiquetas();
         initComponents();
         jLabel_NomeBloco.setText(nomeBloco);
         setNumEtq(numeroBloco);
         numeroBlocoAtual = numeroBloco;
+        gerente.carregarDoArquivo("ListagemEtiquetas.csv");
+        desabilitarCampos(false);
+        etiquetasText = gerente.toStringArray();
+        atualizarTextAreas(etiquetasText);
+    }
 
+    public void atualizarTextAreas(String[] textos) {
+        if (textos.length != 6) {
+            System.err.println("Número incorreto de textos para atualização das text areas.");
+            return;
+        }
+
+        jTextArea_EtiquetaPrimeiroBloco.setText(textos[0]);
+        jTextArea_EtiquetaSegundoBloco.setText(textos[1]);
+        jTextArea_EtiquetaTerceiroBloco.setText(textos[2]);
+        jTextArea_EtiquetaQuartoBloco.setText(textos[3]);
+        jTextArea_EtiquetaQuintoBloco.setText(textos[4]);
+        jTextArea_EtiquetaSextoBloco.setText(textos[5]);
+    }
+
+    public void desabilitarCampos(boolean flag) {
+        jTextArea_EtiquetaPrimeiroBloco.setEditable(flag);
+        jTextArea_EtiquetaSegundoBloco.setEditable(flag);
+        jTextArea_EtiquetaTerceiroBloco.setEditable(flag);
+        jTextArea_EtiquetaQuartoBloco.setEditable(flag);
+        jTextArea_EtiquetaQuintoBloco.setEditable(flag);
+        jTextArea_EtiquetaSextoBloco.setEditable(flag);
     }
 
     public void setNumEtq(int numeroBloco) {
@@ -48,7 +77,6 @@ public class DlgBloco extends javax.swing.JDialog {
         jLabel_QuartaEtqBloco.setText(String.valueOf(numeroBloco + 4));
         jLabel_QuintaEtqBloco.setText(String.valueOf(numeroBloco + 5));
         jLabel_SextaEtqBloco.setText(String.valueOf(numeroBloco + 6));
-
     }
 
     private boolean codigoInternoExiste(String codigoInterno) {
@@ -88,19 +116,19 @@ public class DlgBloco extends javax.swing.JDialog {
         jLabel_TerceiraEtqBloco = new javax.swing.JLabel();
         jLabel_SextaEtqBloco = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea_EtiquetaSegundoBloco = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTextArea_EtiquetaPrimeiroBloco = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        jTextArea_EtiquetaQuartoBloco = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        jTextArea_EtiquetaQuintoBloco = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
+        jTextArea_EtiquetaSextoBloco = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        jTextArea_EtiquetaTerceiroBloco = new javax.swing.JTextArea();
+        jButton_AdicionarProdutoEqt = new javax.swing.JButton();
+        jButton_RemoverProdutoEqt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(350, 473));
@@ -139,50 +167,55 @@ public class DlgBloco extends javax.swing.JDialog {
         jLabel_SextaEtqBloco.setMinimumSize(new java.awt.Dimension(35, 25));
         jLabel_SextaEtqBloco.setPreferredSize(new java.awt.Dimension(35, 25));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setMaximumSize(new java.awt.Dimension(232, 84));
-        jTextArea1.setMinimumSize(new java.awt.Dimension(232, 84));
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextArea_EtiquetaSegundoBloco.setColumns(20);
+        jTextArea_EtiquetaSegundoBloco.setRows(5);
+        jTextArea_EtiquetaSegundoBloco.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea_EtiquetaSegundoBloco.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane1.setViewportView(jTextArea_EtiquetaSegundoBloco);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setMaximumSize(new java.awt.Dimension(232, 84));
-        jTextArea2.setMinimumSize(new java.awt.Dimension(232, 84));
-        jScrollPane2.setViewportView(jTextArea2);
+        jTextArea_EtiquetaPrimeiroBloco.setColumns(20);
+        jTextArea_EtiquetaPrimeiroBloco.setRows(5);
+        jTextArea_EtiquetaPrimeiroBloco.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea_EtiquetaPrimeiroBloco.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane2.setViewportView(jTextArea_EtiquetaPrimeiroBloco);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setMaximumSize(new java.awt.Dimension(232, 84));
-        jTextArea3.setMinimumSize(new java.awt.Dimension(232, 84));
-        jScrollPane3.setViewportView(jTextArea3);
+        jTextArea_EtiquetaQuartoBloco.setColumns(20);
+        jTextArea_EtiquetaQuartoBloco.setRows(5);
+        jTextArea_EtiquetaQuartoBloco.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea_EtiquetaQuartoBloco.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane3.setViewportView(jTextArea_EtiquetaQuartoBloco);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jTextArea4.setMaximumSize(new java.awt.Dimension(232, 84));
-        jTextArea4.setMinimumSize(new java.awt.Dimension(232, 84));
-        jScrollPane4.setViewportView(jTextArea4);
+        jTextArea_EtiquetaQuintoBloco.setColumns(20);
+        jTextArea_EtiquetaQuintoBloco.setRows(5);
+        jTextArea_EtiquetaQuintoBloco.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea_EtiquetaQuintoBloco.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane4.setViewportView(jTextArea_EtiquetaQuintoBloco);
 
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jTextArea5.setMaximumSize(new java.awt.Dimension(232, 84));
-        jTextArea5.setMinimumSize(new java.awt.Dimension(232, 84));
-        jScrollPane5.setViewportView(jTextArea5);
+        jTextArea_EtiquetaSextoBloco.setColumns(20);
+        jTextArea_EtiquetaSextoBloco.setRows(5);
+        jTextArea_EtiquetaSextoBloco.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea_EtiquetaSextoBloco.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane5.setViewportView(jTextArea_EtiquetaSextoBloco);
 
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        jTextArea6.setMaximumSize(new java.awt.Dimension(232, 84));
-        jTextArea6.setMinimumSize(new java.awt.Dimension(232, 84));
-        jScrollPane6.setViewportView(jTextArea6);
+        jTextArea_EtiquetaTerceiroBloco.setColumns(20);
+        jTextArea_EtiquetaTerceiroBloco.setRows(5);
+        jTextArea_EtiquetaTerceiroBloco.setMaximumSize(new java.awt.Dimension(232, 84));
+        jTextArea_EtiquetaTerceiroBloco.setMinimumSize(new java.awt.Dimension(232, 84));
+        jScrollPane6.setViewportView(jTextArea_EtiquetaTerceiroBloco);
 
-        jButton11.setText("add");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jButton_AdicionarProdutoEqt.setText("add");
+        jButton_AdicionarProdutoEqt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jButton_AdicionarProdutoEqtActionPerformed(evt);
             }
         });
 
-        jButton12.setText("remo");
+        jButton_RemoverProdutoEqt.setText("remo");
+        jButton_RemoverProdutoEqt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RemoverProdutoEqtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,9 +228,9 @@ public class DlgBloco extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_NomeBloco, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton11)
+                .addComponent(jButton_AdicionarProdutoEqt)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12)
+                .addComponent(jButton_RemoverProdutoEqt)
                 .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -241,8 +274,8 @@ public class DlgBloco extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton11)
-                            .addComponent(jButton12))
+                            .addComponent(jButton_AdicionarProdutoEqt)
+                            .addComponent(jButton_RemoverProdutoEqt))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
@@ -281,7 +314,7 @@ public class DlgBloco extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void jButton_AdicionarProdutoEqtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdicionarProdutoEqtActionPerformed
         boolean inputValido = false;
 
         while (!inputValido) {
@@ -313,7 +346,6 @@ public class DlgBloco extends javax.swing.JDialog {
                         break;
                     }
 
-
                     try {
                         // Converte a String de data para um objeto LocalDate
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -335,13 +367,14 @@ public class DlgBloco extends javax.swing.JDialog {
 
                     // Adiciona a nova etiqueta à lista de etiquetas
                     this.gerente.adicionarEtiqueta(novaEtiqueta);
-
+                    etiquetasText = gerente.toStringArray();
+                    atualizarTextAreas(etiquetasText);
                     // Salva as etiquetas no arquivo após adicionar a nova etiqueta
                     this.gerente.salvarNoArquivo("ListagemEtiquetas.csv");
 
                     // Informa ao usuário que a etiqueta foi adicionada com sucesso
                     JOptionPane.showMessageDialog(this, "Etiqueta adicionada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-
+                    
                     inputValido = true;  // Dados válidos, saindo do loop
                 } else {
                     // Etiqueta fora do intervalo, reiniciando o processo
@@ -354,15 +387,28 @@ public class DlgBloco extends javax.swing.JDialog {
                 Logger.getLogger(DlgBloco.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_jButton_AdicionarProdutoEqtActionPerformed
 
-/**
- * @param args the command line arguments
- */
+    private void jButton_RemoverProdutoEqtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoverProdutoEqtActionPerformed
+        this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto a ser excluído:", "");
+        Etiqueta etiqueta = this.gerente.buscarEtiqueta(Integer.parseInt(produtoSelecionado));
+        if (etiqueta == null) {
+            JOptionPane.showMessageDialog(this, "O produto informado não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
+        } else {
+            this.gerente.removerEtiqueta(Integer.parseInt(produtoSelecionado));
+            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso.", "Produto Excluído", HEIGHT);
+        }
+        etiquetasText = gerente.toStringArray();
+        atualizarTextAreas(etiquetasText);
+    }//GEN-LAST:event_jButton_RemoverProdutoEqtActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton_AdicionarProdutoEqt;
+    private javax.swing.JButton jButton_RemoverProdutoEqt;
     private javax.swing.JLabel jLabel_NomeBloco;
     private javax.swing.JLabel jLabel_PrimeiraEtqBloco;
     private javax.swing.JLabel jLabel_QuartaEtqBloco;
@@ -379,11 +425,11 @@ public class DlgBloco extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextArea jTextArea_EtiquetaPrimeiroBloco;
+    private javax.swing.JTextArea jTextArea_EtiquetaQuartoBloco;
+    private javax.swing.JTextArea jTextArea_EtiquetaQuintoBloco;
+    private javax.swing.JTextArea jTextArea_EtiquetaSegundoBloco;
+    private javax.swing.JTextArea jTextArea_EtiquetaSextoBloco;
+    private javax.swing.JTextArea jTextArea_EtiquetaTerceiroBloco;
     // End of variables declaration//GEN-END:variables
 }
