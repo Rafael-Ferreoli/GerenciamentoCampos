@@ -254,6 +254,11 @@ public class DlgAereo extends javax.swing.JDialog {
         jButton_BLC02.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC02.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC02.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC02.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC02ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC03.setText("03");
         jButton_BLC03.setToolTipText("");
@@ -493,6 +498,17 @@ public class DlgAereo extends javax.swing.JDialog {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_BLC01ActionPerformed
+
+    private void jButton_BLC02ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC02ActionPerformed
+        try {
+            nomeBloco = "BLC02";
+            numeroBloco = 6;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC02ActionPerformed
 
     /**
      * @param args the command line arguments

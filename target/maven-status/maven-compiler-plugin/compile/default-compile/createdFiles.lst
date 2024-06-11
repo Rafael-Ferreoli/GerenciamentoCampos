@@ -4,6 +4,7 @@ com\mycompany\camposdistribuidora\GUI\DlgCadastroProdutos$3.class
 com\mycompany\camposdistribuidora\GUI\DlgBloco$2.class
 com\mycompany\camposdistribuidora\File\SerializadorCSVEtiquetas.class
 com\mycompany\camposdistribuidora\Cadastro.class
+com\mycompany\camposdistribuidora\GUI\DlgAereo$2.class
 com\mycompany\camposdistribuidora\GerenciadorCadastros.class
 com\mycompany\camposdistribuidora\GUI\DlgMenu$1.class
 com\mycompany\camposdistribuidora\GerenciadorProdutos.class

@@ -48,17 +48,29 @@ public class DlgBloco extends javax.swing.JDialog {
     }
 
     public void atualizarTextAreas(String[] textos) {
-        if (textos.length != 6) {
-            System.err.println("Número incorreto de textos para atualização das text areas.");
-            return;
-        }
+        int inicio = numeroBlocoAtual * 6;
+        int fim = inicio + 6;
 
-        jTextArea_EtiquetaPrimeiroBloco.setText(textos[0]);
-        jTextArea_EtiquetaSegundoBloco.setText(textos[1]);
-        jTextArea_EtiquetaTerceiroBloco.setText(textos[2]);
-        jTextArea_EtiquetaQuartoBloco.setText(textos[3]);
-        jTextArea_EtiquetaQuintoBloco.setText(textos[4]);
-        jTextArea_EtiquetaSextoBloco.setText(textos[5]);
+        // Verifica se o índice final é maior que o tamanho do array textos
+        if (fim > textos.length) {
+            // Define fim como o tamanho máximo do array textos
+            fim = textos.length;
+        }
+        System.out.println(inicio + 3);
+        jTextArea_EtiquetaPrimeiroBloco.setText(obterTextoFormatado(textos, inicio));
+        jTextArea_EtiquetaSegundoBloco.setText(obterTextoFormatado(textos, inicio + 1));
+        jTextArea_EtiquetaTerceiroBloco.setText(obterTextoFormatado(textos, inicio + 2));
+        jTextArea_EtiquetaQuartoBloco.setText(obterTextoFormatado(textos, inicio + 3));
+        jTextArea_EtiquetaQuintoBloco.setText(obterTextoFormatado(textos, inicio + 4));
+        jTextArea_EtiquetaSextoBloco.setText(obterTextoFormatado(textos, inicio + 5));
+    }
+
+    private String obterTextoFormatado(String[] textos, int indice) {
+        if (indice >= 0) {
+            return textos[indice];
+        } else {
+            return ""; // Retorna uma string vazia se o índice estiver fora dos limites
+        }
     }
 
     public void desabilitarCampos(boolean flag) {
@@ -69,8 +81,9 @@ public class DlgBloco extends javax.swing.JDialog {
         jTextArea_EtiquetaQuintoBloco.setEditable(flag);
         jTextArea_EtiquetaSextoBloco.setEditable(flag);
     }
-
+        
     public void setNumEtq(int numeroBloco) {
+ 
         jLabel_PrimeiraEtqBloco.setText(String.valueOf(numeroBloco + 1));
         jLabel_SegundaEtqBloco.setText(String.valueOf(numeroBloco + 2));
         jLabel_TerceiraEtqBloco.setText(String.valueOf(numeroBloco + 3));
@@ -374,7 +387,7 @@ public class DlgBloco extends javax.swing.JDialog {
 
                     // Informa ao usuário que a etiqueta foi adicionada com sucesso
                     JOptionPane.showMessageDialog(this, "Etiqueta adicionada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    
+
                     inputValido = true;  // Dados válidos, saindo do loop
                 } else {
                     // Etiqueta fora do intervalo, reiniciando o processo
@@ -390,16 +403,49 @@ public class DlgBloco extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_AdicionarProdutoEqtActionPerformed
 
     private void jButton_RemoverProdutoEqtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoverProdutoEqtActionPerformed
-        this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto a ser excluído:", "");
-        Etiqueta etiqueta = this.gerente.buscarEtiqueta(Integer.parseInt(produtoSelecionado));
-        if (etiqueta == null) {
-            JOptionPane.showMessageDialog(this, "O produto informado não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
-        } else {
-            this.gerente.removerEtiqueta(Integer.parseInt(produtoSelecionado));
-            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso.", "Produto Excluído", HEIGHT);
+        boolean inputValido = false;
+
+        while (!inputValido) {
+            try {
+                // Solicita o número da etiqueta a ser removida
+                String numeroEtiqueta = JOptionPane.showInputDialog("Informe o número da etiqueta do bloco a ser removida:", "");
+                if (numeroEtiqueta == null) {
+                    // Usuário cancelou a entrada, saindo do loop
+                    break;
+                }
+                // Converte a string numeroEtiqueta para inteiro
+                int numeroEtiquetaInt = Integer.parseInt(numeroEtiqueta);
+
+                // Verifica se a etiqueta está no intervalo correto
+                if (numeroEtiquetaInt >= numeroBlocoAtual + 1 && numeroEtiquetaInt <= numeroBlocoAtual + 6) {
+                    // Tenta remover a etiqueta
+                    if (this.gerente.removerEtiqueta(numeroEtiquetaInt)) {
+                        // Etiqueta removida com sucesso
+                        JOptionPane.showMessageDialog(this, "Etiqueta removida com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                        // Atualiza as áreas de texto
+                        String[] etiquetasText = gerente.toStringArray();
+                        atualizarTextAreas(etiquetasText);
+
+                        // Salva as alterações no arquivo
+                        this.gerente.salvarNoArquivo("ListagemEtiquetas.csv");
+
+                        inputValido = true;  // Dados válidos, saindo do loop
+                    } else {
+                        // Etiqueta não encontrada
+                        JOptionPane.showMessageDialog(this, "Etiqueta não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    // Etiqueta fora do intervalo, reiniciando o processo
+                    JOptionPane.showMessageDialog(this, "A etiqueta informada não foi encontrada nesse bloco.", "Etiqueta Inválida", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException e) {
+                // Tratamento de erro caso a conversão para inteiro falhe, reiniciando o processo
+                JOptionPane.showMessageDialog(this, "Número de etiqueta inválido. Insira um número inteiro.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                Logger.getLogger(DlgBloco.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        etiquetasText = gerente.toStringArray();
-        atualizarTextAreas(etiquetasText);
     }//GEN-LAST:event_jButton_RemoverProdutoEqtActionPerformed
 
     /**
