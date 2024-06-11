@@ -43,12 +43,12 @@ public class DlgBloco extends javax.swing.JDialog {
         numeroBlocoAtual = numeroBloco;
         gerente.carregarDoArquivo("ListagemEtiquetas.csv");
         desabilitarCampos(false);
-        etiquetasText = gerente.toStringArray();
+        etiquetasText = gerente.toStringArray(numeroBlocoAtual);
         atualizarTextAreas(etiquetasText);
     }
 
     public void atualizarTextAreas(String[] textos) {
-        int inicio = numeroBlocoAtual * 6;
+        int inicio = 0;
         int fim = inicio + 6;
 
         // Verifica se o índice final é maior que o tamanho do array textos
@@ -380,7 +380,7 @@ public class DlgBloco extends javax.swing.JDialog {
 
                     // Adiciona a nova etiqueta à lista de etiquetas
                     this.gerente.adicionarEtiqueta(novaEtiqueta);
-                    etiquetasText = gerente.toStringArray();
+                    etiquetasText = gerente.toStringArray(numeroBlocoAtual);
                     atualizarTextAreas(etiquetasText);
                     // Salva as etiquetas no arquivo após adicionar a nova etiqueta
                     this.gerente.salvarNoArquivo("ListagemEtiquetas.csv");
@@ -424,7 +424,7 @@ public class DlgBloco extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(this, "Etiqueta removida com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
                         // Atualiza as áreas de texto
-                        String[] etiquetasText = gerente.toStringArray();
+                        String[] etiquetasText = gerente.toStringArray(numeroBlocoAtual);
                         atualizarTextAreas(etiquetasText);
 
                         // Salva as alterações no arquivo

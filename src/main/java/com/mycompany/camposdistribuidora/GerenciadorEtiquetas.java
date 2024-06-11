@@ -56,7 +56,7 @@ public class GerenciadorEtiquetas {
         }
     }
 
-    public String[] toStringArray() {
+    public String[] toStringArray(int numeroBlocoAtual) {
         StringBuilder[] textAreas = new StringBuilder[6];
         for (int i = 0; i < textAreas.length; i++) {
             textAreas[i] = new StringBuilder();
@@ -64,8 +64,9 @@ public class GerenciadorEtiquetas {
 
         for (Etiqueta etiqueta : etiquetas) {
             int index = etiqueta.getNumEtiqueta()- 1;
-            if (index >= 0 && index < textAreas.length) {
-                textAreas[index].append(etiqueta.toString()).append("\n");
+            if (index >= numeroBlocoAtual && index < numeroBlocoAtual + 6) {
+                System.out.println(index - (numeroBlocoAtual));
+                textAreas[index-numeroBlocoAtual].append(etiqueta.toString()).append("\n");
             }
         }
 

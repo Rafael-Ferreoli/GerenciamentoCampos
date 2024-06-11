@@ -93,150 +93,275 @@ public class DlgAereo extends javax.swing.JDialog {
         jButton_BLC16.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC16.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC16.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC16ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC17.setText("17");
         jButton_BLC17.setBorder(null);
         jButton_BLC17.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC17.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC17.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC17ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC18.setText("18");
         jButton_BLC18.setBorder(null);
         jButton_BLC18.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC18.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC18.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC18ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC19.setText("19");
         jButton_BLC19.setBorder(null);
         jButton_BLC19.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC19.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC19.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC19ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC20.setText("20");
         jButton_BLC20.setBorder(null);
         jButton_BLC20.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC20.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC20.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC20ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC21.setText("21");
         jButton_BLC21.setBorder(null);
         jButton_BLC21.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC21.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC21.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC21ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC22.setText("22");
         jButton_BLC22.setBorder(null);
         jButton_BLC22.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC22.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC22.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC22ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC23.setText("23");
         jButton_BLC23.setBorder(null);
         jButton_BLC23.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC23.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC23.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC23ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC24.setText("24");
         jButton_BLC24.setBorder(null);
         jButton_BLC24.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC24.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC24.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC24ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC25.setText("25");
         jButton_BLC25.setBorder(null);
         jButton_BLC25.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC25.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC25.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC25ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC26.setText("26");
         jButton_BLC26.setBorder(null);
         jButton_BLC26.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC26.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC26.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC26ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC27.setText("27");
         jButton_BLC27.setBorder(null);
         jButton_BLC27.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC27.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC27.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC27ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC28.setText("28");
         jButton_BLC28.setBorder(null);
         jButton_BLC28.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC28.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC28.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC28ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC29.setText("29");
         jButton_BLC29.setBorder(null);
         jButton_BLC29.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC29.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC29.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC29ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC30.setText("30");
         jButton_BLC30.setBorder(null);
         jButton_BLC30.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC30.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC30.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC30ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC31.setText("31");
         jButton_BLC31.setBorder(null);
         jButton_BLC31.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC31.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC31.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC31ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC35.setText("35");
         jButton_BLC35.setBorder(null);
         jButton_BLC35.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC35.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC35.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC35ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC32.setText("32");
         jButton_BLC32.setBorder(null);
         jButton_BLC32.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC32.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC32.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC32ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC33.setText("33");
         jButton_BLC33.setBorder(null);
         jButton_BLC33.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC33.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC33.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC33ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC34.setText("34");
         jButton_BLC34.setBorder(null);
         jButton_BLC34.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC34.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC34.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC34ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC11.setText("11");
         jButton_BLC11.setBorder(null);
         jButton_BLC11.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC11.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC11.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC11ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC12.setText("12");
         jButton_BLC12.setBorder(null);
         jButton_BLC12.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC12.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC12.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC12ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC13.setText("13");
         jButton_BLC13.setBorder(null);
         jButton_BLC13.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC13.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC13.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC13ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC14.setText("14");
         jButton_BLC14.setBorder(null);
         jButton_BLC14.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC14.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC14.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC14ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC15.setText("15");
         jButton_BLC15.setBorder(null);
         jButton_BLC15.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC15.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC15.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC15ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC01.setText("01");
         jButton_BLC01.setBorder(null);
@@ -266,48 +391,88 @@ public class DlgAereo extends javax.swing.JDialog {
         jButton_BLC03.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC03.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC03.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC03.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC03ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC04.setText("04");
         jButton_BLC04.setBorder(null);
         jButton_BLC04.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC04.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC04.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC04.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC04ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC05.setText("05");
         jButton_BLC05.setBorder(null);
         jButton_BLC05.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC05.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC05.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC05.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC05ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC06.setText("06");
         jButton_BLC06.setBorder(null);
         jButton_BLC06.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC06.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC06.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC06ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC07.setText("07");
         jButton_BLC07.setBorder(null);
         jButton_BLC07.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC07.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC07.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC07.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC07ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC08.setText(" 08");
         jButton_BLC08.setBorder(null);
         jButton_BLC08.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC08.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC08.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC08.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC08ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC09.setText("09");
         jButton_BLC09.setBorder(null);
         jButton_BLC09.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC09.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC09.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC09.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC09ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC10.setText("10");
         jButton_BLC10.setBorder(null);
         jButton_BLC10.setMaximumSize(new java.awt.Dimension(70, 15));
         jButton_BLC10.setMinimumSize(new java.awt.Dimension(70, 15));
         jButton_BLC10.setPreferredSize(new java.awt.Dimension(70, 15));
+        jButton_BLC10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC10ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("CORREDOR");
 
@@ -316,18 +481,33 @@ public class DlgAereo extends javax.swing.JDialog {
         jButton_BLC36.setMaximumSize(new java.awt.Dimension(15, 70));
         jButton_BLC36.setMinimumSize(new java.awt.Dimension(15, 70));
         jButton_BLC36.setPreferredSize(new java.awt.Dimension(15, 70));
+        jButton_BLC36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC36ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC37.setText("37");
         jButton_BLC37.setBorder(null);
         jButton_BLC37.setMaximumSize(new java.awt.Dimension(15, 70));
         jButton_BLC37.setMinimumSize(new java.awt.Dimension(15, 70));
         jButton_BLC37.setPreferredSize(new java.awt.Dimension(15, 70));
+        jButton_BLC37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC37ActionPerformed(evt);
+            }
+        });
 
         jButton_BLC38.setText("38");
         jButton_BLC38.setBorder(null);
         jButton_BLC38.setMaximumSize(new java.awt.Dimension(15, 70));
         jButton_BLC38.setMinimumSize(new java.awt.Dimension(15, 70));
         jButton_BLC38.setPreferredSize(new java.awt.Dimension(15, 70));
+        jButton_BLC38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BLC38ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("FUNDO");
 
@@ -509,6 +689,402 @@ public class DlgAereo extends javax.swing.JDialog {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_BLC02ActionPerformed
+
+    private void jButton_BLC03ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC03ActionPerformed
+        try {
+            nomeBloco = "BLC03";
+            numeroBloco = 12;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC03ActionPerformed
+
+    private void jButton_BLC04ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC04ActionPerformed
+        try {
+            nomeBloco = "BLC04";
+            numeroBloco = 18;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC04ActionPerformed
+
+    private void jButton_BLC05ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC05ActionPerformed
+        try {
+            nomeBloco = "BLC05";
+            numeroBloco = 24;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC05ActionPerformed
+
+    private void jButton_BLC06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC06ActionPerformed
+        try {
+            nomeBloco = "BLC06";
+            numeroBloco = 30;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC06ActionPerformed
+
+    private void jButton_BLC07ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC07ActionPerformed
+        try {
+            nomeBloco = "BLC07";
+            numeroBloco = 36;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC07ActionPerformed
+
+    private void jButton_BLC08ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC08ActionPerformed
+        try {
+            nomeBloco = "BLC08";
+            numeroBloco = 42;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC08ActionPerformed
+
+    private void jButton_BLC09ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC09ActionPerformed
+        try {
+            nomeBloco = "BLC09";
+            numeroBloco = 48;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC09ActionPerformed
+
+    private void jButton_BLC10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC10ActionPerformed
+        try {
+            nomeBloco = "BLC10";
+            numeroBloco = 54;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC10ActionPerformed
+
+    private void jButton_BLC11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC11ActionPerformed
+        try {
+            nomeBloco = "BLC11";
+            numeroBloco = 60;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC11ActionPerformed
+
+    private void jButton_BLC12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC12ActionPerformed
+        try {
+            nomeBloco = "BLC12";
+            numeroBloco = 66;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC12ActionPerformed
+
+    private void jButton_BLC13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC13ActionPerformed
+        try {
+            nomeBloco = "BLC13";
+            numeroBloco = 72;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC13ActionPerformed
+
+    private void jButton_BLC14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC14ActionPerformed
+        try {
+            nomeBloco = "BLC14";
+            numeroBloco = 78;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC14ActionPerformed
+
+    private void jButton_BLC15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC15ActionPerformed
+        try {
+            nomeBloco = "BLC15";
+            numeroBloco = 84;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC15ActionPerformed
+
+    private void jButton_BLC16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC16ActionPerformed
+        try {
+            nomeBloco = "BLC16";
+            numeroBloco = 90;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC16ActionPerformed
+
+    private void jButton_BLC17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC17ActionPerformed
+        try {
+            nomeBloco = "BLC17";
+            numeroBloco = 96;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC17ActionPerformed
+
+    private void jButton_BLC18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC18ActionPerformed
+        try {
+            nomeBloco = "BLC18";
+            numeroBloco = 102;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC18ActionPerformed
+
+    private void jButton_BLC19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC19ActionPerformed
+        try {
+            nomeBloco = "BLC19";
+            numeroBloco = 108;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC19ActionPerformed
+
+    private void jButton_BLC20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC20ActionPerformed
+        try {
+            nomeBloco = "BLC20";
+            numeroBloco = 114;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC20ActionPerformed
+
+    private void jButton_BLC21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC21ActionPerformed
+        try {
+            nomeBloco = "BLC21";
+            numeroBloco = 120;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC21ActionPerformed
+
+    private void jButton_BLC22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC22ActionPerformed
+        try {
+            nomeBloco = "BLC22";
+            numeroBloco = 126;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC22ActionPerformed
+
+    private void jButton_BLC23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC23ActionPerformed
+        try {
+            nomeBloco = "BLC23";
+            numeroBloco = 132;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC23ActionPerformed
+
+    private void jButton_BLC24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC24ActionPerformed
+        try {
+            nomeBloco = "BLC24";
+            numeroBloco = 138;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC24ActionPerformed
+
+    private void jButton_BLC25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC25ActionPerformed
+        try {
+            nomeBloco = "BLC25";
+            numeroBloco = 144;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC25ActionPerformed
+
+    private void jButton_BLC26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC26ActionPerformed
+        try {
+            nomeBloco = "BLC26";
+            numeroBloco = 150;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC26ActionPerformed
+
+    private void jButton_BLC27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC27ActionPerformed
+        try {
+            nomeBloco = "BLC27";
+            numeroBloco = 156;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC27ActionPerformed
+
+    private void jButton_BLC28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC28ActionPerformed
+        try {
+            nomeBloco = "BLC28";
+            numeroBloco = 162;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC28ActionPerformed
+
+    private void jButton_BLC29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC29ActionPerformed
+        try {
+            nomeBloco = "BLC29";
+            numeroBloco = 168;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC29ActionPerformed
+
+    private void jButton_BLC30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC30ActionPerformed
+        try {
+            nomeBloco = "BLC30";
+            numeroBloco = 174;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC30ActionPerformed
+
+    private void jButton_BLC31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC31ActionPerformed
+        try {
+            nomeBloco = "BLC31";
+            numeroBloco = 180;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC31ActionPerformed
+
+    private void jButton_BLC32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC32ActionPerformed
+        try {
+            nomeBloco = "BLC32";
+            numeroBloco = 186;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC32ActionPerformed
+
+    private void jButton_BLC33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC33ActionPerformed
+        try {
+            nomeBloco = "BLC33";
+            numeroBloco = 192;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC33ActionPerformed
+
+    private void jButton_BLC34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC34ActionPerformed
+        try {
+            nomeBloco = "BLC34";
+            numeroBloco = 198;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC34ActionPerformed
+
+    private void jButton_BLC35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC35ActionPerformed
+        try {
+            nomeBloco = "BLC35";
+            numeroBloco = 204;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC35ActionPerformed
+
+    private void jButton_BLC36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC36ActionPerformed
+        try {
+            nomeBloco = "BLC36";
+            numeroBloco = 210;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC36ActionPerformed
+
+    private void jButton_BLC37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC37ActionPerformed
+        try {
+            nomeBloco = "BLC37";
+            numeroBloco = 216;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC37ActionPerformed
+
+    private void jButton_BLC38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC38ActionPerformed
+        try {
+            nomeBloco = "BLC38";
+            numeroBloco = 222;
+            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            tela4.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_BLC38ActionPerformed
 
     /**
      * @param args the command line arguments
