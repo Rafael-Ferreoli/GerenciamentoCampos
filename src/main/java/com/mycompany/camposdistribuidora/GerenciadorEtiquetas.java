@@ -9,6 +9,8 @@ import com.mycompany.camposdistribuidora.File.SerializadorCSVEtiquetas;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GerenciadorEtiquetas {
@@ -45,6 +47,15 @@ public class GerenciadorEtiquetas {
         return null;
     }
 
+    public Etiqueta buscarProduto(String codInterno) {
+        for (Etiqueta etiqueta : etiquetas) {
+            if (etiqueta.getCodigoInterno().equals(codInterno)) {
+                return etiqueta;
+            }
+        }
+        return null;
+    }
+
     public void atualizarEtiqueta(int numero, Etiqueta etiquetaNova) {
         Etiqueta etiquetaExistente = buscarEtiqueta(numero);
         if (etiquetaExistente != null) {
@@ -63,10 +74,10 @@ public class GerenciadorEtiquetas {
         }
 
         for (Etiqueta etiqueta : etiquetas) {
-            int index = etiqueta.getNumEtiqueta()- 1;
+            int index = etiqueta.getNumEtiqueta() - 1;
             if (index >= numeroBlocoAtual && index < numeroBlocoAtual + 6) {
                 System.out.println(index - (numeroBlocoAtual));
-                textAreas[index-numeroBlocoAtual].append(etiqueta.toString()).append("\n");
+                textAreas[index - numeroBlocoAtual].append(etiqueta.toString()).append("\n");
             }
         }
 
@@ -76,6 +87,45 @@ public class GerenciadorEtiquetas {
         }
 
         return textAreasText;
+    }
+
+    public String toStringEtiqueta(int etiquetaSelecionada) {
+        StringBuilder saida = new StringBuilder();
+        for (Etiqueta etiqueta : etiquetas) {
+            if (etiqueta.getNumEtiqueta() == etiquetaSelecionada) {
+                saida.append(etiqueta.toString()).append("\n");
+            }
+        }
+        return saida.toString();
+    }
+
+    public String toStringProduto(String codInterno) {
+        StringBuilder saida = new StringBuilder();
+        for (Etiqueta etiqueta : etiquetas) {
+            if (etiqueta.getCodigoInterno().equals(codInterno)) {
+                saida.append(etiqueta.toString()).append("\n");
+            }
+        }
+        return saida.toString();
+    }
+
+    public String toStringValidades() {
+        StringBuilder saida = new StringBuilder();
+
+        // Ordena as etiquetas por data de validade em ordem decrescente
+        Collections.sort(etiquetas, new Comparator<Etiqueta>() {
+            @Override
+            public int compare(Etiqueta e1, Etiqueta e2) {
+                // Assumindo que getDataValidade retorna um objeto Date ou LocalDate
+                return e1.getData().compareTo(e2.getData());
+            }
+        });
+
+        for (Etiqueta etiqueta : etiquetas) {
+            saida.append(etiqueta.toString()).append("\n");
+        }
+
+        return saida.toString();
     }
 
     public void salvarNoArquivo(String pathFile) throws IOException {

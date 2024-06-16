@@ -4,24 +4,37 @@
  */
 package com.mycompany.camposdistribuidora.GUI;
 
+import com.mycompany.camposdistribuidora.Etiqueta;
+import com.mycompany.camposdistribuidora.GerenciadorEtiquetas;
+import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author rafae
  */
 public class DlgAereo extends javax.swing.JDialog {
-    
+
     private String nomeBloco;
     private int numeroBloco;
+    private GerenciadorEtiquetas gerente;
+    private String produtoSelecionado, etiquetaSelecionada;
 
     /**
      * Creates new form DlgAereo
      */
-    public DlgAereo(boolean modal) {
+    public DlgAereo(boolean modal) throws FileNotFoundException {
+        setTitle("Mapa corredor de bebidas");
+        this.produtoSelecionado = "";
+        this.etiquetaSelecionada = "";
+        this.gerente = new GerenciadorEtiquetas();
         initComponents();
+        gerente.carregarDoArquivo("ListagemEtiquetas.csv");
     }
 
     /**
@@ -75,6 +88,8 @@ public class DlgAereo extends javax.swing.JDialog {
         jButton_BLC37 = new javax.swing.JButton();
         jButton_BLC38 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton_BuscarProduto = new javax.swing.JButton();
+        jButton_RelatorioValidades = new javax.swing.JButton();
 
         jButton7.setText("BLC 1");
         jButton7.setMaximumSize(new java.awt.Dimension(65, 15));
@@ -85,6 +100,7 @@ public class DlgAereo extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(216, 546));
         setMinimumSize(new java.awt.Dimension(216, 546));
         setModal(true);
+        setResizable(false);
 
         jLabel1.setText("CAIXAS");
 
@@ -511,79 +527,101 @@ public class DlgAereo extends javax.swing.JDialog {
 
         jLabel3.setText("FUNDO");
 
+        jButton_BuscarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-pesquisar-mais-20.png"))); // NOI18N
+        jButton_BuscarProduto.setPreferredSize(new java.awt.Dimension(55, 7));
+        jButton_BuscarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_BuscarProdutoActionPerformed(evt);
+            }
+        });
+
+        jButton_RelatorioValidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-lista-20.png"))); // NOI18N
+        jButton_RelatorioValidades.setPreferredSize(new java.awt.Dimension(60, 7));
+        jButton_RelatorioValidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RelatorioValidadesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_BLC17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton_BLC20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_BLC19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton_BLC16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(75, 75, 75))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton_BLC17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton_BLC20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton_BLC19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton_BLC16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(55, 55, 55)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton_BLC02, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton_BLC01, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton_BLC05, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC06, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC07, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC08, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC09, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_BLC04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel2)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton_BLC02, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton_BLC01, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton_BLC05, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC06, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC07, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC08, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC09, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_BLC04, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3))
+                                .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_BuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
                         .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addGap(10, 10, 10)
                         .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addGap(10, 10, 10)
                         .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)))
-                .addGap(10, 10, 10))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(jLabel1)
-                .addGap(88, 88, 88))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_RelatorioValidades, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton_BLC37, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_BLC36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_BLC38, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_BuscarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_RelatorioValidades, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -668,11 +706,12 @@ public class DlgAereo extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButton_BLC01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BLC01ActionPerformed
         try {
             nomeBloco = "BLC01";
             numeroBloco = 0;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -683,7 +722,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC02";
             numeroBloco = 6;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -694,7 +733,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC03";
             numeroBloco = 12;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -705,7 +744,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC04";
             numeroBloco = 18;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -716,7 +755,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC05";
             numeroBloco = 24;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -727,7 +766,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC06";
             numeroBloco = 30;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -738,7 +777,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC07";
             numeroBloco = 36;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -749,7 +788,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC08";
             numeroBloco = 42;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -760,7 +799,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC09";
             numeroBloco = 48;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -771,7 +810,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC10";
             numeroBloco = 54;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -782,7 +821,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC11";
             numeroBloco = 60;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -793,7 +832,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC12";
             numeroBloco = 66;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -804,7 +843,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC13";
             numeroBloco = 72;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -815,7 +854,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC14";
             numeroBloco = 78;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -826,7 +865,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC15";
             numeroBloco = 84;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -837,7 +876,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC16";
             numeroBloco = 90;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -848,7 +887,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC17";
             numeroBloco = 96;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -859,7 +898,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC18";
             numeroBloco = 102;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -870,7 +909,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC19";
             numeroBloco = 108;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -881,7 +920,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC20";
             numeroBloco = 114;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -892,7 +931,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC21";
             numeroBloco = 120;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -903,7 +942,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC22";
             numeroBloco = 126;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -914,7 +953,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC23";
             numeroBloco = 132;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -925,7 +964,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC24";
             numeroBloco = 138;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -936,7 +975,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC25";
             numeroBloco = 144;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -947,7 +986,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC26";
             numeroBloco = 150;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -958,7 +997,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC27";
             numeroBloco = 156;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -969,7 +1008,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC28";
             numeroBloco = 162;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -980,7 +1019,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC29";
             numeroBloco = 168;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -991,7 +1030,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC30";
             numeroBloco = 174;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1002,7 +1041,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC31";
             numeroBloco = 180;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1013,7 +1052,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC32";
             numeroBloco = 186;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1024,7 +1063,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC33";
             numeroBloco = 192;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1035,7 +1074,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC34";
             numeroBloco = 198;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1046,7 +1085,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC35";
             numeroBloco = 204;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1057,7 +1096,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC36";
             numeroBloco = 210;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1068,7 +1107,7 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC37";
             numeroBloco = 216;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1079,12 +1118,106 @@ public class DlgAereo extends javax.swing.JDialog {
         try {
             nomeBloco = "BLC38";
             numeroBloco = 222;
-            DlgBloco tela4 = new DlgBloco(nomeBloco,numeroBloco,true);
+            DlgBloco tela4 = new DlgBloco(nomeBloco, numeroBloco, true);
             tela4.setVisible(true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_BLC38ActionPerformed
+
+    private void jButton_BuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarProdutoActionPerformed
+        try {
+            gerente.carregarDoArquivo("ListagemEtiquetas.csv");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Opções para o usuário selecionar
+        String[] options = {"Informar Etiqueta", "Informar Produto"};
+
+        // Mostra a caixa de diálogo com múltiplas opções
+        int response = JOptionPane.showOptionDialog(
+                this,
+                "Escolha uma das opções abaixo:",
+                "Seleção de Opções",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        // Verifica qual opção foi selecionada
+        if (response == 0) {
+            // Informar Etiqueta
+            this.etiquetaSelecionada = JOptionPane.showInputDialog("Informe a etiqueta a ser buscada:", "");
+            try {
+                Etiqueta etiqueta = this.gerente.buscarEtiqueta(Integer.parseInt(etiquetaSelecionada));
+                if (etiqueta == null) {
+                    JOptionPane.showMessageDialog(this, "A etiqueta não foi encontrada no sistema.", "Cadastro Inexistente", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    String listagem = this.gerente.toStringEtiqueta(Integer.parseInt(etiquetaSelecionada));
+                    JTextArea textArea = new JTextArea(listagem);
+                    textArea.setEditable(false);
+                    JScrollPane scrollPane = new JScrollPane(textArea);
+                    scrollPane.setPreferredSize(new Dimension(500, 400));
+                    JOptionPane.showMessageDialog(
+                            this,
+                            scrollPane,
+                            "Resultado da Busca",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Por favor, informe uma etiqueta numérica válida.", "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (response == 1) {
+            // Informar Produto
+            this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno a ser buscado:", "");
+            try {
+                Etiqueta etiqueta = this.gerente.buscarProduto(produtoSelecionado);
+                if (etiqueta == null) {
+                    JOptionPane.showMessageDialog(this, "O código informado não foi encontrado no sistema.", "Cadastro Inexistente", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    String listagem = this.gerente.toStringProduto(produtoSelecionado);
+                    JTextArea textArea = new JTextArea(listagem);
+                    textArea.setEditable(false);
+                    JScrollPane scrollPane = new JScrollPane(textArea);
+                    scrollPane.setPreferredSize(new Dimension(500, 400));
+                    JOptionPane.showMessageDialog(
+                            this,
+                            scrollPane,
+                            "Resultado da Busca",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Por favor, informe um código numérico válido.", "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton_BuscarProdutoActionPerformed
+
+    private void jButton_RelatorioValidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RelatorioValidadesActionPerformed
+        try {
+            gerente.carregarDoArquivo("ListagemEtiquetas.csv");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgAereo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String listagem = this.gerente.toStringValidades();
+
+        JTextArea textArea = new JTextArea(listagem);
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(500, 400));  // Ajuste o tamanho conforme necessário
+
+        JOptionPane.showMessageDialog(
+                this,
+                scrollPane,
+                "Listagem de validades",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jButton_RelatorioValidadesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1130,6 +1263,8 @@ public class DlgAereo extends javax.swing.JDialog {
     private javax.swing.JButton jButton_BLC36;
     private javax.swing.JButton jButton_BLC37;
     private javax.swing.JButton jButton_BLC38;
+    private javax.swing.JButton jButton_BuscarProduto;
+    private javax.swing.JButton jButton_RelatorioValidades;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

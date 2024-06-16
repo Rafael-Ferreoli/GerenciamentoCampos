@@ -4,6 +4,10 @@
  */
 package com.mycompany.camposdistribuidora.GUI;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rafae
@@ -15,6 +19,9 @@ public class DlgMenu extends javax.swing.JDialog {
      */
     public DlgMenu(boolean modal) {
         initComponents();
+        setTitle("Menu");
+        jButton_Relatorio.setEnabled(false);
+        jButton_Vazio.setEnabled(false);
     }
 
     /**
@@ -27,7 +34,7 @@ public class DlgMenu extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton_Estoque = new javax.swing.JButton();
-        jButton_Relatório = new javax.swing.JButton();
+        jButton_Relatorio = new javax.swing.JButton();
         jButton_Aereo = new javax.swing.JButton();
         jButton_Vazio = new javax.swing.JButton();
 
@@ -37,27 +44,36 @@ public class DlgMenu extends javax.swing.JDialog {
         setModal(true);
 
         jButton_Estoque.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton_Estoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-armazém-20.png"))); // NOI18N
         jButton_Estoque.setText("Estoque");
+        jButton_Estoque.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Estoque.setMaximumSize(new java.awt.Dimension(90, 90));
         jButton_Estoque.setMinimumSize(new java.awt.Dimension(90, 90));
         jButton_Estoque.setPreferredSize(new java.awt.Dimension(90, 90));
+        jButton_Estoque.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton_Estoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_EstoqueActionPerformed(evt);
             }
         });
 
-        jButton_Relatório.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton_Relatório.setText("Relatório");
-        jButton_Relatório.setMaximumSize(new java.awt.Dimension(90, 90));
-        jButton_Relatório.setMinimumSize(new java.awt.Dimension(90, 90));
-        jButton_Relatório.setPreferredSize(new java.awt.Dimension(90, 90));
+        jButton_Relatorio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton_Relatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-relatório-20.png"))); // NOI18N
+        jButton_Relatorio.setText("Relatório");
+        jButton_Relatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton_Relatorio.setMaximumSize(new java.awt.Dimension(90, 90));
+        jButton_Relatorio.setMinimumSize(new java.awt.Dimension(90, 90));
+        jButton_Relatorio.setPreferredSize(new java.awt.Dimension(90, 90));
+        jButton_Relatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jButton_Aereo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton_Aereo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-empilhadeira-20.png"))); // NOI18N
         jButton_Aereo.setText("Aéreo");
+        jButton_Aereo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Aereo.setMaximumSize(new java.awt.Dimension(90, 90));
         jButton_Aereo.setMinimumSize(new java.awt.Dimension(90, 90));
         jButton_Aereo.setPreferredSize(new java.awt.Dimension(90, 90));
+        jButton_Aereo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton_Aereo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AereoActionPerformed(evt);
@@ -75,28 +91,28 @@ public class DlgMenu extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton_Estoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_Aereo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_Vazio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Relatório, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                    .addComponent(jButton_Relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Estoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Relatório, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_Relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_Vazio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Aereo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_Aereo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Vazio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -109,8 +125,12 @@ public class DlgMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_EstoqueActionPerformed
 
     private void jButton_AereoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AereoActionPerformed
-        DlgAereo tela3 = new DlgAereo(true);
-        tela3.setVisible(true);
+        try {
+            DlgAereo tela3 = new DlgAereo(true);
+            tela3.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DlgMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton_AereoActionPerformed
 
     /**
@@ -120,7 +140,7 @@ public class DlgMenu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Aereo;
     private javax.swing.JButton jButton_Estoque;
-    private javax.swing.JButton jButton_Relatório;
+    private javax.swing.JButton jButton_Relatorio;
     private javax.swing.JButton jButton_Vazio;
     // End of variables declaration//GEN-END:variables
 }
