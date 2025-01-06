@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.camposdistribuidora;
-import com.mycompany.camposdistribuidora.GUI.FrHome;
+import view.FrHome;
 /**
  *
  * @author rafae
