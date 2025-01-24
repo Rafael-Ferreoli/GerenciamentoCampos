@@ -1,14 +1,14 @@
 package controller;
 
 import model.Produto;
-import model.SerializadorCSVProdutos;
-import model.FilePersistence;
+import model.DAO.CSV.SerializadorCSVProdutos;
+import model.DAO.CSV.FilePersistence;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import model.validation.Validacao;
+import model.validation.ValidacaoProduto;
 
 public class GerenciadorProdutosANTIGO {
 
@@ -31,15 +31,15 @@ public class GerenciadorProdutosANTIGO {
         if (produto == null) {
             throw new IllegalArgumentException("Produto não pode ser nulo.");
         }
-        Validacao.validarStringNaoVazia(produto.getNome(), "Nome do produto não pode ser vazio.");
-        Validacao.validarStringNaoVazia(produto.getCodigoInterno(), "Código interno do produto não pode ser vazio.");
-        Validacao.validarNumeroPositivo(produto.getPreco(), "Preço do produto deve ser maior ou igual a zero.");
-        Validacao.validarNumeroNaoNegativo(produto.getQuantidade(), "Quantidade do produto não pode ser negativa.");
+        ValidacaoProduto.validarStringNaoVazia(produto.getNome(), "Nome do produto não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(produto.getCodigoInterno(), "Código interno do produto não pode ser vazio.");
+        ValidacaoProduto.validarNumeroPositivo(produto.getPreco(), "Preço do produto deve ser maior ou igual a zero.");
+        ValidacaoProduto.validarNumeroNaoNegativo(produto.getQuantidade(), "Quantidade do produto não pode ser negativa.");
         this.produtos.add(produto);
     }
 
     public boolean removerProduto(String codigoInterno) {
-        Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
         Produto produto = buscarProduto(codigoInterno);
         if (produto != null) {
             this.produtos.remove(produto);
@@ -49,7 +49,7 @@ public class GerenciadorProdutosANTIGO {
     }
 
     public Produto buscarProduto(String codigoInterno) {
-        Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
         return this.produtos.stream()
                 .filter(produto -> produto.getCodigoInterno().equals(codigoInterno))
                 .findFirst()
@@ -57,7 +57,7 @@ public class GerenciadorProdutosANTIGO {
     }
 
     public boolean atualizarProduto(String codigoInterno, Produto produtoNovo) {
-        Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
         if (produtoNovo == null) {
             throw new IllegalArgumentException("Produto novo não pode ser nulo.");
         }
@@ -71,7 +71,7 @@ public class GerenciadorProdutosANTIGO {
     }
 
     public void salvarNoArquivo(String pathFile) throws IOException {
-        Validacao.validarStringNaoVazia(pathFile, "Caminho do arquivo não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(pathFile, "Caminho do arquivo não pode ser vazio.");
         SerializadorCSVProdutos serializador = new SerializadorCSVProdutos();
         FilePersistence filePersistence = new FilePersistence();
 
@@ -80,7 +80,7 @@ public class GerenciadorProdutosANTIGO {
     }
 
     public void carregarDoArquivo(String pathFile) throws FileNotFoundException {
-        Validacao.validarStringNaoVazia(pathFile, "Caminho do arquivo não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(pathFile, "Caminho do arquivo não pode ser vazio.");
         FilePersistence filePersistence = new FilePersistence();
         SerializadorCSVProdutos serializador = new SerializadorCSVProdutos();
 

@@ -1,10 +1,8 @@
 package model.validation;
 
-import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import model.exception.ProdutoException;
 
-public class Validacao {
+public class ValidacaoProduto {
 
     public static void validarPreco(double preco) {
         if (preco < 0) {
@@ -36,6 +34,13 @@ public class Validacao {
         }
     }
 
+    public static void validarCodBarra(String codBarra) {
+        // Verifica se o código de barras está vazio ou com espaços
+        if (codBarra.isEmpty() || codBarra.length() != 13 || !codBarra.matches("\\d{13}")) {
+            throw new IllegalArgumentException("Código de barras deve conter exatamente 13 dígitos.");
+        }
+    }
+
     // Nova validação para CPF
     public static void validarCPF(String cpf) {
         if (cpf == null || !cpf.matches("\\d{11}")) {
@@ -56,7 +61,6 @@ public class Validacao {
             throw new IllegalArgumentException("A matrícula não pode ser vazia.");
         }
     }
-    
 
     public static void validarCodigoInterno(String codigoInterno) {
         if (codigoInterno == null || codigoInterno.trim().isEmpty()) {

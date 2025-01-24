@@ -1,6 +1,6 @@
 package model;
 
-import model.validation.Validacao;
+import model.validation.ValidacaoProduto;
 import java.time.LocalDate;
 
 public class Etiqueta {
@@ -10,8 +10,8 @@ public class Etiqueta {
 
     public Etiqueta(String codigoInterno, LocalDate data, int numEtiqueta) {
         // Validação dos dados de entrada
-        Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio");
-        Validacao.validarNumeroNaoNegativo(numEtiqueta, "Número da etiqueta não pode ser negativo");
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio");
+        ValidacaoProduto.validarNumeroNaoNegativo(numEtiqueta, "Número da etiqueta não pode ser negativo");
 
         this.codigoInterno = codigoInterno;
         this.data = data;
@@ -46,7 +46,7 @@ public class Etiqueta {
     }
 
     public void setNumEtiqueta(int numEtiqueta) {
-        Validacao.validarNumeroNaoNegativo(numEtiqueta, "Número da etiqueta não pode ser negativo");
+        ValidacaoProduto.validarNumeroNaoNegativo(numEtiqueta, "Número da etiqueta não pode ser negativo");
         this.numEtiqueta = numEtiqueta;
     }
 }

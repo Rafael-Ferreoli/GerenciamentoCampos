@@ -5,8 +5,8 @@
 package controller;
 
 import model.Cadastro;
-import model.FilePersistence;
-import model.SerializadorCSVCadastro;
+import model.DAO.CSV.FilePersistence;
+import model.DAO.CSV.SerializadorCSVCadastro;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;

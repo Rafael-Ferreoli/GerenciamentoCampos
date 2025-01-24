@@ -1,7 +1,8 @@
-package model;
+package model.DAO.CSV;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.Produto;
 
 public class SerializadorCSVProdutos {
 

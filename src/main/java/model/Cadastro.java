@@ -4,7 +4,7 @@
  */
 package model;
 
-import model.validation.Validacao;
+import model.validation.ValidacaoProduto;
 
 /**
  *
@@ -20,14 +20,14 @@ public class Cadastro {
     private String matricula;
 
     public Cadastro(String nome, String email, String cpf, String cargo, String senha, String matricula) {
-        Validacao.validarStringNaoVazia(nome, "Nome não pode ser vazio");
-        Validacao.validarStringNaoVazia(email, "E-mail não pode ser vazio");
-        Validacao.validarEmail(email);
-        Validacao.validarStringNaoVazia(cpf, "CPF não pode ser vazio");
-        Validacao.validarCPF(cpf);
-        Validacao.validarStringNaoVazia(cargo, "Cargo não pode ser vazio");
-        Validacao.validarStringNaoVazia(senha, "Senha não pode ser vazia");
-        Validacao.validarMatricula(matricula);
+        ValidacaoProduto.validarStringNaoVazia(nome, "Nome não pode ser vazio");
+        ValidacaoProduto.validarStringNaoVazia(email, "E-mail não pode ser vazio");
+        ValidacaoProduto.validarEmail(email);
+        ValidacaoProduto.validarStringNaoVazia(cpf, "CPF não pode ser vazio");
+        ValidacaoProduto.validarCPF(cpf);
+        ValidacaoProduto.validarStringNaoVazia(cargo, "Cargo não pode ser vazio");
+        ValidacaoProduto.validarStringNaoVazia(senha, "Senha não pode ser vazia");
+        ValidacaoProduto.validarMatricula(matricula);
 
         this.nome = nome;
         this.email = email;

@@ -1,8 +1,9 @@
-package model;
+package model.DAO.CSV;
 
-import model.validation.Validacao;
+import model.validation.ValidacaoProduto;
 import java.util.ArrayList;
 import java.util.List;
+import model.Cadastro;
 
 public class SerializadorCSVCadastro {
 
@@ -30,13 +31,13 @@ public class SerializadorCSVCadastro {
             if (partes.length >= 6) {
                 try {
                     // Usamos a validação ao criar o objeto Cadastro
-                    Validacao.validarStringNaoVazia(partes[0], "Nome não pode ser vazio");
-                    Validacao.validarStringNaoVazia(partes[1], "Cargo não pode ser vazio");
-                    Validacao.validarStringNaoVazia(partes[2], "CPF não pode ser vazio");
-                    Validacao.validarCPF(partes[2]);
-                    Validacao.validarStringNaoVazia(partes[3], "Email não pode ser vazio");
-                    Validacao.validarEmail(partes[3]);
-                    Validacao.validarStringNaoVazia(partes[4], "Matrícula não pode ser vazia");
+                    ValidacaoProduto.validarStringNaoVazia(partes[0], "Nome não pode ser vazio");
+                    ValidacaoProduto.validarStringNaoVazia(partes[1], "Cargo não pode ser vazio");
+                    ValidacaoProduto.validarStringNaoVazia(partes[2], "CPF não pode ser vazio");
+                    ValidacaoProduto.validarCPF(partes[2]);
+                    ValidacaoProduto.validarStringNaoVazia(partes[3], "Email não pode ser vazio");
+                    ValidacaoProduto.validarEmail(partes[3]);
+                    ValidacaoProduto.validarStringNaoVazia(partes[4], "Matrícula não pode ser vazia");
 
                     Cadastro cadastro = new Cadastro(partes[0], partes[3], partes[2], partes[1], partes[5], partes[4]);
                     cadastros.add(cadastro);

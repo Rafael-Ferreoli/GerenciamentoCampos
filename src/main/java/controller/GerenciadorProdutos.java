@@ -1,19 +1,22 @@
 package controller;
 
 import model.Produto;
-import model.SerializadorCSVProdutos;
-import model.FilePersistence;
+import model.validation.ValidacaoProduto;
 
+import javax.swing.table.AbstractTableModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
-import model.validation.Validacao;
+import model.DAO.ProdutoCSVDAO;
+import model.DAO.ProdutoPersistence;
+import model.DAO.ProdutoSQLiteDAO;
+import model.exception.ProdutoException;
 
 public class GerenciadorProdutos extends AbstractTableModel {
 
     private List<Produto> produtos;
+    private ProdutoPersistence produtoPersistence;
 
     private final int COL_NOME = 0;
     private final int COL_CODINT = 1;
@@ -21,84 +24,119 @@ public class GerenciadorProdutos extends AbstractTableModel {
     private final int COL_PRECO = 3;
     private final int COL_QTD = 4;
 
-    public GerenciadorProdutos() {
+    // Construtor que recebe o tipo de persistência
+    public GerenciadorProdutos(String tipoPersistencia) {
         this.produtos = new ArrayList<>();
+        if ("csv".equals(tipoPersistencia)) {
+            this.produtoPersistence = new ProdutoCSVDAO();
+        } else if ("sqlite".equals(tipoPersistencia)) {
+            this.produtoPersistence = new ProdutoSQLiteDAO();
+        } else {
+            throw new IllegalArgumentException("Tipo de persistência inválido.");
+        }
     }
 
-    // Métodos de gerenciamento
     public void adicionarProduto(Produto produto) {
         if (produto == null) {
-            throw new IllegalArgumentException("Produto não pode ser nulo.");
+            throw ProdutoException.camposInvalidos("Produto");
         }
-        Validacao.validarStringNaoVazia(produto.getNome(), "Nome do produto não pode ser vazio.");
-        Validacao.validarStringNaoVazia(produto.getCodigoInterno(), "Código interno do produto não pode ser vazio.");
-        Validacao.validarNumeroPositivo(produto.getPreco(), "Preço do produto deve ser maior ou igual a zero.");
-        Validacao.validarNumeroNaoNegativo(produto.getQuantidade(), "Quantidade do produto não pode ser negativa.");
-        this.produtos.add(produto);
-        fireTableDataChanged(); // Atualiza a tabela
+
+        // Validações de campos obrigatórios
+        ValidacaoProduto.validarStringNaoVazia(produto.getNome(), "Nome do produto não pode ser vazio.");
+        ValidacaoProduto.validarStringNaoVazia(produto.getCodigoInterno(), "Código interno do produto não pode ser vazio.");
+        ValidacaoProduto.validarCodBarra(produto.getCodigoBarra());
+        ValidacaoProduto.validarNumeroPositivo(produto.getPreco(), "Preço do produto deve ser maior ou igual a zero.");
+        ValidacaoProduto.validarNumeroNaoNegativo(produto.getQuantidade(), "Quantidade do produto não pode ser negativa.");
+
+        // Verificar duplicidade
+        if (isProdutoDuplicado(produto, null)) { // Passa null porque é um novo produto
+            throw ProdutoException.produtoDuplicado(produto.getCodigoInterno());
+        }
+
+        // Salva o produto
+        this.produtoPersistence.save(produto);
+
+        // Recarrega a lista de produtos e atualiza a tabela
+        this.produtos = this.produtoPersistence.findAll();
+        fireTableDataChanged();
     }
 
-    public boolean removerProduto(String codigoInterno) {
-    Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-    Produto produto = buscarProduto(codigoInterno);
-    if (produto != null) {
-        this.produtos.remove(produto);
-        fireTableDataChanged(); // Atualiza a tabela
-        try {
-            salvarNoArquivo("ListagemProdutos.csv"); // Salva automaticamente
-        } catch (IOException ex) {
-            throw new RuntimeException("Erro ao salvar arquivo: " + ex.getMessage(), ex);
-        }
-        return true;
-    }
-    return false;
-}
-
-
-    public Produto buscarProduto(String codigoInterno) {
-        Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-        return this.produtos.stream()
-                .filter(produto -> produto.getCodigoInterno().equals(codigoInterno))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public boolean atualizarProduto(String codigoInterno, Produto produtoNovo) {
-        Validacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-        if (produtoNovo == null) {
-            throw new IllegalArgumentException("Produto novo não pode ser nulo.");
-        }
-        Produto produtoExistente = buscarProduto(codigoInterno);
-        if (produtoExistente != null) {
-            int indice = produtos.indexOf(produtoExistente);
-            this.produtos.set(indice, produtoNovo);
-            fireTableDataChanged(); // Atualiza a tabela
-            return true;
+    public boolean isProdutoDuplicado(Produto produto, String codigoAtual) {
+        for (Produto p : this.produtoPersistence.findAll()) {
+            // Ignorar o produto atual ao editar
+            if (codigoAtual != null && p.getCodigoInterno().equals(codigoAtual)) {
+                continue;
+            }
+            if (p.getCodigoInterno().equals(produto.getCodigoInterno())
+                    || p.getCodigoBarra().equals(produto.getCodigoBarra())) {
+                return true;
+            }
         }
         return false;
     }
 
-    public void salvarNoArquivo(String pathFile) throws IOException {
-        Validacao.validarStringNaoVazia(pathFile, "Caminho do arquivo não pode ser vazio.");
-        SerializadorCSVProdutos serializador = new SerializadorCSVProdutos();
-        FilePersistence filePersistence = new FilePersistence();
+    public boolean removerProduto(String codigoInterno) {
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        Produto produto = buscarProduto(codigoInterno);
+        if (produto == null) {
+            throw ProdutoException.produtoNaoEncontrado(codigoInterno);
+        }
+        this.produtoPersistence.delete(codigoInterno);
+        this.produtos = this.produtoPersistence.findAll();  // Recarrega a lista
+        fireTableDataChanged(); // Atualiza a tabela
+        return true;
+    }
 
-        String csvData = serializador.toCSV(this.produtos);
-        filePersistence.saveToFile(csvData, pathFile);
+    public Produto buscarProduto(String codigoInterno) {
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        Produto produto = this.produtoPersistence.findByCodInterno(codigoInterno);
+        if (produto == null) {
+            throw ProdutoException.produtoNaoEncontrado(codigoInterno);
+        }
+        return produto;
+    }
+
+    public boolean atualizarProduto(String codigoInterno, Produto produtoNovo) {
+    ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+    
+    if (produtoNovo == null) {
+        throw ProdutoException.camposInvalidos("Produto novo");
+    }
+
+    ValidacaoProduto.validarCodBarra(produtoNovo.getCodigoBarra());
+
+    Produto produtoExistente = buscarProduto(codigoInterno);
+    if (produtoExistente == null) {
+        throw ProdutoException.produtoNaoEncontrado(codigoInterno);
+    }
+
+    // Atualiza o produto
+    this.produtoPersistence.update(codigoInterno, produtoNovo);
+    this.produtos = this.produtoPersistence.findAll();  // Recarrega a lista
+    fireTableDataChanged(); // Atualiza a tabela
+    return true;
+}
+
+
+    public List<Produto> listarProdutos() {
+        return this.produtoPersistence.findAll();
+    }
+
+    public void salvarNoArquivo(String pathFile) throws IOException {
+        if (produtoPersistence instanceof ProdutoCSVDAO) {
+            ((ProdutoCSVDAO) produtoPersistence).salvarLista(listarProdutos());
+        } else {
+            throw new UnsupportedOperationException("Salvar no arquivo não suportado para esse tipo de persistência.");
+        }
     }
 
     public void carregarDoArquivo(String pathFile) throws FileNotFoundException {
-        Validacao.validarStringNaoVazia(pathFile, "Caminho do arquivo não pode ser vazio.");
-        FilePersistence filePersistence = new FilePersistence();
-        SerializadorCSVProdutos serializador = new SerializadorCSVProdutos();
-
-        String csvData = filePersistence.loadFromFile(pathFile);
-        this.produtos = serializador.fromCSV(csvData);
-        fireTableDataChanged(); // Atualiza a tabela
-    }
-
-    public List<Produto> listarProdutos() {
-        return new ArrayList<>(this.produtos);
+        if (produtoPersistence instanceof ProdutoCSVDAO) {
+            List<Produto> produtosCarregados = ((ProdutoCSVDAO) produtoPersistence).findAll();
+            this.produtos = produtosCarregados; // Atualiza a lista de produtos
+        } else {
+            throw new UnsupportedOperationException("Carregamento do arquivo não suportado para esse tipo de persistência.");
+        }
     }
 
     // Métodos de AbstractTableModel

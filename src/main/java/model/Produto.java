@@ -4,7 +4,7 @@
  */
 package model;
 
-import model.validation.Validacao;
+import model.validation.ValidacaoProduto;
 
 /**
  *
@@ -84,7 +84,7 @@ public class Produto {
      * @param valor the valor to set
      */
     public void setPreco(double preco) {
-        Validacao.validarPreco(preco);
+        ValidacaoProduto.validarPreco(preco);
         this.preco = preco;
     }    
 
@@ -99,7 +99,7 @@ public class Produto {
      * @param quantidade the quantidade to set
      */
     public void setQuantidade(int quantidade) {
-        Validacao.validarQuantidade(quantidade);
+        ValidacaoProduto.validarQuantidade(quantidade);
         this.quantidade = quantidade;
     }
     

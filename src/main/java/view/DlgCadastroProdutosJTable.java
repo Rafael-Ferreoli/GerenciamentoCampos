@@ -8,9 +8,12 @@ import controller.GerenciadorProdutos;
 import model.Produto;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import model.exception.ProdutoException;
 
 /**
  *
@@ -25,8 +28,9 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
     public DlgCadastroProdutosJTable(boolean modal) {
         this.editando = false;
         this.produtoSelecionado = "";
-        this.gerente = new GerenciadorProdutos();
+        this.gerente = new GerenciadorProdutos("csv");
         initComponents();
+        this.adicionarMascaraNosCampos();
         setTitle("Produtos");
         this.habilitarCampos(false);
         this.limparCampos();
@@ -66,12 +70,12 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
         jLabel_CadastroProduto_CodInterno = new javax.swing.JLabel();
         jLabel_CadastroProduto_CodBarras = new javax.swing.JLabel();
         jTextField_CadastroProduto_CodInterno = new javax.swing.JTextField();
-        jTextField_CadastroProduto_CodBarras = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel_CadastroProduto_Quantidade = new javax.swing.JLabel();
         jTextField_CadastroProduto_Quantidade = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         grdProdutos = new javax.swing.JTable();
+        jTextField_CadastroProduto_CodBarras = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
@@ -156,10 +160,6 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
         jTextField_CadastroProduto_CodInterno.setMinimumSize(new java.awt.Dimension(190, 22));
         jTextField_CadastroProduto_CodInterno.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        jTextField_CadastroProduto_CodBarras.setMaximumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_CodBarras.setMinimumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_CodBarras.setPreferredSize(new java.awt.Dimension(190, 22));
-
         jLabel_CadastroProduto_Quantidade.setText("Quantidade:");
 
         jTextField_CadastroProduto_Quantidade.setMaximumSize(new java.awt.Dimension(83, 22));
@@ -183,6 +183,14 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
             }
         });
         jScrollPane2.setViewportView(grdProdutos);
+
+        jTextField_CadastroProduto_CodBarras.setMaximumSize(new java.awt.Dimension(190, 22));
+        jTextField_CadastroProduto_CodBarras.setMinimumSize(new java.awt.Dimension(190, 22));
+        jTextField_CadastroProduto_CodBarras.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField_CadastroProduto_CodBarrasFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,9 +232,9 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
                             .addComponent(jLabel_CadastroProduto_CodBarras)
                             .addComponent(jLabel_CadastroProduto_CodInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_CadastroProduto_CodInterno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_CadastroProduto_CodBarras, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_CadastroProduto_CodInterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField_CadastroProduto_CodBarras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(6, 6, 6))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -270,7 +278,7 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel_CadastroProduto_CodBarras)
                             .addComponent(jTextField_CadastroProduto_CodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(6, 6, 6)
+                .addGap(3, 3, 3)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,6 +288,18 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void adicionarMascaraNosCampos() {
+        try {
+            MaskFormatter maskCodBarra = new MaskFormatter("#############"); // 13 caracteres
+            maskCodBarra.setValidCharacters("0123456789"); // Aceita apenas números
+            maskCodBarra.setPlaceholder(""); // Remove o preenchimento automático
+            maskCodBarra.install(jTextField_CadastroProduto_CodBarras);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(DlgCadastroProdutosJTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void limparCampos() {
         this.jTextField_CadastroProduto_Nome.setText("");
@@ -354,19 +374,33 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_CadastroProduto_ExcluirActionPerformed
 
     private void jButton_CadastroProduto_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_SalvarActionPerformed
-        Produto novoProduto = this.camposParaObjeto();
-        if (this.editando) {
-            this.gerente.atualizarProduto(this.produtoSelecionado, novoProduto);
-        } else {
-            this.gerente.adicionarProduto(novoProduto);
-        }
-        this.limparCampos();
-        this.habilitarCampos(false);
-        this.editando = false;
         try {
+            Produto novoProduto = this.camposParaObjeto();
+            if (this.editando) {
+                // Verifica duplicidade ao editar (exceto para o próprio produto sendo editado)
+                if (gerente.isProdutoDuplicado(novoProduto, this.produtoSelecionado)) {
+                    throw new ProdutoException("Já existe outro produto com o mesmo código interno ou código de barras.");
+                }
+                this.gerente.atualizarProduto(this.produtoSelecionado, novoProduto);
+            } else {
+                // Verifica duplicidade ao adicionar novo
+                if (gerente.isProdutoDuplicado(novoProduto, null)) {
+                    throw new ProdutoException("Já existe um produto com o mesmo código interno ou código de barras.");
+                }
+                this.gerente.adicionarProduto(novoProduto);
+            }
+            JOptionPane.showMessageDialog(this, "Produto salvo com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.limparCampos();
+            this.habilitarCampos(false);
+            this.editando = false;
+
+            // Salvar no arquivo
             gerente.salvarNoArquivo("ListagemProdutos.csv");
-        } catch (IOException ex) {
+        } catch (ProdutoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
             Logger.getLogger(DlgCadastroProdutosJTable.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao salvar produto: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_CadastroProduto_SalvarActionPerformed
 
@@ -387,6 +421,10 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_grdProdutosMouseClicked
+
+    private void jTextField_CadastroProduto_CodBarrasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_CadastroProduto_CodBarrasFocusGained
+        jTextField_CadastroProduto_CodBarras.setText(""); // Limpa o campo ao ganhar o foco
+    }//GEN-LAST:event_jTextField_CadastroProduto_CodBarrasFocusGained
 
     /**
      * @param args the command line arguments
@@ -409,7 +447,7 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField_CadastroProduto_CodBarras;
+    private javax.swing.JFormattedTextField jTextField_CadastroProduto_CodBarras;
     private javax.swing.JTextField jTextField_CadastroProduto_CodInterno;
     private javax.swing.JTextField jTextField_CadastroProduto_Nome;
     private javax.swing.JTextField jTextField_CadastroProduto_Preço;

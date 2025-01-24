@@ -6,8 +6,8 @@ package controller;
 
 import java.io.BufferedReader;
 import model.Etiqueta;
-import model.FilePersistence;
-import model.SerializadorCSVEtiquetas;
+import model.DAO.CSV.FilePersistence;
+import model.DAO.CSV.SerializadorCSVEtiquetas;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
