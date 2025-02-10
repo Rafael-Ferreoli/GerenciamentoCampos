@@ -122,22 +122,12 @@ public class GerenciadorProdutos extends AbstractTableModel {
         return this.produtoPersistence.findAll();
     }
 
-    public void salvarNoArquivo(String pathFile) throws IOException {
-        if (produtoPersistence instanceof ProdutoCSVDAO) {
-            ((ProdutoCSVDAO) produtoPersistence).salvarLista(listarProdutos());
-        } else {
-            throw new UnsupportedOperationException("Salvar no arquivo não suportado para esse tipo de persistência.");
-        }
-    }
+    public void carregarProdutos() throws FileNotFoundException {
+    this.produtos = this.produtoPersistence.findAll();
+    fireTableDataChanged();
+}
 
-    public void carregarDoArquivo(String pathFile) throws FileNotFoundException {
-        if (produtoPersistence instanceof ProdutoCSVDAO) {
-            List<Produto> produtosCarregados = ((ProdutoCSVDAO) produtoPersistence).findAll();
-            this.produtos = produtosCarregados; // Atualiza a lista de produtos
-        } else {
-            throw new UnsupportedOperationException("Carregamento do arquivo não suportado para esse tipo de persistência.");
-        }
-    }
+
 
     // Métodos de AbstractTableModel
     @Override

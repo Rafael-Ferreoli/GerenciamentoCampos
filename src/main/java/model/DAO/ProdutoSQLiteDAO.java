@@ -1,38 +1,12 @@
 package model.DAO;
 
+import factory.Persistencia;
 import model.Produto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoSQLiteDAO implements ProdutoPersistence {
-
-    private static final String DATABASE_URL = "jdbc:sqlite:produtos.db";
-
-    public ProdutoSQLiteDAO() {
-        criarTabelaSeNaoExistir();
-    }
-
-    // Criação da tabela, caso ainda não exista
-    private void criarTabelaSeNaoExistir() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS produtos (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    nome TEXT NOT NULL,
-                    codigo_interno TEXT NOT NULL UNIQUE,
-                    codigo_barra TEXT,
-                    preco REAL NOT NULL,
-                    quantidade INTEGER NOT NULL
-                );
-                """;
-
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao criar tabela: " + e.getMessage(), e);
-        }
-    }
 
     @Override
     public void save(Produto produto) {
@@ -41,7 +15,7 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
                 VALUES (?, ?, ?, ?, ?);
                 """;
 
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+        try (Connection conn = Persistencia.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, produto.getNome());
             pstmt.setString(2, produto.getCodigoInterno());
@@ -62,7 +36,7 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
                 WHERE codigo_interno = ?;
                 """;
 
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+        try (Connection conn = Persistencia.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, produtoAtualizado.getNome());
             pstmt.setString(2, produtoAtualizado.getCodigoBarra());
@@ -81,7 +55,7 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
     @Override
     public void delete(String codigoInterno) {
         String sql = "DELETE FROM produtos WHERE codigo_interno = ?;";
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+        try (Connection conn = Persistencia.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, codigoInterno);
             int rowsDeleted = pstmt.executeUpdate();
@@ -96,7 +70,7 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
     @Override
     public Produto findByCodInterno(String codigoInterno) {
         String sql = "SELECT * FROM produtos WHERE codigo_interno = ?;";
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+        try (Connection conn = Persistencia.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, codigoInterno);
             ResultSet rs = pstmt.executeQuery();
@@ -113,7 +87,7 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
     public List<Produto> findAll() {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produtos;";
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+        try (Connection conn = Persistencia.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {

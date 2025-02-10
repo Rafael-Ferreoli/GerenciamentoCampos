@@ -74,6 +74,7 @@ view\DlgBloco.class
 model\DAO\ProdutoCSVDAO.class
 view\DlgAereo$14.class
 view\DlgMenu$2.class
+factory\Persistencia.class
 view\DlgAereo$26.class
 view\DlgAereo$8.class
 controller\GerenciadorEtiquetas.class

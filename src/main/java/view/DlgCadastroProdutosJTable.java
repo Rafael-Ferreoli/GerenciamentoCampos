@@ -28,6 +28,7 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
     public DlgCadastroProdutosJTable(boolean modal) {
         this.editando = false;
         this.produtoSelecionado = "";
+        // Aqui você define a persistência desejada, por exemplo "sqlite" ou "csv"
         this.gerente = new GerenciadorProdutos("csv");
         initComponents();
         this.adicionarMascaraNosCampos();
@@ -37,13 +38,11 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
 
         grdProdutos.setModel(gerente);
 
-        // Inicializa o modelo da tabela
         try {
-            gerente.carregarDoArquivo("ListagemProdutos.csv");
+            gerente.carregarProdutos();
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Arquivo não encontrado: ListagemProdutos.csv", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     /**
@@ -394,8 +393,6 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
             this.habilitarCampos(false);
             this.editando = false;
 
-            // Salvar no arquivo
-            gerente.salvarNoArquivo("ListagemProdutos.csv");
         } catch (ProdutoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro de Cadastro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
