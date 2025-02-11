@@ -5,9 +5,9 @@
 package view;
 
 import controller.GerenciadorProdutos;
+import factory.Persistencia;
 import model.Produto;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +28,8 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
     public DlgCadastroProdutosJTable(boolean modal) {
         this.editando = false;
         this.produtoSelecionado = "";
-        // Aqui você define a persistência desejada, por exemplo "sqlite" ou "csv"
-        this.gerente = new GerenciadorProdutos("csv");
+        // Em vez de "csv", coletamos o tipo de persistência da classe Persistencia
+        this.gerente = new GerenciadorProdutos();
         initComponents();
         this.adicionarMascaraNosCampos();
         setTitle("Produtos");
@@ -41,7 +41,8 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
         try {
             gerente.carregarProdutos();
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Arquivo não encontrado: ListagemProdutos.csv", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Arquivo não encontrado: ListagemProdutos.csv", 
+                                          "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

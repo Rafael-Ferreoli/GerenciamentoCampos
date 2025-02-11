@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoSQLiteDAO implements ProdutoPersistence {
+public class ProdutoSQLiteDAO implements IDAO<Produto> {
 
     @Override
     public void save(Produto produto) {
@@ -68,7 +68,7 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
     }
 
     @Override
-    public Produto findByCodInterno(String codigoInterno) {
+    public Produto findById(String codigoInterno) {
         String sql = "SELECT * FROM produtos WHERE codigo_interno = ?;";
         try (Connection conn = Persistencia.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -99,7 +99,6 @@ public class ProdutoSQLiteDAO implements ProdutoPersistence {
         return produtos;
     }
 
-    // Método auxiliar para criar um Produto a partir de um ResultSet
     private Produto criarProdutoDeResultSet(ResultSet rs) throws SQLException {
         Produto produto = new Produto();
         produto.setNome(rs.getString("nome"));

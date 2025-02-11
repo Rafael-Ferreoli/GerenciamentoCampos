@@ -1,22 +1,21 @@
 package controller;
 
-import model.Produto;
-import model.validation.ValidacaoProduto;
-
-import javax.swing.table.AbstractTableModel;
+import factory.Persistencia;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
+import model.DAO.IDAO;
 import model.DAO.ProdutoCSVDAO;
-import model.DAO.ProdutoPersistence;
 import model.DAO.ProdutoSQLiteDAO;
+import model.Produto;
 import model.exception.ProdutoException;
+import model.validation.ValidacaoProduto;
 
 public class GerenciadorProdutos extends AbstractTableModel {
 
     private List<Produto> produtos;
-    private ProdutoPersistence produtoPersistence;
+    private IDAO<Produto> produtoPersistence;
 
     private final int COL_NOME = 0;
     private final int COL_CODINT = 1;
@@ -24,15 +23,16 @@ public class GerenciadorProdutos extends AbstractTableModel {
     private final int COL_PRECO = 3;
     private final int COL_QTD = 4;
 
-    // Construtor que recebe o tipo de persistência
-    public GerenciadorProdutos(String tipoPersistencia) {
+    // Construtor sem parâmetros, que coleta o tipo de persistência da classe Persistencia
+    public GerenciadorProdutos() {
         this.produtos = new ArrayList<>();
-        if ("csv".equals(tipoPersistencia)) {
+        String tipoPersistencia = Persistencia.getTipoPersistencia();
+        if ("csv".equalsIgnoreCase(tipoPersistencia)) {
             this.produtoPersistence = new ProdutoCSVDAO();
-        } else if ("sqlite".equals(tipoPersistencia)) {
+        } else if ("sqlite".equalsIgnoreCase(tipoPersistencia)) {
             this.produtoPersistence = new ProdutoSQLiteDAO();
         } else {
-            throw new IllegalArgumentException("Tipo de persistência inválido.");
+            throw new IllegalArgumentException("Tipo de persistência inválido: " + tipoPersistencia);
         }
     }
 
@@ -89,7 +89,7 @@ public class GerenciadorProdutos extends AbstractTableModel {
 
     public Produto buscarProduto(String codigoInterno) {
         ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-        Produto produto = this.produtoPersistence.findByCodInterno(codigoInterno);
+        Produto produto = this.produtoPersistence.findById(codigoInterno);
         if (produto == null) {
             throw ProdutoException.produtoNaoEncontrado(codigoInterno);
         }
@@ -97,37 +97,34 @@ public class GerenciadorProdutos extends AbstractTableModel {
     }
 
     public boolean atualizarProduto(String codigoInterno, Produto produtoNovo) {
-    ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-    
-    if (produtoNovo == null) {
-        throw ProdutoException.camposInvalidos("Produto novo");
+        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+
+        if (produtoNovo == null) {
+            throw ProdutoException.camposInvalidos("Produto novo");
+        }
+
+        ValidacaoProduto.validarCodBarra(produtoNovo.getCodigoBarra());
+
+        Produto produtoExistente = buscarProduto(codigoInterno);
+        if (produtoExistente == null) {
+            throw ProdutoException.produtoNaoEncontrado(codigoInterno);
+        }
+
+        // Atualiza o produto
+        this.produtoPersistence.update(codigoInterno, produtoNovo);
+        this.produtos = this.produtoPersistence.findAll();  // Recarrega a lista
+        fireTableDataChanged(); // Atualiza a tabela
+        return true;
     }
-
-    ValidacaoProduto.validarCodBarra(produtoNovo.getCodigoBarra());
-
-    Produto produtoExistente = buscarProduto(codigoInterno);
-    if (produtoExistente == null) {
-        throw ProdutoException.produtoNaoEncontrado(codigoInterno);
-    }
-
-    // Atualiza o produto
-    this.produtoPersistence.update(codigoInterno, produtoNovo);
-    this.produtos = this.produtoPersistence.findAll();  // Recarrega a lista
-    fireTableDataChanged(); // Atualiza a tabela
-    return true;
-}
-
 
     public List<Produto> listarProdutos() {
         return this.produtoPersistence.findAll();
     }
 
     public void carregarProdutos() throws FileNotFoundException {
-    this.produtos = this.produtoPersistence.findAll();
-    fireTableDataChanged();
-}
-
-
+        this.produtos = this.produtoPersistence.findAll();
+        fireTableDataChanged();
+    }
 
     // Métodos de AbstractTableModel
     @Override

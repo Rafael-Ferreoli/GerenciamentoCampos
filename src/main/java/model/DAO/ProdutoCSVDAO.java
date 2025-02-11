@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoCSVDAO implements ProdutoPersistence {
+public class ProdutoCSVDAO implements IDAO<Produto> {
 
     private final String pathFile = "ListagemProdutos.csv";
     private final SerializadorCSVProdutos serializador;
@@ -46,7 +46,7 @@ public class ProdutoCSVDAO implements ProdutoPersistence {
     }
 
     @Override
-    public Produto findByCodInterno(String codigoInterno) {
+    public Produto findById(String codigoInterno) {
         return findAll().stream()
                 .filter(produto -> produto.getCodigoInterno().equals(codigoInterno))
                 .findFirst()
@@ -67,7 +67,6 @@ public class ProdutoCSVDAO implements ProdutoPersistence {
         try {
             String csvData = filePersistence.loadFromFile(pathFile);
             List<Produto> produtos = serializador.fromCSV(csvData);
-            // A lista de produtos pode ser passada ao GerenciadorProdutos ou usada conforme necessário
         } catch (IOException e) {
             throw new FileNotFoundException("Erro ao carregar arquivo: " + pathFile);
         }

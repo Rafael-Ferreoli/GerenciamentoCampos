@@ -24,6 +24,7 @@ model\DAO\CSV\SerializadorCSVProdutos.class
 model\exception\ProdutoException.class
 view\DlgAereo$23.class
 view\DlgCadastroProdutosANTIGO$2.class
+model\DAO\IDAO.class
 view\DlgAereo$17.class
 view\DlgAereo$6.class
 com\mycompany\camposdistribuidora\CamposDistribuidora.class
@@ -54,9 +55,9 @@ view\DlgAereo$1.class
 view\FrHome$4.class
 model\Cadastro.class
 view\DlgAereo$34.class
+model\DAO\EtiquetaSQLiteDAO.class
 view\DlgAereo$16.class
 view\DlgAereo$36.class
-model\DAO\ProdutoPersistence.class
 model\DAO\CSV\SerializadorCSVEtiquetas.class
 view\DlgAereo$13.class
 view\DlgBloco$2.class
@@ -81,6 +82,7 @@ controller\GerenciadorEtiquetas.class
 controller\GerenciadorProdutos.class
 view\DlgCadastroProdutosJTable$7.class
 view\DlgAereo$32.class
+model\DAO\EtiquetaCSVDAO.class
 view\FrHome.class
 view\DlgAereo$20.class
 view\DlgCadastroProdutosANTIGO$4.class

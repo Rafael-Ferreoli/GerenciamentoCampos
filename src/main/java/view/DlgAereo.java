@@ -35,9 +35,9 @@ public class DlgAereo extends javax.swing.JDialog {
         this.etiquetaSelecionada = "";
         this.gerente = new GerenciadorEtiquetas();
         initComponents();
-        gerente.carregarDoArquivo("ListagemEtiquetas.csv");
-    } 
-    
+        // Em vez de indicar o arquivo, chamamos carregarDados():
+        gerente.carregarDados();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1147,32 +1147,33 @@ public class DlgAereo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_BuscarProdutoActionPerformed
 
     private void buscarProduto() {
-    this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno a ser buscado:", "");
-    
-    if (produtoSelecionado == null || produtoSelecionado.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Nenhum código foi informado.", "Entrada Inválida", JOptionPane.WARNING_MESSAGE);
-        return;
+        this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno a ser buscado:", "");
+
+        if (produtoSelecionado == null || produtoSelecionado.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum código foi informado.", "Entrada Inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        List<Etiqueta> etiquetasEncontradas = gerente.buscarProduto(produtoSelecionado);
+        exibirResultadosBuscaProduto(etiquetasEncontradas);
     }
 
-    List<Etiqueta> etiquetasEncontradas = gerente.buscarProduto(produtoSelecionado);
-    exibirResultadosBuscaProduto(etiquetasEncontradas);
-}
-    
     private void exibirResultadosBuscaProduto(List<Etiqueta> etiquetas) {
-    if (etiquetas == null || etiquetas.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Nenhuma etiqueta encontrada para o código interno informado.", "Produto Inexistente", JOptionPane.WARNING_MESSAGE);
-    } else {
-        StringBuilder listagem = new StringBuilder();
-        for (Etiqueta etiqueta : etiquetas) {
-            listagem.append(etiqueta.toString()).append("\n");
+        if (etiquetas == null || etiquetas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhuma etiqueta encontrada para o código interno informado.", "Produto Inexistente", JOptionPane.WARNING_MESSAGE);
+        } else {
+            StringBuilder listagem = new StringBuilder();
+            for (Etiqueta etiqueta : etiquetas) {
+                listagem.append(etiqueta.toString()).append("\n");
+            }
+            JTextArea textArea = new JTextArea(listagem.toString());
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(500, 400));
+            JOptionPane.showMessageDialog(this, scrollPane, "Resultado da Busca", JOptionPane.INFORMATION_MESSAGE);
         }
-        JTextArea textArea = new JTextArea(listagem.toString());
-        textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setPreferredSize(new Dimension(500, 400));
-        JOptionPane.showMessageDialog(this, scrollPane, "Resultado da Busca", JOptionPane.INFORMATION_MESSAGE);
     }
-}
+
     private void buscarEtiqueta() {
         this.etiquetaSelecionada = JOptionPane.showInputDialog("Informe a etiqueta a ser buscada:", "");
         try {
@@ -1182,7 +1183,6 @@ public class DlgAereo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Por favor, informe uma etiqueta numérica válida.", "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
 
     private void exibirResultadoBusca(Etiqueta etiqueta) {
         if (etiqueta == null) {
@@ -1196,7 +1196,7 @@ public class DlgAereo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, scrollPane, "Resultado da Busca", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void jButton_RelatorioValidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RelatorioValidadesActionPerformed
         String listagem = gerente.toStringValidades();
         JTextArea textArea = new JTextArea(listagem);

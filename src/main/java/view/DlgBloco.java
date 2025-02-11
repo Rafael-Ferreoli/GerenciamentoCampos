@@ -37,7 +37,7 @@ public class DlgBloco extends javax.swing.JDialog {
         jLabel_NomeBloco.setText(nomeBloco);
         setNumEtq(numeroBloco);
         numeroBlocoAtual = numeroBloco;
-        gerente.carregarDoArquivo("ListagemEtiquetas.csv");
+        gerente.carregarDados();
         desabilitarCampos(false);
         etiquetasText = gerente.toStringArray(numeroBlocoAtual);
         atualizarTextAreas(etiquetasText);
@@ -77,9 +77,9 @@ public class DlgBloco extends javax.swing.JDialog {
         jTextArea_EtiquetaQuintoBloco.setEditable(flag);
         jTextArea_EtiquetaSextoBloco.setEditable(flag);
     }
-        
+
     public void setNumEtq(int numeroBloco) {
- 
+
         jLabel_PrimeiraEtqBloco.setText(String.valueOf(numeroBloco + 1));
         jLabel_SegundaEtqBloco.setText(String.valueOf(numeroBloco + 2));
         jLabel_TerceiraEtqBloco.setText(String.valueOf(numeroBloco + 3));
@@ -314,90 +314,93 @@ public class DlgBloco extends javax.swing.JDialog {
     private void jButton_AdicionarProdutoEqtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AdicionarProdutoEqtActionPerformed
         boolean inputValido = false;
 
-    while (!inputValido) {
-        try {
-            this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto a ser adicionado a etiqueta:", "");
-            if (this.produtoSelecionado == null || this.produtoSelecionado.isEmpty()) break;
-
-            if (!gerente.codigoInternoExiste(this.produtoSelecionado)) {
-                JOptionPane.showMessageDialog(this, "Produto não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
-                break;
-            }
-
-            this.numeroEtiqueta = JOptionPane.showInputDialog("Informe o número da etiqueta do bloco a ser adicionado o produto:", "");
-            if (this.numeroEtiqueta == null || this.numeroEtiqueta.isEmpty()) break;
-
-            int numeroEtiquetaInt = Integer.parseInt(this.numeroEtiqueta);
-
-            if (numeroEtiquetaInt >= numeroBlocoAtual + 1 && numeroEtiquetaInt <= numeroBlocoAtual + 6) {
-                String data = JOptionPane.showInputDialog("Informe a data (no formato dd/mm/aaaa):", "");
-                if (data == null || data.isEmpty()) break;
-
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate dataFormatada = LocalDate.parse(data, formatter);
-
-                    Etiqueta novaEtiqueta = new Etiqueta(this.produtoSelecionado, dataFormatada, numeroEtiquetaInt);
-                    this.gerente.adicionarEtiqueta(novaEtiqueta);
-
-                    etiquetasText = gerente.toStringArray(numeroBlocoAtual);
-                    atualizarTextAreas(etiquetasText);
-                    this.gerente.salvarNoArquivo("ListagemEtiquetas.csv");
-
-                    JOptionPane.showMessageDialog(this, "Etiqueta adicionada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    inputValido = true;
-                } catch (DateTimeParseException e) {
-                    JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/mm/aaaa.", "Erro", JOptionPane.ERROR_MESSAGE);
+        while (!inputValido) {
+            try {
+                this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto a ser adicionado a etiqueta:", "");
+                if (this.produtoSelecionado == null || this.produtoSelecionado.isEmpty()) {
+                    break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Número da etiqueta fora do bloco atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+
+                if (!gerente.codigoInternoExiste(this.produtoSelecionado)) {
+                    JOptionPane.showMessageDialog(this, "Produto não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
+                }
+
+                this.numeroEtiqueta = JOptionPane.showInputDialog("Informe o número da etiqueta do bloco a ser adicionado o produto:", "");
+                if (this.numeroEtiqueta == null || this.numeroEtiqueta.isEmpty()) {
+                    break;
+                }
+
+                int numeroEtiquetaInt = Integer.parseInt(this.numeroEtiqueta);
+
+                if (numeroEtiquetaInt >= numeroBlocoAtual + 1 && numeroEtiquetaInt <= numeroBlocoAtual + 6) {
+                    String data = JOptionPane.showInputDialog("Informe a data (no formato dd/mm/aaaa):", "");
+                    if (data == null || data.isEmpty()) {
+                        break;
+                    }
+
+                    try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate dataFormatada = LocalDate.parse(data, formatter);
+
+                        Etiqueta novaEtiqueta = new Etiqueta(this.produtoSelecionado, dataFormatada, numeroEtiquetaInt);
+                        this.gerente.adicionarEtiqueta(novaEtiqueta);
+
+                        etiquetasText = gerente.toStringArray(numeroBlocoAtual);
+                        atualizarTextAreas(etiquetasText);
+                        gerente.salvarDados();
+
+
+                        JOptionPane.showMessageDialog(this, "Etiqueta adicionada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        inputValido = true;
+                    } catch (DateTimeParseException e) {
+                        JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/mm/aaaa.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Número da etiqueta fora do bloco atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Número inválido. Insira um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Número inválido. Insira um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar arquivo.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_jButton_AdicionarProdutoEqtActionPerformed
 
     private void jButton_RemoverProdutoEqtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoverProdutoEqtActionPerformed
         boolean inputValido = false;
-    while (!inputValido) {
-        try {
-            // Solicita o número da etiqueta a ser removida
-            String numeroEtiquetaStr = JOptionPane.showInputDialog("Informe o número da etiqueta a ser removida:", "");
-            if (numeroEtiquetaStr == null || numeroEtiquetaStr.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Operação cancelada.", "Informação", JOptionPane.INFORMATION_MESSAGE);
-                break;
+        while (!inputValido) {
+            try {
+                // Solicita o número da etiqueta a ser removida
+                String numeroEtiquetaStr = JOptionPane.showInputDialog("Informe o número da etiqueta a ser removida:", "");
+                if (numeroEtiquetaStr == null || numeroEtiquetaStr.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Operação cancelada.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                }
+
+                int numeroEtiquetaInt = Integer.parseInt(numeroEtiquetaStr);
+
+                // Verifica se o número está no intervalo do bloco atual
+                if (numeroEtiquetaInt < numeroBlocoAtual + 1 || numeroEtiquetaInt > numeroBlocoAtual + 6) {
+                    JOptionPane.showMessageDialog(this, "Número da etiqueta fora do bloco atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    break;
+                }
+
+                // Remove a etiqueta através do Gerenciador
+                boolean removido = gerente.removerEtiqueta(numeroEtiquetaInt);
+                if (removido) {
+                    // Atualiza as áreas de texto e salva no arquivo
+                    etiquetasText = gerente.toStringArray(numeroBlocoAtual);
+                    atualizarTextAreas(etiquetasText);
+
+                    gerente.salvarDados();
+                    JOptionPane.showMessageDialog(this, "Etiqueta removida com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    inputValido = true;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Etiqueta não encontrada no bloco atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Número inválido. Insira um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-
-            int numeroEtiquetaInt = Integer.parseInt(numeroEtiquetaStr);
-
-            // Verifica se o número está no intervalo do bloco atual
-            if (numeroEtiquetaInt < numeroBlocoAtual + 1 || numeroEtiquetaInt > numeroBlocoAtual + 6) {
-                JOptionPane.showMessageDialog(this, "Número da etiqueta fora do bloco atual.", "Erro", JOptionPane.ERROR_MESSAGE);
-                break;
-            }
-
-            // Remove a etiqueta através do Gerenciador
-            boolean removido = gerente.removerEtiqueta(numeroEtiquetaInt);
-            if (removido) {
-                // Atualiza as áreas de texto e salva no arquivo
-                etiquetasText = gerente.toStringArray(numeroBlocoAtual);
-                atualizarTextAreas(etiquetasText);
-
-                gerente.salvarNoArquivo("ListagemEtiquetas.csv");
-                JOptionPane.showMessageDialog(this, "Etiqueta removida com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                inputValido = true;
-            } else {
-                JOptionPane.showMessageDialog(this, "Etiqueta não encontrada no bloco atual.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Número inválido. Insira um número inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar arquivo.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_jButton_RemoverProdutoEqtActionPerformed
 
     /**

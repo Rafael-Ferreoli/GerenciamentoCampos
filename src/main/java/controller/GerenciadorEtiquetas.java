@@ -1,167 +1,156 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
-import java.io.BufferedReader;
-import model.Etiqueta;
-import model.DAO.CSV.FilePersistence;
-import model.DAO.CSV.SerializadorCSVEtiquetas;
+import factory.Persistencia;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import model.Etiqueta;
+import model.DAO.IDAO;
+import model.DAO.ProdutoSQLiteDAO;
+import model.Produto;
 
 public class GerenciadorEtiquetas {
 
-    private List<Etiqueta> etiquetas;
+    private IDAO<Etiqueta> etiquetaDAO;
 
     public GerenciadorEtiquetas() {
-        this.etiquetas = new ArrayList<>();
+        // Centraliza a escolha do tipo de persistência
+        this.etiquetaDAO = factory.Persistencia.getEtiquetaDAO();
+
     }
 
     public void adicionarEtiqueta(Etiqueta etiqueta) {
-        this.etiquetas.add(etiqueta);
+        etiquetaDAO.save(etiqueta);
         System.out.println("Etiqueta adicionada");
     }
 
     public boolean removerEtiqueta(int numero) {
-        for (Etiqueta etiqueta : etiquetas) {
-            if (etiqueta.getNumEtiqueta() == numero) {
-                etiquetas.remove(etiqueta);
-                System.out.println("Etiqueta removida");
-                return true;
-            }
+        Etiqueta etiqueta = buscarEtiqueta(numero);
+        if (etiqueta != null) {
+            etiquetaDAO.delete(String.valueOf(numero));
+            System.out.println("Etiqueta removida");
+            return true;
         }
         System.out.println("Etiqueta não encontrada");
         return false;
     }
 
     public Etiqueta buscarEtiqueta(int numero) {
-        for (Etiqueta etiqueta : etiquetas) {
-            if (etiqueta.getNumEtiqueta() == numero) {
-                return etiqueta;
+        // Se o DAO tiver o método findById implementado de forma eficiente, use-o
+        Etiqueta etiqueta = etiquetaDAO.findById(String.valueOf(numero));
+        if (etiqueta != null) {
+            return etiqueta;
+        }
+        // Alternativamente, pode filtrar a lista completa:
+        for (Etiqueta e : etiquetaDAO.findAll()) {
+            if (e.getNumEtiqueta() == numero) {
+                return e;
             }
         }
         return null;
     }
 
     public List<Etiqueta> buscarProduto(String codInterno) {
-    List<Etiqueta> etiquetasEncontradas = new ArrayList<>();
-    for (Etiqueta etiqueta : etiquetas) {
-        if (etiqueta.getCodigoInterno().equals(codInterno)) {
-            etiquetasEncontradas.add(etiqueta);
+        List<Etiqueta> etiquetasEncontradas = new ArrayList<>();
+        for (Etiqueta etiqueta : etiquetaDAO.findAll()) {
+            if (etiqueta.getCodigoInterno().equals(codInterno)) {
+                etiquetasEncontradas.add(etiqueta);
+            }
         }
+        return etiquetasEncontradas;
     }
-    return etiquetasEncontradas;
-}
 
     public void atualizarEtiqueta(int numero, Etiqueta etiquetaNova) {
-        Etiqueta etiquetaExistente = buscarEtiqueta(numero);
-        if (etiquetaExistente != null) {
-            int indice = etiquetas.indexOf(etiquetaExistente);
-            etiquetas.set(indice, etiquetaNova);
+        if (buscarEtiqueta(numero) != null) {
+            etiquetaDAO.update(String.valueOf(numero), etiquetaNova);
             System.out.println("Etiqueta atualizada");
         } else {
             System.out.println("Etiqueta " + numero + " não encontrada");
         }
     }
-    
-    // Verifica se o código interno do produto existe no arquivo CSV
+
+    // Mantemos o método codigoInternoExiste caso ele verifique o arquivo de produtos
     public boolean codigoInternoExiste(String codigoInterno) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("ListagemProdutos.csv"))) {
-            String line;
-            reader.readLine(); // Ignora o cabeçalho
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(";");
-                if (parts.length >= 2 && parts[1].equals(codigoInterno)) {
-                    return true;
+        if (Persistencia.getTipoPersistencia().equalsIgnoreCase("sqlite")) {
+            // Usa o DAO de produto SQLite para verificar a existência
+            IDAO<Produto> produtoDAO = new ProdutoSQLiteDAO();
+            Produto produto = produtoDAO.findById(codigoInterno);
+            return produto != null;
+        } else { // assume CSV
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader("ListagemProdutos.csv"))) {
+                String line;
+                reader.readLine(); // Ignora o cabeçalho
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(";");
+                    if (parts.length >= 2 && parts[1].equals(codigoInterno)) {
+                        return true;
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public String[] toStringArray(int numeroBlocoAtual) {
         StringBuilder[] textAreas = new StringBuilder[6];
-        for (int i = 0; i < textAreas.length; i++) {
+        for (int i = 0; i < 6; i++) {
             textAreas[i] = new StringBuilder();
         }
-
-        for (Etiqueta etiqueta : etiquetas) {
+        for (Etiqueta etiqueta : etiquetaDAO.findAll()) {
             int index = etiqueta.getNumEtiqueta() - 1;
             if (index >= numeroBlocoAtual && index < numeroBlocoAtual + 6) {
-                System.out.println(index - (numeroBlocoAtual));
                 textAreas[index - numeroBlocoAtual].append(etiqueta.toString()).append("\n");
             }
         }
-
-        String[] textAreasText = new String[textAreas.length];
-        for (int i = 0; i < textAreas.length; i++) {
-            textAreasText[i] = textAreas[i].toString();
+        String[] result = new String[6];
+        for (int i = 0; i < 6; i++) {
+            result[i] = textAreas[i].toString();
         }
-
-        return textAreasText;
+        return result;
     }
 
     public String toStringEtiqueta(int etiquetaSelecionada) {
-        StringBuilder saida = new StringBuilder();
-        for (Etiqueta etiqueta : etiquetas) {
-            if (etiqueta.getNumEtiqueta() == etiquetaSelecionada) {
-                saida.append(etiqueta.toString()).append("\n");
-            }
-        }
-        return saida.toString();
+        Etiqueta etiqueta = buscarEtiqueta(etiquetaSelecionada);
+        return etiqueta != null ? etiqueta.toString() + "\n" : "";
     }
 
     public String toStringProduto(String codInterno) {
         StringBuilder saida = new StringBuilder();
-        for (Etiqueta etiqueta : etiquetas) {
-            if (etiqueta.getCodigoInterno().equals(codInterno)) {
-                saida.append(etiqueta.toString()).append("\n");
-            }
+        for (Etiqueta etiqueta : buscarProduto(codInterno)) {
+            saida.append(etiqueta.toString()).append("\n");
         }
         return saida.toString();
     }
 
     public String toStringValidades() {
-        StringBuilder saida = new StringBuilder();
-
-        // Ordena as etiquetas por data de validade em ordem decrescente
-        Collections.sort(etiquetas, new Comparator<Etiqueta>() {
+        List<Etiqueta> todas = etiquetaDAO.findAll();
+        Collections.sort(todas, new Comparator<Etiqueta>() {
             @Override
             public int compare(Etiqueta e1, Etiqueta e2) {
-                // Assumindo que getDataValidade retorna um objeto Date ou LocalDate
                 return e1.getData().compareTo(e2.getData());
             }
         });
-
-        for (Etiqueta etiqueta : etiquetas) {
+        StringBuilder saida = new StringBuilder();
+        for (Etiqueta etiqueta : todas) {
             saida.append(etiqueta.toString()).append("\n");
         }
-
         return saida.toString();
     }
 
-    public void salvarNoArquivo(String pathFile) throws IOException {
-        SerializadorCSVEtiquetas serializadorCSV = new SerializadorCSVEtiquetas();
-        String csvData = serializadorCSV.toCSV(this.etiquetas);
-        FilePersistence filePersistence = new FilePersistence();
-        filePersistence.saveToFile(csvData, pathFile);
-        System.out.println("Etiquetas salvas");
+    // Para o CSV, disponibilizamos métodos para carregar e salvar os dados
+    public void carregarDados() throws FileNotFoundException {
+        if (etiquetaDAO instanceof model.DAO.EtiquetaCSVDAO) {
+            ((model.DAO.EtiquetaCSVDAO) etiquetaDAO).loadFromFile();
+        }
     }
 
-    public void carregarDoArquivo(String pathFile) throws FileNotFoundException {
-        FilePersistence filePersistence = new FilePersistence();
-        String csvData = filePersistence.loadFromFile(pathFile);
-        SerializadorCSVEtiquetas serializadorCSV = new SerializadorCSVEtiquetas();
-        this.etiquetas = serializadorCSV.fromCSV(csvData);
-        System.out.println("Etiquetas carregadas");
+    public void salvarDados() {
+        if (etiquetaDAO instanceof model.DAO.EtiquetaCSVDAO) {
+            ((model.DAO.EtiquetaCSVDAO) etiquetaDAO).saveToFile();
+        }
     }
 }
