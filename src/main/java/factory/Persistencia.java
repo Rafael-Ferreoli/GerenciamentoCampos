@@ -16,7 +16,7 @@ public class Persistencia {
     private static final String URL = "jdbc:sqlite:dbCampos.sqlite";
     
     // sqlite ou csv
-    private static String tipoPersistencia = "sqlite"; 
+    private static String tipoPersistencia = "csv"; 
 
     public static void setTipoPersistencia(String tipo) {
         tipoPersistencia = tipo;

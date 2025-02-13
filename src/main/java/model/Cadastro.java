@@ -4,42 +4,50 @@
  */
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import model.validation.ValidacaoProduto;
+
 
 /**
  *
  * @author rafae
  */
+@Entity
 public class Cadastro {
-
     private String nome;
-    private String email;
     private String cpf;
-    private String cargo;
     private String senha;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String matricula;
 
-    public Cadastro(String nome, String email, String cpf, String cargo, String senha, String matricula) {
+    public Cadastro(String nome, String cpf, String senha, String matricula) {
         ValidacaoProduto.validarStringNaoVazia(nome, "Nome não pode ser vazio");
-        ValidacaoProduto.validarStringNaoVazia(email, "E-mail não pode ser vazio");
-        ValidacaoProduto.validarEmail(email);
         ValidacaoProduto.validarStringNaoVazia(cpf, "CPF não pode ser vazio");
         ValidacaoProduto.validarCPF(cpf);
-        ValidacaoProduto.validarStringNaoVazia(cargo, "Cargo não pode ser vazio");
         ValidacaoProduto.validarStringNaoVazia(senha, "Senha não pode ser vazia");
         ValidacaoProduto.validarMatricula(matricula);
 
         this.nome = nome;
-        this.email = email;
         this.cpf = cpf;
-        this.cargo = cargo;
         this.senha = senha;
         this.matricula = matricula;
+    }
+    
+    public Cadastro() {
+        this.nome = "";
+        this.cpf = "";
+        this.senha = "";
+        this.matricula = "";
+
     }
 
     @Override
     public String toString() {
-        return " Nome: " + nome + "\n Email: " + email + "\n CPF: " + cpf + "\n Cargo: " + cargo + "\n Matrícula: " + matricula + "\n Senha: " + senha + "\n ********************";
+        return " Nome: " + nome +  "\n CPF: " + cpf + "\n Matrícula: " + matricula + "\n Senha: " + senha + "\n ********************";
     }
 
     /**
@@ -56,19 +64,6 @@ public class Cadastro {
         this.nome = nome;
     }
 
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     /**
      * @return the cpf
@@ -82,20 +77,6 @@ public class Cadastro {
      */
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    /**
-     * @return the cargo
-     */
-    public String getCargo() {
-        return cargo;
-    }
-
-    /**
-     * @param cargo the cargo to set
-     */
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     /**

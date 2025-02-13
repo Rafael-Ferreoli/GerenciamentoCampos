@@ -9,13 +9,11 @@ public class SerializadorCSVCadastro {
 
     // Serializa a lista de cadastros para CSV
     public String toCSV(List<Cadastro> cadastros) {
-        StringBuilder csv = new StringBuilder("Nome;Cargo;CPF;Email;Matricula;Senha");
+        StringBuilder csv = new StringBuilder("Nome;CPF;Matricula;Senha");
         for (Cadastro cadastro : cadastros) {
             csv.append("\n")
                .append(cadastro.getNome()).append(";")
-               .append(cadastro.getCargo()).append(";")
                .append(cadastro.getCpf()).append(";")
-               .append(cadastro.getEmail()).append(";")
                .append(cadastro.getMatricula()).append(";")
                .append(cadastro.getSenha());
         }
@@ -32,14 +30,12 @@ public class SerializadorCSVCadastro {
                 try {
                     // Usamos a validação ao criar o objeto Cadastro
                     ValidacaoProduto.validarStringNaoVazia(partes[0], "Nome não pode ser vazio");
-                    ValidacaoProduto.validarStringNaoVazia(partes[1], "Cargo não pode ser vazio");
-                    ValidacaoProduto.validarStringNaoVazia(partes[2], "CPF não pode ser vazio");
-                    ValidacaoProduto.validarCPF(partes[2]);
-                    ValidacaoProduto.validarStringNaoVazia(partes[3], "Email não pode ser vazio");
-                    ValidacaoProduto.validarEmail(partes[3]);
-                    ValidacaoProduto.validarStringNaoVazia(partes[4], "Matrícula não pode ser vazia");
+                    ValidacaoProduto.validarStringNaoVazia(partes[1], "CPF não pode ser vazio");
+                    ValidacaoProduto.validarCPF(partes[1]);
+                    ValidacaoProduto.validarEmail(partes[2]);
+                    ValidacaoProduto.validarStringNaoVazia(partes[3], "Matrícula não pode ser vazia");
 
-                    Cadastro cadastro = new Cadastro(partes[0], partes[3], partes[2], partes[1], partes[5], partes[4]);
+                    Cadastro cadastro = new Cadastro(partes[0], partes[1], partes[2], partes[3]);
                     cadastros.add(cadastro);
                 } catch (IllegalArgumentException e) {
                     System.err.println("Erro ao processar cadastro: " + e.getMessage());
