@@ -3,13 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
-import controller.GerenciadorProdutosANTIGO;
-import model.Produto;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import controller.GerenciadorCadastros;
 import javax.swing.JOptionPane;
+import model.Cadastro;
+import model.exception.CadastroException;
 
 /**
  *
@@ -17,26 +15,18 @@ import javax.swing.JOptionPane;
  */
 public class DlgCadastroUsuario extends javax.swing.JDialog {
 
-    private String produtoSelecionado;
+    private String cadastroSelecionado;
     private boolean editando;
-    private GerenciadorProdutosANTIGO gerente;
+    private GerenciadorCadastros gerente;
 
     public DlgCadastroUsuario(boolean modal) {
         this.editando = false;
-        this.produtoSelecionado = "";
-        this.gerente = new GerenciadorProdutosANTIGO();
+        this.cadastroSelecionado = "";
+        this.gerente = new GerenciadorCadastros();
         initComponents();
-        setTitle("Produtos");
+        setTitle("Cadastro");
         this.habilitarCampos(false);
         this.limparCampos();
-        this.jTextArea_CadastroProduto_Saida.setEditable(false);
-        try {
-            gerente.carregarDoArquivo("ListagemProdutos.csv");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(DlgCadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jTextArea_CadastroProduto_Saida.setText(gerente.toString());
-
     }
 
     /**
@@ -48,124 +38,108 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton_CadastroProduto_Novo = new javax.swing.JButton();
-        jButton_CadastroProduto_Editar = new javax.swing.JButton();
-        jButton_CadastroProduto_Cancelar = new javax.swing.JButton();
-        jButton_CadastroProduto_Excluir = new javax.swing.JButton();
-        jButton_CadastroProduto_Salvar = new javax.swing.JButton();
-        jLabel_CadastroProduto_Título = new javax.swing.JLabel();
+        jButton_CadastroUsuario_Novo = new javax.swing.JButton();
+        jButton_CadastroUsuario_Editar = new javax.swing.JButton();
+        jButton_CadastroUsuario_Cancelar = new javax.swing.JButton();
+        jButton_CadastroUsuario_Excluir = new javax.swing.JButton();
+        jButton_CadastroUsuario_Salvar = new javax.swing.JButton();
+        jLabel_CadastroUsuario_Título = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel_CadastroProduto_Nome = new javax.swing.JLabel();
-        jLabel_CadastroProduto_Preco = new javax.swing.JLabel();
-        jTextField_CadastroProduto_Nome = new javax.swing.JTextField();
-        jTextField_CadastroProduto_Preço = new javax.swing.JTextField();
-        jLabel_CadastroProduto_CodInterno = new javax.swing.JLabel();
-        jLabel_CadastroProduto_CodBarras = new javax.swing.JLabel();
-        jTextField_CadastroProduto_CodInterno = new javax.swing.JTextField();
-        jTextField_CadastroProduto_CodBarras = new javax.swing.JTextField();
+        jLabel_CadastroUsuario_Nome = new javax.swing.JLabel();
+        jTextField_CadastroUsuario_Nome = new javax.swing.JTextField();
+        jLabel_CadastroUsuario_CPF = new javax.swing.JLabel();
+        jLabel_CadastroUsuario_Senha = new javax.swing.JLabel();
+        jTextField_CadastroUsuario_CPF = new javax.swing.JTextField();
+        jTextField_CadastroUsuario_Senha = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea_CadastroProduto_Saida = new javax.swing.JTextArea();
-        jLabel_CadastroProduto_Quantidade = new javax.swing.JLabel();
-        jTextField_CadastroProduto_Quantidade = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField_CadastroUsuario_Matricula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(583, 145));
+        setMinimumSize(new java.awt.Dimension(583, 145));
         setModal(true);
         setResizable(false);
 
-        jButton_CadastroProduto_Novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-novo.png"))); // NOI18N
-        jButton_CadastroProduto_Novo.setText("Novo");
-        jButton_CadastroProduto_Novo.setMaximumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Novo.setMinimumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Novo.setPreferredSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Novo.addActionListener(new java.awt.event.ActionListener() {
+        jButton_CadastroUsuario_Novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-novo.png"))); // NOI18N
+        jButton_CadastroUsuario_Novo.setText("Novo");
+        jButton_CadastroUsuario_Novo.setMaximumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Novo.setMinimumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Novo.setPreferredSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CadastroProduto_NovoActionPerformed(evt);
+                jButton_CadastroUsuario_NovoActionPerformed(evt);
             }
         });
 
-        jButton_CadastroProduto_Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-editar-20.png"))); // NOI18N
-        jButton_CadastroProduto_Editar.setText("Editar");
-        jButton_CadastroProduto_Editar.setMaximumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Editar.setMinimumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Editar.setPreferredSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Editar.addActionListener(new java.awt.event.ActionListener() {
+        jButton_CadastroUsuario_Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-editar-20.png"))); // NOI18N
+        jButton_CadastroUsuario_Editar.setText("Editar");
+        jButton_CadastroUsuario_Editar.setMaximumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Editar.setMinimumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Editar.setPreferredSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CadastroProduto_EditarActionPerformed(evt);
+                jButton_CadastroUsuario_EditarActionPerformed(evt);
             }
         });
 
-        jButton_CadastroProduto_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-cancelar-20 (1).png"))); // NOI18N
-        jButton_CadastroProduto_Cancelar.setText("Cancelar");
-        jButton_CadastroProduto_Cancelar.setMaximumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Cancelar.setMinimumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Cancelar.setPreferredSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButton_CadastroUsuario_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-cancelar-20 (1).png"))); // NOI18N
+        jButton_CadastroUsuario_Cancelar.setText("Cancelar");
+        jButton_CadastroUsuario_Cancelar.setMaximumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Cancelar.setMinimumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Cancelar.setPreferredSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CadastroProduto_CancelarActionPerformed(evt);
+                jButton_CadastroUsuario_CancelarActionPerformed(evt);
             }
         });
 
-        jButton_CadastroProduto_Excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-excluir.png"))); // NOI18N
-        jButton_CadastroProduto_Excluir.setText("Excluir");
-        jButton_CadastroProduto_Excluir.setMaximumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Excluir.setMinimumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Excluir.setPreferredSize(new java.awt.Dimension(100, 27));
-        jButton_CadastroProduto_Excluir.addActionListener(new java.awt.event.ActionListener() {
+        jButton_CadastroUsuario_Excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-excluir.png"))); // NOI18N
+        jButton_CadastroUsuario_Excluir.setText("Excluir");
+        jButton_CadastroUsuario_Excluir.setMaximumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Excluir.setMinimumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Excluir.setPreferredSize(new java.awt.Dimension(100, 27));
+        jButton_CadastroUsuario_Excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CadastroProduto_ExcluirActionPerformed(evt);
+                jButton_CadastroUsuario_ExcluirActionPerformed(evt);
             }
         });
 
-        jButton_CadastroProduto_Salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-salvar.png"))); // NOI18N
-        jButton_CadastroProduto_Salvar.setText("Salvar");
-        jButton_CadastroProduto_Salvar.setMaximumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Salvar.setMinimumSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Salvar.setPreferredSize(new java.awt.Dimension(110, 27));
-        jButton_CadastroProduto_Salvar.addActionListener(new java.awt.event.ActionListener() {
+        jButton_CadastroUsuario_Salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-salvar.png"))); // NOI18N
+        jButton_CadastroUsuario_Salvar.setText("Salvar");
+        jButton_CadastroUsuario_Salvar.setMaximumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Salvar.setMinimumSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Salvar.setPreferredSize(new java.awt.Dimension(110, 27));
+        jButton_CadastroUsuario_Salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CadastroProduto_SalvarActionPerformed(evt);
+                jButton_CadastroUsuario_SalvarActionPerformed(evt);
             }
         });
 
-        jLabel_CadastroProduto_Título.setFont(new java.awt.Font("Segoe UI", 1, 56)); // NOI18N
-        jLabel_CadastroProduto_Título.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_CadastroProduto_Título.setText("Cadastro de Produtos");
+        jLabel_CadastroUsuario_Título.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel_CadastroUsuario_Título.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_CadastroUsuario_Título.setText("Cadastro de Usuários");
 
-        jLabel_CadastroProduto_Nome.setText("Nome:");
+        jLabel_CadastroUsuario_Nome.setText("Nome:");
 
-        jLabel_CadastroProduto_Preco.setText("Preço:");
+        jTextField_CadastroUsuario_Nome.setMaximumSize(new java.awt.Dimension(210, 22));
+        jTextField_CadastroUsuario_Nome.setMinimumSize(new java.awt.Dimension(210, 22));
+        jTextField_CadastroUsuario_Nome.setPreferredSize(new java.awt.Dimension(210, 22));
 
-        jTextField_CadastroProduto_Nome.setMaximumSize(new java.awt.Dimension(210, 22));
-        jTextField_CadastroProduto_Nome.setMinimumSize(new java.awt.Dimension(210, 22));
-        jTextField_CadastroProduto_Nome.setPreferredSize(new java.awt.Dimension(210, 22));
+        jLabel_CadastroUsuario_CPF.setText("CPF:");
 
-        jTextField_CadastroProduto_Preço.setMaximumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_Preço.setMinimumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_Preço.setPreferredSize(new java.awt.Dimension(190, 22));
+        jLabel_CadastroUsuario_Senha.setText("Senha");
 
-        jLabel_CadastroProduto_CodInterno.setText("Código Interno:");
+        jTextField_CadastroUsuario_CPF.setMaximumSize(new java.awt.Dimension(190, 22));
+        jTextField_CadastroUsuario_CPF.setMinimumSize(new java.awt.Dimension(190, 22));
+        jTextField_CadastroUsuario_CPF.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        jLabel_CadastroProduto_CodBarras.setText("Código de Barras:");
+        jTextField_CadastroUsuario_Senha.setMaximumSize(new java.awt.Dimension(190, 22));
+        jTextField_CadastroUsuario_Senha.setMinimumSize(new java.awt.Dimension(190, 22));
+        jTextField_CadastroUsuario_Senha.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        jTextField_CadastroProduto_CodInterno.setMaximumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_CodInterno.setMinimumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_CodInterno.setPreferredSize(new java.awt.Dimension(190, 22));
-
-        jTextField_CadastroProduto_CodBarras.setMaximumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_CodBarras.setMinimumSize(new java.awt.Dimension(190, 22));
-        jTextField_CadastroProduto_CodBarras.setPreferredSize(new java.awt.Dimension(190, 22));
-
-        jTextArea_CadastroProduto_Saida.setColumns(20);
-        jTextArea_CadastroProduto_Saida.setRows(5);
-        jScrollPane1.setViewportView(jTextArea_CadastroProduto_Saida);
-
-        jLabel_CadastroProduto_Quantidade.setText("Quantidade:");
-
-        jTextField_CadastroProduto_Quantidade.setMaximumSize(new java.awt.Dimension(83, 22));
-        jTextField_CadastroProduto_Quantidade.setMinimumSize(new java.awt.Dimension(83, 22));
-        jTextField_CadastroProduto_Quantidade.setPreferredSize(new java.awt.Dimension(83, 22));
+        jLabel1.setText("Matricula:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,84 +151,65 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_CadastroUsuario_Título, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_CadastroProduto_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton_CadastroProduto_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton_CadastroProduto_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton_CadastroProduto_Excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_CadastroProduto_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel_CadastroProduto_Título, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel_CadastroProduto_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel_CadastroProduto_Preco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField_CadastroProduto_Preço, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_CadastroUsuario_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jButton_CadastroUsuario_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jButton_CadastroUsuario_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jButton_CadastroUsuario_Excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_CadastroProduto_Quantidade)
+                                .addComponent(jButton_CadastroUsuario_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_CadastroUsuario_Nome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_CadastroProduto_Quantidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTextField_CadastroProduto_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel_CadastroProduto_CodBarras)
-                            .addComponent(jLabel_CadastroProduto_CodInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_CadastroProduto_CodInterno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_CadastroProduto_CodBarras, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(6, 6, 6))
+                                .addComponent(jTextField_CadastroUsuario_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel_CadastroUsuario_CPF)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_CadastroUsuario_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_CadastroUsuario_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel_CadastroUsuario_Senha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_CadastroUsuario_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                        .addGap(6, 6, 6))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_CadastroProduto_Título, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(jLabel_CadastroUsuario_Título, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_CadastroProduto_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_CadastroProduto_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_CadastroProduto_Excluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_CadastroProduto_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_CadastroProduto_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_CadastroUsuario_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_CadastroUsuario_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_CadastroUsuario_Excluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_CadastroUsuario_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_CadastroUsuario_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_CadastroProduto_Nome)
-                            .addComponent(jTextField_CadastroProduto_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_CadastroProduto_Preco)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField_CadastroProduto_Preço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_CadastroProduto_Quantidade)
-                                .addComponent(jTextField_CadastroProduto_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_CadastroProduto_CodInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_CadastroProduto_CodInterno))
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_CadastroProduto_CodBarras)
-                            .addComponent(jTextField_CadastroProduto_CodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_CadastroUsuario_Nome)
+                    .addComponent(jTextField_CadastroUsuario_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_CadastroUsuario_CPF)
+                    .addComponent(jTextField_CadastroUsuario_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_CadastroUsuario_Senha)
+                    .addComponent(jTextField_CadastroUsuario_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField_CadastroUsuario_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -262,124 +217,112 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     public void limparCampos() {
-        this.jTextField_CadastroProduto_Nome.setText("");
-        this.jTextField_CadastroProduto_Preço.setText("");
-        this.jTextField_CadastroProduto_CodBarras.setText("");
-        this.jTextField_CadastroProduto_CodInterno.setText("");
-        this.jTextField_CadastroProduto_Quantidade.setText("");
+        this.jTextField_CadastroUsuario_Nome.setText("");
+        this.jTextField_CadastroUsuario_Senha.setText("");
+        this.jTextField_CadastroUsuario_Matricula.setText("");
+        this.jTextField_CadastroUsuario_CPF.setText("");
     }
 
     public void habilitarCampos(boolean flag) {
-        this.jTextField_CadastroProduto_Nome.setEnabled(flag);
-        this.jTextField_CadastroProduto_Preço.setEnabled(flag);
-        this.jTextField_CadastroProduto_CodBarras.setEnabled(flag);
-        this.jTextField_CadastroProduto_CodInterno.setEnabled(flag);
-        this.jTextField_CadastroProduto_Quantidade.setEnabled(flag);
+        this.jTextField_CadastroUsuario_Nome.setEnabled(flag);
+        this.jTextField_CadastroUsuario_Senha.setEnabled(flag);
+        this.jTextField_CadastroUsuario_Matricula.setEnabled(flag);
+        this.jTextField_CadastroUsuario_CPF.setEnabled(flag);
     }
 
-    public Produto camposParaObjeto() {
-        Produto produto = new Produto();
-        produto.setNome(jTextField_CadastroProduto_Nome.getText());
-        produto.setCodigoInterno(jTextField_CadastroProduto_CodInterno.getText());
-        produto.setCodigoBarra(jTextField_CadastroProduto_CodBarras.getText());
-        produto.setPreco(Double.parseDouble(jTextField_CadastroProduto_Preço.getText()));  
-        produto.setQuantidade(Integer.parseInt(jTextField_CadastroProduto_Quantidade.getText()));
-        return produto;
+    public Cadastro camposParaObjeto() {
+        Cadastro cadastro = new Cadastro();
+        cadastro.setNome(jTextField_CadastroUsuario_Nome.getText());
+        cadastro.setCpf(jTextField_CadastroUsuario_CPF.getText());
+        cadastro.setMatricula(jTextField_CadastroUsuario_Matricula.getText());
+        cadastro.setSenha(jTextField_CadastroUsuario_Senha.getText());
+        return cadastro;
     }
 
-    public void objetoParaCampos(Produto produto) {
-        jTextField_CadastroProduto_Nome.setText(produto.getNome());
-        jTextField_CadastroProduto_CodInterno.setText(produto.getCodigoInterno());
-        jTextField_CadastroProduto_Preço.setText(String.valueOf(produto.getPreco()));
-        jTextField_CadastroProduto_CodBarras.setText(produto.getCodigoBarra());
-        jTextField_CadastroProduto_Quantidade.setText(String.valueOf(produto.getQuantidade()));
+    public void objetoParaCampos(Cadastro cadastro) {
+        jTextField_CadastroUsuario_Nome.setText(cadastro.getNome());
+        jTextField_CadastroUsuario_CPF.setText(cadastro.getCpf());
+        jTextField_CadastroUsuario_Matricula.setText(cadastro.getMatricula());
+        jTextField_CadastroUsuario_Senha.setText(cadastro.getSenha());
     }
 
-    private void jButton_CadastroProduto_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_NovoActionPerformed
+    private void jButton_CadastroUsuario_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_NovoActionPerformed
         this.limparCampos();
         this.habilitarCampos(true);
         this.editando = false;
-    }//GEN-LAST:event_jButton_CadastroProduto_NovoActionPerformed
+    }//GEN-LAST:event_jButton_CadastroUsuario_NovoActionPerformed
 
-    private void jButton_CadastroProduto_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_EditarActionPerformed
-        this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto selecionado:", "");
-        Produto produtoEditando = this.gerente.buscarProduto(produtoSelecionado);
-        if (produtoEditando != null) {
+    private void jButton_CadastroUsuario_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_EditarActionPerformed
+        this.cadastroSelecionado = JOptionPane.showInputDialog("Informe a matricula do cadastro selecionado:", "");
+        Cadastro cadastroEditando = this.gerente.buscarCadastro(cadastroSelecionado);
+        if (cadastroEditando != null) {
             this.editando = true;
             this.limparCampos();
             this.habilitarCampos(true);
-            objetoParaCampos(produtoEditando);
+            objetoParaCampos(cadastroEditando);
 
         } else {
-            System.out.println("produto inexistente");
-            JOptionPane.showMessageDialog(this, "O código informado não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
+            System.out.println("cadastro inexistente");
+            JOptionPane.showMessageDialog(this, "A matricula informada não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
         }
-    }//GEN-LAST:event_jButton_CadastroProduto_EditarActionPerformed
+    }//GEN-LAST:event_jButton_CadastroUsuario_EditarActionPerformed
 
-    private void jButton_CadastroProduto_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_CancelarActionPerformed
+    private void jButton_CadastroUsuario_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_CancelarActionPerformed
         this.limparCampos();
         this.habilitarCampos(false);
         this.editando = false;
-    }//GEN-LAST:event_jButton_CadastroProduto_CancelarActionPerformed
+    }//GEN-LAST:event_jButton_CadastroUsuario_CancelarActionPerformed
 
-    private void jButton_CadastroProduto_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_ExcluirActionPerformed
-        this.produtoSelecionado = JOptionPane.showInputDialog("Informe o código interno do produto a ser excluído:", "");
-        Produto produto = this.gerente.buscarProduto(produtoSelecionado);
-        if (produto == null) {
-            JOptionPane.showMessageDialog(this, "O produto informado não foi encontrado no sistema.", "Cadastro Inexistente", HEIGHT);
+    private void jButton_CadastroUsuario_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_ExcluirActionPerformed
+        this.cadastroSelecionado = JOptionPane.showInputDialog("Informe a matricula do cadastro a ser excluído:", "");
+        Cadastro cadastro = this.gerente.buscarCadastro(cadastroSelecionado);
+        if (cadastro == null) {
+            JOptionPane.showMessageDialog(this, "O cadastro informado não foi encontrado no sistema.", "Cadastro Inexistente", HEIGHT);
         } else {
-            this.gerente.removerProduto(produtoSelecionado);
-            JOptionPane.showMessageDialog(this, "Produto excluído com sucesso.", "Produto Excluído", HEIGHT);
+            this.gerente.removerCadastro(cadastroSelecionado);
+            JOptionPane.showMessageDialog(this, "Cadastro excluído com sucesso.", "Cadastro Excluído", HEIGHT);
         }
-        String listagem = this.gerente.toString();
-        jTextArea_CadastroProduto_Saida.setText(listagem);
+    }//GEN-LAST:event_jButton_CadastroUsuario_ExcluirActionPerformed
 
-    }//GEN-LAST:event_jButton_CadastroProduto_ExcluirActionPerformed
-
-    private void jButton_CadastroProduto_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_SalvarActionPerformed
-         Produto novoProduto = this.camposParaObjeto();
-        if (this.editando) {
-            this.gerente.atualizarProduto(this.produtoSelecionado, novoProduto);
-        } else {
-            this.gerente.adicionarProduto(novoProduto);
-        }
-        this.limparCampos();
-        this.habilitarCampos(false);
-        this.editando = false;
-        String listagem = gerente.toString();
-        jTextArea_CadastroProduto_Saida.setText(listagem);
+    private void jButton_CadastroUsuario_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_SalvarActionPerformed
         try {
-            gerente.salvarNoArquivo("ListagemProdutos.csv");
-        } catch (IOException ex) {
-            Logger.getLogger(DlgCadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Cadastro novoCadastro = this.camposParaObjeto();
+            if (this.editando) {
+                this.gerente.atualizarCadastro(this.cadastroSelecionado, novoCadastro);
+            } else {
+                this.gerente.adicionarCadastro(novoCadastro);
+            }
+            this.limparCampos();
+            this.habilitarCampos(false);
+            this.editando = false;
+        } catch (CadastroException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton_CadastroProduto_SalvarActionPerformed
+
+
+    }//GEN-LAST:event_jButton_CadastroUsuario_SalvarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_CadastroProduto_Cancelar;
-    private javax.swing.JButton jButton_CadastroProduto_Editar;
-    private javax.swing.JButton jButton_CadastroProduto_Excluir;
-    private javax.swing.JButton jButton_CadastroProduto_Novo;
-    private javax.swing.JButton jButton_CadastroProduto_Salvar;
-    private javax.swing.JLabel jLabel_CadastroProduto_CodBarras;
-    private javax.swing.JLabel jLabel_CadastroProduto_CodInterno;
-    private javax.swing.JLabel jLabel_CadastroProduto_Nome;
-    private javax.swing.JLabel jLabel_CadastroProduto_Preco;
-    private javax.swing.JLabel jLabel_CadastroProduto_Quantidade;
-    private javax.swing.JLabel jLabel_CadastroProduto_Título;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jButton_CadastroUsuario_Cancelar;
+    private javax.swing.JButton jButton_CadastroUsuario_Editar;
+    private javax.swing.JButton jButton_CadastroUsuario_Excluir;
+    private javax.swing.JButton jButton_CadastroUsuario_Novo;
+    private javax.swing.JButton jButton_CadastroUsuario_Salvar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_CadastroUsuario_CPF;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Nome;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Senha;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Título;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextArea jTextArea_CadastroProduto_Saida;
-    private javax.swing.JTextField jTextField_CadastroProduto_CodBarras;
-    private javax.swing.JTextField jTextField_CadastroProduto_CodInterno;
-    private javax.swing.JTextField jTextField_CadastroProduto_Nome;
-    private javax.swing.JTextField jTextField_CadastroProduto_Preço;
-    private javax.swing.JTextField jTextField_CadastroProduto_Quantidade;
+    private javax.swing.JTextField jTextField_CadastroUsuario_CPF;
+    private javax.swing.JTextField jTextField_CadastroUsuario_Matricula;
+    private javax.swing.JTextField jTextField_CadastroUsuario_Nome;
+    private javax.swing.JTextField jTextField_CadastroUsuario_Senha;
     // End of variables declaration//GEN-END:variables
 }

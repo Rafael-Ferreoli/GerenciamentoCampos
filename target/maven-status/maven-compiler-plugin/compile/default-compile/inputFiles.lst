@@ -11,7 +11,7 @@ C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\CSV\FilePersistence.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\IDAO.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\view\DlgCadastroProdutosANTIGO.java
-C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\validation\ValidacaoProduto.java
+C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\validation\ProdutoValidacao.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\Etiqueta.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\view\DlgBloco.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\view\DlgAereo.java
@@ -22,6 +22,9 @@ C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\controller\GerenciadorEtiquetas.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\ProdutoSQLiteDAO.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\controller\GerenciadorProdutos.java
+C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\exception\CadastroException.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\CSV\SerializadorCSVEtiquetas.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\EtiquetaSQLiteDAO.java
 C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\CSV\SerializadorCSVProdutos.java
+C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\validation\UsuarioValidacao.java
+C:\Users\rafae\OneDrive\Documentos\NetBeansProjects\CamposDistribuidora\src\main\java\model\DAO\CadastroCSVDAO.java

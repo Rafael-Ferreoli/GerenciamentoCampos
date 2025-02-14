@@ -5,10 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Cadastro;
+import model.DAO.CadastroCSVDAO;
 import model.DAO.EtiquetaCSVDAO;
-import model.DAO.IDAO;
 import model.DAO.EtiquetaSQLiteDAO;
+import model.DAO.IDAO;
+import model.DAO.ProdutoCSVDAO;
+import model.DAO.ProdutoSQLiteDAO;
 import model.Etiqueta;
+import model.Produto;
 
 public class Persistencia {
 
@@ -16,7 +21,7 @@ public class Persistencia {
     private static final String URL = "jdbc:sqlite:dbCampos.sqlite";
     
     // sqlite ou csv
-    private static String tipoPersistencia = "csv"; 
+    private static String tipoPersistencia = "sqlite"; 
 
     public static void setTipoPersistencia(String tipo) {
         tipoPersistencia = tipo;
@@ -63,15 +68,36 @@ public class Persistencia {
         }
     }
     
-    // Método para obter a implementação de IDAO<Etiqueta> conforme o tipo de persistência
-    public static IDAO<Etiqueta> getEtiquetaDAO() {
-        if (tipoPersistencia.equalsIgnoreCase("sqlite")) {
-            return new EtiquetaSQLiteDAO(); // Sua implementação para SQLite pode utilizar Persistencia.getConnection() internamente
-        } else if (tipoPersistencia.equalsIgnoreCase("csv")) {
-            // Supondo que o construtor do EtiquetaCSVDAO receba o caminho do arquivo
-            return new EtiquetaCSVDAO("ListagemEtiquetas.csv");
+    // Método fábrica para Produto
+    public static IDAO<Produto> getProdutoDAO() {
+        if (tipoPersistencia.equalsIgnoreCase("csv")) {
+            return new ProdutoCSVDAO();
+        } else if (tipoPersistencia.equalsIgnoreCase("sqlite")) {
+            return new ProdutoSQLiteDAO();
         } else {
-            throw new IllegalArgumentException("Tipo de persistência não suportado: " + tipoPersistencia);
+            throw new IllegalArgumentException("Tipo de persistência inválido: " + tipoPersistencia);
+        }
+    }
+    
+    // Método fábrica para Etiqueta
+    public static IDAO<Etiqueta> getEtiquetaDAO() {
+        if (tipoPersistencia.equalsIgnoreCase("csv")) {
+            return new EtiquetaCSVDAO();
+        } else if (tipoPersistencia.equalsIgnoreCase("sqlite")) {
+            return new EtiquetaSQLiteDAO();
+        } else {
+            throw new IllegalArgumentException("Tipo de persistência inválido: " + tipoPersistencia);
+        }
+    }
+    
+    // Método fábrica para Cadastro
+    public static IDAO<Cadastro> getCadastroDAO() {
+        if (tipoPersistencia.equalsIgnoreCase("csv")) {
+            return new CadastroCSVDAO();
+        } /*else if (tipoPersistencia.equalsIgnoreCase("sqlite")) {
+            return new CadastroSQLiteDAO();
+        }*/ else {
+            throw new IllegalArgumentException("Tipo de persistência inválido: " + tipoPersistencia);
         }
     }
 }

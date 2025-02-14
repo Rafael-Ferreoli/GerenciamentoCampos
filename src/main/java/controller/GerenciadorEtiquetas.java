@@ -1,7 +1,6 @@
 package controller;
 
 import factory.Persistencia;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,7 +15,6 @@ public class GerenciadorEtiquetas {
     private IDAO<Etiqueta> etiquetaDAO;
 
     public GerenciadorEtiquetas() {
-        // Centraliza a escolha do tipo de persistência
         this.etiquetaDAO = factory.Persistencia.getEtiquetaDAO();
 
     }
@@ -140,17 +138,6 @@ public class GerenciadorEtiquetas {
         }
         return saida.toString();
     }
-
-    // Para o CSV, disponibilizamos métodos para carregar e salvar os dados
-    public void carregarDados() throws FileNotFoundException {
-        if (etiquetaDAO instanceof model.DAO.EtiquetaCSVDAO) {
-            ((model.DAO.EtiquetaCSVDAO) etiquetaDAO).loadFromFile();
-        }
-    }
-
-    public void salvarDados() {
-        if (etiquetaDAO instanceof model.DAO.EtiquetaCSVDAO) {
-            ((model.DAO.EtiquetaCSVDAO) etiquetaDAO).saveToFile();
-        }
-    }
+    
+    
 }

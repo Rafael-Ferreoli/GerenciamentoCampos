@@ -2,26 +2,31 @@ package model.exception;
 
 public class ProdutoException extends RuntimeException {
 
-    // Construtor padrão com mensagem
-    public ProdutoException(String message) {
-        super(message);
-    }
-
-    // Construtor com mensagem e causa
-    public ProdutoException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    // Métodos estáticos para mensagens específicas
-    public static ProdutoException produtoDuplicado(String identificador) {
-        return new ProdutoException("Produto com identificador '" + identificador + "' já existe no sistema.");
-    }
-
-    public static ProdutoException produtoNaoEncontrado(String codigoInterno) {
-        return new ProdutoException("Produto com código interno '" + codigoInterno + "' não foi encontrado.");
+    public ProdutoException(String mensagem) {
+        super(mensagem);
     }
 
     public static ProdutoException camposInvalidos(String campo) {
-        return new ProdutoException("O campo '" + campo + "' é inválido ou está vazio.");
+        return new ProdutoException("Erro: " + campo + " não pode ser vazio.");
+    }
+
+    public static ProdutoException produtoDuplicado(String codigo) {
+        return new ProdutoException("Erro: Já existe um produto com o código interno ou código de barras informado: " + codigo);
+    }
+
+    public static ProdutoException produtoNaoEncontrado(String codigo) {
+        return new ProdutoException("Erro: Produto com código interno " + codigo + " não encontrado.");
+    }
+
+    public static ProdutoException valorInvalido(String campo) {
+        return new ProdutoException("Erro: " + campo + " deve ser um valor positivo.");
+    }
+
+    public static ProdutoException codigoBarrasInvalido() {
+        return new ProdutoException("Erro: Código de barras deve ter exatamente 13 dígitos numéricos.");
+    }
+
+    public static ProdutoException formatoInvalido(String campo) {
+        return new ProdutoException("Erro: " + campo + " contém caracteres inválidos. Apenas números são permitidos.");
     }
 }

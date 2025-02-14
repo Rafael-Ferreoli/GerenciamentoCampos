@@ -5,7 +5,6 @@
 package view;
 
 import controller.GerenciadorProdutos;
-import factory.Persistencia;
 import model.Produto;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -38,12 +37,7 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
 
         grdProdutos.setModel(gerente);
 
-        try {
-            gerente.carregarProdutos();
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Arquivo não encontrado: ListagemProdutos.csv", 
-                                          "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+        gerente.carregarProdutos();
     }
 
     /**
@@ -319,11 +313,15 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
 
     public Produto camposParaObjeto() {
         Produto produto = new Produto();
+        try {
         produto.setNome(jTextField_CadastroProduto_Nome.getText());
         produto.setCodigoInterno(jTextField_CadastroProduto_CodInterno.getText());
         produto.setCodigoBarra(jTextField_CadastroProduto_CodBarras.getText());
-        produto.setPreco(Double.parseDouble(jTextField_CadastroProduto_Preço.getText()));
-        produto.setQuantidade(Integer.parseInt(jTextField_CadastroProduto_Quantidade.getText()));
+        produto.setPreco(Double.parseDouble(jTextField_CadastroProduto_Preço.getText().trim()));
+        produto.setQuantidade(Integer.parseInt(jTextField_CadastroProduto_Quantidade.getText().trim()));
+    } catch (NumberFormatException e) {
+        throw ProdutoException.camposInvalidos("Preço e Quantidade devem ser números válidos.");
+    }
         return produto;
     }
 
@@ -376,19 +374,13 @@ public class DlgCadastroProdutosJTable extends javax.swing.JDialog {
     private void jButton_CadastroProduto_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroProduto_SalvarActionPerformed
         try {
             Produto novoProduto = this.camposParaObjeto();
+
             if (this.editando) {
-                // Verifica duplicidade ao editar (exceto para o próprio produto sendo editado)
-                if (gerente.isProdutoDuplicado(novoProduto, this.produtoSelecionado)) {
-                    throw new ProdutoException("Já existe outro produto com o mesmo código interno ou código de barras.");
-                }
                 this.gerente.atualizarProduto(this.produtoSelecionado, novoProduto);
             } else {
-                // Verifica duplicidade ao adicionar novo
-                if (gerente.isProdutoDuplicado(novoProduto, null)) {
-                    throw new ProdutoException("Já existe um produto com o mesmo código interno ou código de barras.");
-                }
                 this.gerente.adicionarProduto(novoProduto);
             }
+
             JOptionPane.showMessageDialog(this, "Produto salvo com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.limparCampos();
             this.habilitarCampos(false);

@@ -22,9 +22,7 @@ public class DlgBloco extends javax.swing.JDialog {
     private GerenciadorEtiquetas gerente;
     private String produtoSelecionado;
     private String numeroEtiqueta;
-    private int numeroEtiquetaInt;
     private int numeroBlocoAtual;
-    private LocalDate dataFormatada = null;
     String[] etiquetasText;
 
     /**
@@ -37,7 +35,6 @@ public class DlgBloco extends javax.swing.JDialog {
         jLabel_NomeBloco.setText(nomeBloco);
         setNumEtq(numeroBloco);
         numeroBlocoAtual = numeroBloco;
-        gerente.carregarDados();
         desabilitarCampos(false);
         etiquetasText = gerente.toStringArray(numeroBlocoAtual);
         atualizarTextAreas(etiquetasText);
@@ -348,9 +345,6 @@ public class DlgBloco extends javax.swing.JDialog {
 
                         etiquetasText = gerente.toStringArray(numeroBlocoAtual);
                         atualizarTextAreas(etiquetasText);
-                        gerente.salvarDados();
-
-
                         JOptionPane.showMessageDialog(this, "Etiqueta adicionada com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                         inputValido = true;
                     } catch (DateTimeParseException e) {
@@ -390,8 +384,6 @@ public class DlgBloco extends javax.swing.JDialog {
                     // Atualiza as áreas de texto e salva no arquivo
                     etiquetasText = gerente.toStringArray(numeroBlocoAtual);
                     atualizarTextAreas(etiquetasText);
-
-                    gerente.salvarDados();
                     JOptionPane.showMessageDialog(this, "Etiqueta removida com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                     inputValido = true;
                 } else {

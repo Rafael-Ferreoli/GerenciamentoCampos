@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import model.validation.ValidacaoProduto;
 
 
 /**
@@ -18,36 +17,30 @@ import model.validation.ValidacaoProduto;
 @Entity
 public class Cadastro {
     private String nome;
-    private String cpf;
-    private String senha;
+    private String cpf;   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String matricula;
+    private String senha;
 
-    public Cadastro(String nome, String cpf, String senha, String matricula) {
-        ValidacaoProduto.validarStringNaoVazia(nome, "Nome não pode ser vazio");
-        ValidacaoProduto.validarStringNaoVazia(cpf, "CPF não pode ser vazio");
-        ValidacaoProduto.validarCPF(cpf);
-        ValidacaoProduto.validarStringNaoVazia(senha, "Senha não pode ser vazia");
-        ValidacaoProduto.validarMatricula(matricula);
-
+    public Cadastro(String nome, String cpf, String matricula, String senha) {
         this.nome = nome;
         this.cpf = cpf;
-        this.senha = senha;
         this.matricula = matricula;
+        this.senha = senha;
     }
     
     public Cadastro() {
         this.nome = "";
         this.cpf = "";
-        this.senha = "";
         this.matricula = "";
+        this.senha = "";
 
     }
 
     @Override
     public String toString() {
-        return " Nome: " + nome +  "\n CPF: " + cpf + "\n Matrícula: " + matricula + "\n Senha: " + senha + "\n ********************";
+        return " Nome: " + nome +  "\n CPF: " + cpf + "\n Senha: " + senha + "\n Matrícula: " + matricula +  "\n ********************";
     }
 
     /**

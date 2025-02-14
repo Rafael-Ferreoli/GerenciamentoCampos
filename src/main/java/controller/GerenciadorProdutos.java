@@ -1,21 +1,18 @@
 package controller;
 
 import factory.Persistencia;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.DAO.IDAO;
-import model.DAO.ProdutoCSVDAO;
-import model.DAO.ProdutoSQLiteDAO;
 import model.Produto;
 import model.exception.ProdutoException;
-import model.validation.ValidacaoProduto;
+import model.validation.ProdutoValidacao;
 
 public class GerenciadorProdutos extends AbstractTableModel {
 
     private List<Produto> produtos;
-    private IDAO<Produto> produtoPersistence;
+    private IDAO<Produto> produtoDAO;
 
     private final int COL_NOME = 0;
     private final int COL_CODINT = 1;
@@ -23,73 +20,38 @@ public class GerenciadorProdutos extends AbstractTableModel {
     private final int COL_PRECO = 3;
     private final int COL_QTD = 4;
 
-    // Construtor sem parâmetros, que coleta o tipo de persistência da classe Persistencia
     public GerenciadorProdutos() {
         this.produtos = new ArrayList<>();
-        String tipoPersistencia = Persistencia.getTipoPersistencia();
-        if ("csv".equalsIgnoreCase(tipoPersistencia)) {
-            this.produtoPersistence = new ProdutoCSVDAO();
-        } else if ("sqlite".equalsIgnoreCase(tipoPersistencia)) {
-            this.produtoPersistence = new ProdutoSQLiteDAO();
-        } else {
-            throw new IllegalArgumentException("Tipo de persistência inválido: " + tipoPersistencia);
-        }
+        this.produtoDAO = Persistencia.getProdutoDAO();
+        carregarProdutos();
     }
 
     public void adicionarProduto(Produto produto) {
         if (produto == null) {
             throw ProdutoException.camposInvalidos("Produto");
         }
-
-        // Validações de campos obrigatórios
-        ValidacaoProduto.validarStringNaoVazia(produto.getNome(), "Nome do produto não pode ser vazio.");
-        ValidacaoProduto.validarStringNaoVazia(produto.getCodigoInterno(), "Código interno do produto não pode ser vazio.");
-        ValidacaoProduto.validarCodBarra(produto.getCodigoBarra());
-        ValidacaoProduto.validarNumeroPositivo(produto.getPreco(), "Preço do produto deve ser maior ou igual a zero.");
-        ValidacaoProduto.validarNumeroNaoNegativo(produto.getQuantidade(), "Quantidade do produto não pode ser negativa.");
-
-        // Verificar duplicidade
-        if (isProdutoDuplicado(produto, null)) { // Passa null porque é um novo produto
-            throw ProdutoException.produtoDuplicado(produto.getCodigoInterno());
-        }
-
-        // Salva o produto
-        this.produtoPersistence.save(produto);
-
-        // Recarrega a lista de produtos e atualiza a tabela
-        this.produtos = this.produtoPersistence.findAll();
+        ProdutoValidacao.validarCamposObrigatorios(produto, this.produtos, null); // código atual é null na adição
+        this.produtoDAO.save(produto);
+        this.produtos = this.produtoDAO.findAll();
         fireTableDataChanged();
     }
 
-    public boolean isProdutoDuplicado(Produto produto, String codigoAtual) {
-        for (Produto p : this.produtoPersistence.findAll()) {
-            // Ignorar o produto atual ao editar
-            if (codigoAtual != null && p.getCodigoInterno().equals(codigoAtual)) {
-                continue;
-            }
-            if (p.getCodigoInterno().equals(produto.getCodigoInterno())
-                    || p.getCodigoBarra().equals(produto.getCodigoBarra())) {
-                return true;
-            }
+    public boolean removerProduto(String codigoInterno) {
+        ProdutoValidacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        Produto produto = buscarProduto(codigoInterno);
+
+        if (produto != null) {
+            this.produtoDAO.delete(codigoInterno);
+            this.produtos = this.produtoDAO.findAll();
+            fireTableDataChanged();
+            return true;
         }
         return false;
     }
 
-    public boolean removerProduto(String codigoInterno) {
-        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-        Produto produto = buscarProduto(codigoInterno);
-        if (produto == null) {
-            throw ProdutoException.produtoNaoEncontrado(codigoInterno);
-        }
-        this.produtoPersistence.delete(codigoInterno);
-        this.produtos = this.produtoPersistence.findAll();  // Recarrega a lista
-        fireTableDataChanged(); // Atualiza a tabela
-        return true;
-    }
-
     public Produto buscarProduto(String codigoInterno) {
-        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
-        Produto produto = this.produtoPersistence.findById(codigoInterno);
+        ProdutoValidacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        Produto produto = this.produtoDAO.findById(codigoInterno);
         if (produto == null) {
             throw ProdutoException.produtoNaoEncontrado(codigoInterno);
         }
@@ -97,36 +59,41 @@ public class GerenciadorProdutos extends AbstractTableModel {
     }
 
     public boolean atualizarProduto(String codigoInterno, Produto produtoNovo) {
-        ValidacaoProduto.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ProdutoValidacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
 
         if (produtoNovo == null) {
             throw ProdutoException.camposInvalidos("Produto novo");
         }
 
-        ValidacaoProduto.validarCodBarra(produtoNovo.getCodigoBarra());
-
+        ProdutoValidacao.validarCodBarra(produtoNovo.getCodigoBarra());
         Produto produtoExistente = buscarProduto(codigoInterno);
         if (produtoExistente == null) {
             throw ProdutoException.produtoNaoEncontrado(codigoInterno);
         }
 
+        // lista temporaria pra ignorar o produto que esta sendo editado
+        List<Produto> listaSemAtual = new ArrayList<>(this.produtos);
+        listaSemAtual.remove(produtoExistente);
+
+        ProdutoValidacao.validarCamposObrigatorios(produtoNovo, listaSemAtual, produtoExistente.getCodigoInterno());
+
         // Atualiza o produto
-        this.produtoPersistence.update(codigoInterno, produtoNovo);
-        this.produtos = this.produtoPersistence.findAll();  // Recarrega a lista
-        fireTableDataChanged(); // Atualiza a tabela
+        this.produtoDAO.update(codigoInterno, produtoNovo);
+        this.produtos = this.produtoDAO.findAll();  
+        fireTableDataChanged(); 
         return true;
     }
 
     public List<Produto> listarProdutos() {
-        return this.produtoPersistence.findAll();
+        return this.produtoDAO.findAll();
     }
 
-    public void carregarProdutos() throws FileNotFoundException {
-        this.produtos = this.produtoPersistence.findAll();
+    public void carregarProdutos() {
+        this.produtos = this.produtoDAO.findAll();
         fireTableDataChanged();
     }
 
-    // Métodos de AbstractTableModel
+    // Métodos do AbstractTableModel
     @Override
     public int getRowCount() {
         return this.produtos.size();
@@ -134,44 +101,44 @@ public class GerenciadorProdutos extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5; // Nome, Código Interno, Código Barra, Preço, Quantidade
+        return 5;
     }
 
     @Override
     public Object getValueAt(int row, int col) {
         Produto produto = this.produtos.get(row);
-        switch (col) {
-            case COL_NOME:
-                return produto.getNome();
-            case COL_CODINT:
-                return produto.getCodigoInterno();
-            case COL_CODBARRA:
-                return produto.getCodigoBarra();
-            case COL_PRECO:
-                return produto.getPreco();
-            case COL_QTD:
-                return produto.getQuantidade();
-            default:
-                return "-";
-        }
+        return switch (col) {
+            case COL_NOME ->
+                produto.getNome();
+            case COL_CODINT ->
+                produto.getCodigoInterno();
+            case COL_CODBARRA ->
+                produto.getCodigoBarra();
+            case COL_PRECO ->
+                produto.getPreco();
+            case COL_QTD ->
+                produto.getQuantidade();
+            default ->
+                "-";
+        };
     }
 
     @Override
     public String getColumnName(int column) {
-        switch (column) {
-            case COL_NOME:
-                return "Nome";
-            case COL_CODINT:
-                return "Cod Interno";
-            case COL_CODBARRA:
-                return "Cod Barra";
-            case COL_PRECO:
-                return "Preço";
-            case COL_QTD:
-                return "Quantidade";
-            default:
-                return "";
-        }
+        return switch (column) {
+            case COL_NOME ->
+                "Nome";
+            case COL_CODINT ->
+                "Cod Interno";
+            case COL_CODBARRA ->
+                "Cod Barra";
+            case COL_PRECO ->
+                "Preço";
+            case COL_QTD ->
+                "Quantidade";
+            default ->
+                "";
+        };
     }
 
     public Produto getProdutoAt(int row) {

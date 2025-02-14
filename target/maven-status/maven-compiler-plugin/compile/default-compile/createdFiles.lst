@@ -9,6 +9,7 @@ view\DlgBloco$1.class
 controller\GerenciadorCadastros.class
 view\DlgCadastroProdutosANTIGO$3.class
 view\DlgCadastroProdutosJTable$2.class
+model\exception\CadastroException.class
 controller\GerenciadorProdutosANTIGO.class
 view\DlgCadastroUsuario.class
 view\DlgCadastroProdutosANTIGO$5.class
@@ -45,8 +46,8 @@ view\DlgAereo$40.class
 view\DlgAereo$4.class
 view\DlgAereo$7.class
 view\DlgAereo$31.class
-model\validation\ValidacaoProduto.class
 view\DlgAereo$11.class
+model\DAO\CadastroCSVDAO.class
 view\DlgAereo$21.class
 model\Produto.class
 view\FrHome$1.class
@@ -76,6 +77,7 @@ view\FrHome$6.class
 view\DlgAereo.class
 view\DlgAereo$27.class
 view\DlgBloco.class
+model\validation\CadastroValidacao.class
 model\DAO\ProdutoCSVDAO.class
 view\DlgAereo$14.class
 view\DlgCadastroUsuario$5.class
@@ -86,6 +88,7 @@ view\DlgAereo$8.class
 controller\GerenciadorEtiquetas.class
 controller\GerenciadorProdutos.class
 view\FrHome$7.class
+model\validation\ProdutoValidacao.class
 view\DlgCadastroProdutosJTable$7.class
 view\DlgAereo$32.class
 model\DAO\EtiquetaCSVDAO.class

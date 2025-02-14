@@ -35,8 +35,6 @@ public class DlgAereo extends javax.swing.JDialog {
         this.etiquetaSelecionada = "";
         this.gerente = new GerenciadorEtiquetas();
         initComponents();
-        // Em vez de indicar o arquivo, chamamos carregarDados():
-        gerente.carregarDados();
     }
 
     /**
