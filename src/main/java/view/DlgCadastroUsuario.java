@@ -5,8 +5,15 @@
 package view;
 
 import controller.GerenciadorCadastros;
+import factory.Persistencia;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import model.Cadastro;
+import model.Administrador;
+import model.DAO.CadastroSQLiteJPADAO;
+import model.Funcionario;
+import model.Operador;
 import model.exception.CadastroException;
 
 /**
@@ -20,6 +27,7 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
     private GerenciadorCadastros gerente;
 
     public DlgCadastroUsuario(boolean modal) {
+        super((java.awt.Frame) null, modal); // Certifique-se de passar o owner se necessário
         this.editando = false;
         this.cadastroSelecionado = "";
         this.gerente = new GerenciadorCadastros();
@@ -27,6 +35,28 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
         setTitle("Cadastro");
         this.habilitarCampos(false);
         this.limparCampos();
+        jComboBox_CadastroUsuario_Cargo.setModel(new DefaultComboBoxModel<>(new String[]{"OPERADOR", "ADMINISTRADOR"}));
+        // Inicialmente, desabilita o combo de ADM
+        jComboBox_CadastroUsuario_Adm.setEnabled(false);
+        // Adiciona listener para atualizar o combo de ADM de acordo com o cargo selecionado
+        jComboBox_CadastroUsuario_Cargo.addActionListener(evt -> atualizarComboAdm());
+
+        // Adiciona listener para fechar as conexões ao fechar a tela
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                // Fecha o EntityManagerFactory do JPA
+                CadastroSQLiteJPADAO.closeEntityManagerFactory();
+                // Fecha a conexão JDBC, se estiver aberta
+                Persistencia.closeConnection();
+            }
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                // Também pode ser chamado aqui, para garantir
+                CadastroSQLiteJPADAO.closeEntityManagerFactory();
+                Persistencia.closeConnection();
+            }
+        });
     }
 
     /**
@@ -53,11 +83,16 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
         jTextField_CadastroUsuario_CPF = new javax.swing.JTextField();
         jTextField_CadastroUsuario_Senha = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_CadastroUsuario_Matrícula = new javax.swing.JLabel();
         jTextField_CadastroUsuario_Matricula = new javax.swing.JTextField();
+        jComboBox_CadastroUsuario_Adm = new javax.swing.JComboBox<>();
+        jLabel_CadastroUsuario_Cargo = new javax.swing.JLabel();
+        jLabel_CadastroUsuario_Email = new javax.swing.JLabel();
+        jTextField_CadastroUsuario_Email = new javax.swing.JTextField();
+        jLabel_CadastroUsuario_Adm = new javax.swing.JLabel();
+        jComboBox_CadastroUsuario_Cargo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(583, 145));
         setMinimumSize(new java.awt.Dimension(583, 145));
         setModal(true);
         setResizable(false);
@@ -129,7 +164,7 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
 
         jLabel_CadastroUsuario_CPF.setText("CPF:");
 
-        jLabel_CadastroUsuario_Senha.setText("Senha");
+        jLabel_CadastroUsuario_Senha.setText("Senha:");
 
         jTextField_CadastroUsuario_CPF.setMaximumSize(new java.awt.Dimension(190, 22));
         jTextField_CadastroUsuario_CPF.setMinimumSize(new java.awt.Dimension(190, 22));
@@ -139,7 +174,17 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
         jTextField_CadastroUsuario_Senha.setMinimumSize(new java.awt.Dimension(190, 22));
         jTextField_CadastroUsuario_Senha.setPreferredSize(new java.awt.Dimension(190, 22));
 
-        jLabel1.setText("Matricula:");
+        jLabel_CadastroUsuario_Matrícula.setText("Matricula:");
+
+        jComboBox_CadastroUsuario_Adm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel_CadastroUsuario_Cargo.setText("Cargo:");
+
+        jLabel_CadastroUsuario_Email.setText("Email:");
+
+        jLabel_CadastroUsuario_Adm.setText("ADM:");
+
+        jComboBox_CadastroUsuario_Cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,36 +196,51 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_CadastroUsuario_Título, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_CadastroUsuario_Título, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton_CadastroUsuario_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jButton_CadastroUsuario_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jButton_CadastroUsuario_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jButton_CadastroUsuario_Excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel_CadastroUsuario_CPF)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField_CadastroUsuario_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_CadastroUsuario_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel_CadastroUsuario_Email)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_CadastroUsuario_Email))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_CadastroUsuario_Nome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField_CadastroUsuario_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel_CadastroUsuario_CPF)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_CadastroUsuario_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel_CadastroUsuario_Matrícula)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_CadastroUsuario_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField_CadastroUsuario_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel_CadastroUsuario_Senha)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_CadastroUsuario_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                        .addGap(6, 6, 6))))
+                                .addComponent(jTextField_CadastroUsuario_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel_CadastroUsuario_Cargo))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel_CadastroUsuario_Adm)))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox_CadastroUsuario_Cargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox_CadastroUsuario_Adm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_CadastroUsuario_Novo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton_CadastroUsuario_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton_CadastroUsuario_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton_CadastroUsuario_Excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_CadastroUsuario_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,13 +262,22 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_CadastroUsuario_Nome)
                     .addComponent(jTextField_CadastroUsuario_Nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_CadastroUsuario_CPF)
-                    .addComponent(jTextField_CadastroUsuario_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_CadastroUsuario_Senha)
                     .addComponent(jTextField_CadastroUsuario_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField_CadastroUsuario_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_CadastroUsuario_Matrícula)
+                    .addComponent(jTextField_CadastroUsuario_Matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_CadastroUsuario_Cargo)
+                    .addComponent(jComboBox_CadastroUsuario_Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox_CadastroUsuario_Adm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_CadastroUsuario_CPF)
+                        .addComponent(jTextField_CadastroUsuario_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_CadastroUsuario_Email)
+                        .addComponent(jTextField_CadastroUsuario_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_CadastroUsuario_Adm, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -216,35 +285,98 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Método para limpar os campos, agora também limpando o email e resetando o combo de cargo
     public void limparCampos() {
-        this.jTextField_CadastroUsuario_Nome.setText("");
-        this.jTextField_CadastroUsuario_Senha.setText("");
-        this.jTextField_CadastroUsuario_Matricula.setText("");
-        this.jTextField_CadastroUsuario_CPF.setText("");
+        jTextField_CadastroUsuario_Nome.setText("");
+        jTextField_CadastroUsuario_Senha.setText("");
+        jTextField_CadastroUsuario_Matricula.setText("");
+        jTextField_CadastroUsuario_CPF.setText("");
+        jTextField_CadastroUsuario_Email.setText("");
+        jComboBox_CadastroUsuario_Cargo.setSelectedIndex(0);
+        jComboBox_CadastroUsuario_Adm.setSelectedItem(null);
     }
 
+// Método para habilitar/desabilitar os campos, agora incluindo email e o combo box de cargo
     public void habilitarCampos(boolean flag) {
-        this.jTextField_CadastroUsuario_Nome.setEnabled(flag);
-        this.jTextField_CadastroUsuario_Senha.setEnabled(flag);
-        this.jTextField_CadastroUsuario_Matricula.setEnabled(flag);
-        this.jTextField_CadastroUsuario_CPF.setEnabled(flag);
+        jTextField_CadastroUsuario_Nome.setEnabled(flag);
+        jTextField_CadastroUsuario_Senha.setEnabled(flag);
+        jTextField_CadastroUsuario_Matricula.setEnabled(flag);
+        jTextField_CadastroUsuario_CPF.setEnabled(flag);
+        jTextField_CadastroUsuario_Email.setEnabled(flag);
+        jComboBox_CadastroUsuario_Cargo.setEnabled(flag);
+        // Se o cargo selecionado for OPERADOR, permite editar o combo de ADM
+        String cargo = jComboBox_CadastroUsuario_Cargo.getSelectedItem().toString();
+        jComboBox_CadastroUsuario_Adm.setEnabled(flag && cargo.equalsIgnoreCase("OPERADOR"));
     }
 
-    public Cadastro camposParaObjeto() {
-        Cadastro cadastro = new Cadastro();
-        cadastro.setNome(jTextField_CadastroUsuario_Nome.getText());
-        cadastro.setCpf(jTextField_CadastroUsuario_CPF.getText());
-        cadastro.setMatricula(jTextField_CadastroUsuario_Matricula.getText());
-        cadastro.setSenha(jTextField_CadastroUsuario_Senha.getText());
-        return cadastro;
+// Método que converte os campos da tela em um objeto Funcionario
+// Aqui é feita a criação de um Operador ou Administrador de acordo com o cargo selecionado
+    public Funcionario camposParaObjeto() {
+        String nome = jTextField_CadastroUsuario_Nome.getText();
+        String cpf = jTextField_CadastroUsuario_CPF.getText();
+        String matricula = jTextField_CadastroUsuario_Matricula.getText();
+        String senha = jTextField_CadastroUsuario_Senha.getText();
+        String email = jTextField_CadastroUsuario_Email.getText();
+        String cargo = jComboBox_CadastroUsuario_Cargo.getSelectedItem().toString();
+
+        if (cargo.equalsIgnoreCase("OPERADOR")) {
+            Operador operador = new Operador(nome, cpf, matricula, senha, email);
+            Object item = jComboBox_CadastroUsuario_Adm.getSelectedItem();
+            if (item != null && item instanceof Administrador) {
+                operador.setAdministrador((Administrador) item);
+            } else {
+                operador.setAdministrador(null);
+            }
+            return operador;
+        } else if (cargo.equalsIgnoreCase("ADMINISTRADOR")) {
+            return new Administrador(nome, cpf, matricula, senha, email);
+        } else {
+            throw new RuntimeException("Cargo inválido: " + cargo);
+        }
     }
 
-    public void objetoParaCampos(Cadastro cadastro) {
-        jTextField_CadastroUsuario_Nome.setText(cadastro.getNome());
-        jTextField_CadastroUsuario_CPF.setText(cadastro.getCpf());
-        jTextField_CadastroUsuario_Matricula.setText(cadastro.getMatricula());
-        jTextField_CadastroUsuario_Senha.setText(cadastro.getSenha());
+    // Transfere os dados do objeto para os campos da tela
+    public void objetoParaCampos(Funcionario funcionario) {
+        jTextField_CadastroUsuario_Nome.setText(funcionario.getNome());
+        jTextField_CadastroUsuario_CPF.setText(funcionario.getCpf());
+        jTextField_CadastroUsuario_Matricula.setText(funcionario.getMatricula());
+        jTextField_CadastroUsuario_Senha.setText(funcionario.getSenha());
+        jTextField_CadastroUsuario_Email.setText(funcionario.getEmail());
+        jComboBox_CadastroUsuario_Cargo.setSelectedItem(funcionario.getCargo());
+
+        // Se for Operador, seleciona o Administrador associado (se houver)
+        if (funcionario instanceof Operador) {
+            Operador op = (Operador) funcionario;
+            jComboBox_CadastroUsuario_Adm.setEnabled(true);
+            jComboBox_CadastroUsuario_Adm.setSelectedItem(op.getAdministrador());
+        } else {
+            jComboBox_CadastroUsuario_Adm.setEnabled(false);
+            jComboBox_CadastroUsuario_Adm.setSelectedItem(null);
+        }
     }
+
+    // Atualiza o combobox de administradores conforme o cargo selecionado
+    private void atualizarComboAdm() {
+        String cargo = jComboBox_CadastroUsuario_Cargo.getSelectedItem().toString();
+        if (cargo.equalsIgnoreCase("OPERADOR")) {
+            jComboBox_CadastroUsuario_Adm.setEnabled(true);
+            // Obtém a lista de funcionários e filtra os administradores
+            List<Funcionario> funcionarios = gerente.getFuncionarios();
+            List<Administrador> listaAdmins = new ArrayList<>();
+            for (Funcionario f : funcionarios) {
+                if (f instanceof Administrador) {
+                    listaAdmins.add((Administrador) f);
+                }
+            }
+            // Adiciona uma opção "Nenhum" no início para representar null
+            listaAdmins.add(0, null);
+            jComboBox_CadastroUsuario_Adm.setModel(new DefaultComboBoxModel(listaAdmins.toArray()));
+        } else {
+            jComboBox_CadastroUsuario_Adm.setEnabled(false);
+            jComboBox_CadastroUsuario_Adm.setSelectedItem(null);
+        }
+    }
+
 
     private void jButton_CadastroUsuario_NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_NovoActionPerformed
         this.limparCampos();
@@ -254,16 +386,15 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
 
     private void jButton_CadastroUsuario_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_EditarActionPerformed
         this.cadastroSelecionado = JOptionPane.showInputDialog("Informe a matricula do cadastro selecionado:", "");
-        Cadastro cadastroEditando = this.gerente.buscarCadastro(cadastroSelecionado);
+        Funcionario cadastroEditando = this.gerente.buscarCadastro(cadastroSelecionado);
         if (cadastroEditando != null) {
             this.editando = true;
             this.limparCampos();
             this.habilitarCampos(true);
             objetoParaCampos(cadastroEditando);
-
         } else {
-            System.out.println("cadastro inexistente");
-            JOptionPane.showMessageDialog(this, "A matricula informada não foi encontrada no sistema.", "Cadastro Inexistente", HEIGHT);
+            System.out.println("Cadastro inexistente");
+            JOptionPane.showMessageDialog(this, "A matricula informada não foi encontrada no sistema.", "Cadastro Inexistente", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_CadastroUsuario_EditarActionPerformed
 
@@ -275,7 +406,7 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
 
     private void jButton_CadastroUsuario_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_ExcluirActionPerformed
         this.cadastroSelecionado = JOptionPane.showInputDialog("Informe a matricula do cadastro a ser excluído:", "");
-        Cadastro cadastro = this.gerente.buscarCadastro(cadastroSelecionado);
+        Funcionario cadastro = this.gerente.buscarCadastro(cadastroSelecionado);
         if (cadastro == null) {
             JOptionPane.showMessageDialog(this, "O cadastro informado não foi encontrado no sistema.", "Cadastro Inexistente", HEIGHT);
         } else {
@@ -286,7 +417,7 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
 
     private void jButton_CadastroUsuario_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CadastroUsuario_SalvarActionPerformed
         try {
-            Cadastro novoCadastro = this.camposParaObjeto();
+            Funcionario novoCadastro = this.camposParaObjeto();
             if (this.editando) {
                 this.gerente.atualizarCadastro(this.cadastroSelecionado, novoCadastro);
             } else {
@@ -312,8 +443,13 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JButton jButton_CadastroUsuario_Excluir;
     private javax.swing.JButton jButton_CadastroUsuario_Novo;
     private javax.swing.JButton jButton_CadastroUsuario_Salvar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBox_CadastroUsuario_Adm;
+    private javax.swing.JComboBox<String> jComboBox_CadastroUsuario_Cargo;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Adm;
     private javax.swing.JLabel jLabel_CadastroUsuario_CPF;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Cargo;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Email;
+    private javax.swing.JLabel jLabel_CadastroUsuario_Matrícula;
     private javax.swing.JLabel jLabel_CadastroUsuario_Nome;
     private javax.swing.JLabel jLabel_CadastroUsuario_Senha;
     private javax.swing.JLabel jLabel_CadastroUsuario_Título;
@@ -321,6 +457,7 @@ public class DlgCadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField_CadastroUsuario_CPF;
+    private javax.swing.JTextField jTextField_CadastroUsuario_Email;
     private javax.swing.JTextField jTextField_CadastroUsuario_Matricula;
     private javax.swing.JTextField jTextField_CadastroUsuario_Nome;
     private javax.swing.JTextField jTextField_CadastroUsuario_Senha;

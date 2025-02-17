@@ -3,9 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[583, 145]"/>
-    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[583, 145]"/>
     </Property>
@@ -37,39 +34,59 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel_CadastroUsuario_Título" max="32767" attributes="0"/>
+                  <Component id="jLabel_CadastroUsuario_Título" pref="577" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jButton_CadastroUsuario_Novo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="jButton_CadastroUsuario_Editar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="jButton_CadastroUsuario_Cancelar" min="-2" pref="110" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="jButton_CadastroUsuario_Excluir" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel_CadastroUsuario_CPF" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jTextField_CadastroUsuario_CPF" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton_CadastroUsuario_Salvar" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_CadastroUsuario_Email" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextField_CadastroUsuario_Email" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel_CadastroUsuario_Nome" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextField_CadastroUsuario_Nome" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="jLabel_CadastroUsuario_CPF" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField_CadastroUsuario_CPF" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="jLabel_CadastroUsuario_Matrícula" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField_CadastroUsuario_Matricula" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="jTextField_CadastroUsuario_Matricula" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="jLabel_CadastroUsuario_Senha" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField_CadastroUsuario_Senha" pref="0" max="32767" attributes="0"/>
+                              <Component id="jTextField_CadastroUsuario_Senha" min="-2" pref="74" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="jLabel_CadastroUsuario_Cargo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                              <Component id="jLabel_CadastroUsuario_Adm" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jComboBox_CadastroUsuario_Cargo" max="32767" attributes="0"/>
+                          <Component id="jComboBox_CadastroUsuario_Adm" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jButton_CadastroUsuario_Novo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="jButton_CadastroUsuario_Editar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="jButton_CadastroUsuario_Cancelar" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="jButton_CadastroUsuario_Excluir" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton_CadastroUsuario_Salvar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -96,14 +113,25 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel_CadastroUsuario_Nome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField_CadastroUsuario_Nome" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jLabel_CadastroUsuario_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField_CadastroUsuario_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel_CadastroUsuario_Senha" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField_CadastroUsuario_Senha" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel_CadastroUsuario_Matrícula" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField_CadastroUsuario_Matricula" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel_CadastroUsuario_Cargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox_CadastroUsuario_Cargo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jComboBox_CadastroUsuario_Adm" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel_CadastroUsuario_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField_CadastroUsuario_CPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel_CadastroUsuario_Email" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField_CadastroUsuario_Email" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel_CadastroUsuario_Adm" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -248,7 +276,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel_CadastroUsuario_Senha">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Senha"/>
+        <Property name="text" type="java.lang.String" value="Senha:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_CadastroUsuario_CPF">
@@ -279,12 +307,59 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator3">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabel_CadastroUsuario_Matr&#xed;cula">
       <Properties>
         <Property name="text" type="java.lang.String" value="Matricula:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_CadastroUsuario_Matricula">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox_CadastroUsuario_Adm">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel_CadastroUsuario_Cargo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cargo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel_CadastroUsuario_Email">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Email:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField_CadastroUsuario_Email">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel_CadastroUsuario_Adm">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ADM:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox_CadastroUsuario_Cargo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

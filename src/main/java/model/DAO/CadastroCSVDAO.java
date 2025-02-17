@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.DAO;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Cadastro;
+import model.Funcionario;
 import model.DAO.CSV.FilePersistence;
 import model.DAO.CSV.SerializadorCSVCadastro;
 
-/**
- *
- * @author rafae
- */
-public class CadastroCSVDAO implements IDAO<Cadastro>{
+public class CadastroCSVDAO implements IDAO<Funcionario> {
     
     private final String pathFile = "ListagemCadastro.csv";
     private final SerializadorCSVCadastro serializador;
@@ -28,19 +20,19 @@ public class CadastroCSVDAO implements IDAO<Cadastro>{
     }
 
     @Override
-    public void save(Cadastro cadastro) {
-        List<Cadastro> cadastros = findAll();
-        cadastros.add(cadastro);
-        salvarLista(cadastros);
+    public void save(Funcionario funcionario) {
+        List<Funcionario> funcionarios = findAll();
+        funcionarios.add(funcionario);
+        salvarLista(funcionarios);
     }
 
     @Override
-    public void update(String matricula, Cadastro cadastroNovo) {
-        List<Cadastro> cadastros = findAll();
-        for (int i = 0; i < cadastros.size(); i++) {
-            if (cadastros.get(i).getMatricula().equals(matricula)) {
-                cadastros.set(i, cadastroNovo);
-                salvarLista(cadastros);
+    public void update(String matricula, Funcionario funcionarioNovo) {
+        List<Funcionario> funcionarios = findAll();
+        for (int i = 0; i < funcionarios.size(); i++) {
+            if (funcionarios.get(i).getMatricula().equals(matricula)) {
+                funcionarios.set(i, funcionarioNovo);
+                salvarLista(funcionarios);
                 return;
             }
         }
@@ -48,21 +40,21 @@ public class CadastroCSVDAO implements IDAO<Cadastro>{
 
     @Override
     public void delete(String matricula) {
-        List<Cadastro> cadastros = findAll();
-        cadastros.removeIf(cadastro -> cadastro.getMatricula().equals(matricula));
-        salvarLista(cadastros);
+        List<Funcionario> funcionarios = findAll();
+        funcionarios.removeIf(funcionario -> funcionario.getMatricula().equals(matricula));
+        salvarLista(funcionarios);
     }
 
     @Override
-    public Cadastro findById(String matricula) {
+    public Funcionario findById(String matricula) {
         return findAll().stream()
-                .filter(cadastro -> cadastro.getMatricula().equals(matricula))
+                .filter(funcionario -> funcionario.getMatricula().equals(matricula))
                 .findFirst()
                 .orElse(null);
     }
 
     @Override
-    public List<Cadastro> findAll() {
+    public List<Funcionario> findAll() {
         try {
             String csvData = filePersistence.loadFromFile(pathFile);
             return serializador.fromCSV(csvData);
@@ -74,20 +66,18 @@ public class CadastroCSVDAO implements IDAO<Cadastro>{
     public void carregarDoArquivo(String pathFile) throws FileNotFoundException {
         try {
             String csvData = filePersistence.loadFromFile(pathFile);
-            List<Cadastro> cadastros = serializador.fromCSV(csvData);
+            List<Funcionario> funcionarios = serializador.fromCSV(csvData);
         } catch (IOException e) {
             throw new FileNotFoundException("Erro ao carregar arquivo: " + pathFile);
         }
     }
 
-    public void salvarLista(List<Cadastro> cadastros) {
+    public void salvarLista(List<Funcionario> funcionarios) {
         try {
-            String csvData = serializador.toCSV(cadastros);
+            String csvData = serializador.toCSV(funcionarios);
             filePersistence.saveToFile(csvData, pathFile);
         } catch (IOException e) {
             throw new RuntimeException("Erro ao salvar no arquivo CSV: " + e.getMessage(), e);
         }
     }
 }
-
-   

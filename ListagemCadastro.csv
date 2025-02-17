@@ -1,4 +1,7 @@
-Nome;CPF;Matricula;Senha
-rafael;17871249754;daw;Rafael123
-asda;47904119668;sd21;Ra21
-ara;01274395011;123;asdR1
+Nome;CPF;Matricula;Senha;Email;Cargo;Administrador
+Rafael;17871249754;1;Ra1;rafael@gmail.com;ADMINISTRADOR;
+Zé;47904119668;14;zE2;ze@gmail.com;OPERADOR;1
+Tatu;32434490069;1111;s@aA1;dsf@gmail.com;OPERADOR;
+Yasmin;36766541024;231;2sA;yas@gmail.com;OPERADOR;1
+vitor;23436266000;555;e@aA2;gmai@mail.com;ADMINISTRADOR;
+Gabrei;34927574059;134;da@X1;raf@123.com;OPERADOR;555

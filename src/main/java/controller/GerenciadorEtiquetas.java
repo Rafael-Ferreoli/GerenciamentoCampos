@@ -9,6 +9,7 @@ import model.Etiqueta;
 import model.DAO.IDAO;
 import model.DAO.ProdutoSQLiteDAO;
 import model.Produto;
+import model.validation.EtiquetaValidation;
 
 public class GerenciadorEtiquetas {
 
@@ -16,10 +17,11 @@ public class GerenciadorEtiquetas {
 
     public GerenciadorEtiquetas() {
         this.etiquetaDAO = factory.Persistencia.getEtiquetaDAO();
-
     }
 
     public void adicionarEtiqueta(Etiqueta etiqueta) {
+        // Valida os campos obrigatórios da etiqueta antes de salvá-la.
+        EtiquetaValidation.validarCamposObrigatorios(etiqueta, etiquetaDAO.findAll(), etiqueta.getNumEtiqueta());
         etiquetaDAO.save(etiqueta);
         System.out.println("Etiqueta adicionada");
     }
@@ -36,12 +38,10 @@ public class GerenciadorEtiquetas {
     }
 
     public Etiqueta buscarEtiqueta(int numero) {
-        // Se o DAO tiver o método findById implementado de forma eficiente, use-o
         Etiqueta etiqueta = etiquetaDAO.findById(String.valueOf(numero));
         if (etiqueta != null) {
             return etiqueta;
         }
-        // Alternativamente, pode filtrar a lista completa:
         for (Etiqueta e : etiquetaDAO.findAll()) {
             if (e.getNumEtiqueta() == numero) {
                 return e;
@@ -62,6 +62,8 @@ public class GerenciadorEtiquetas {
 
     public void atualizarEtiqueta(int numero, Etiqueta etiquetaNova) {
         if (buscarEtiqueta(numero) != null) {
+            // Também podemos validar antes de atualizar.
+            EtiquetaValidation.validarCamposObrigatorios(etiquetaNova, etiquetaDAO.findAll(), numero);
             etiquetaDAO.update(String.valueOf(numero), etiquetaNova);
             System.out.println("Etiqueta atualizada");
         } else {
@@ -138,6 +140,5 @@ public class GerenciadorEtiquetas {
         }
         return saida.toString();
     }
-    
-    
+
 }

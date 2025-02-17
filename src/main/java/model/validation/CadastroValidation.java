@@ -3,17 +3,17 @@ package model.validation;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import model.Cadastro;
+import model.Funcionario;
 import model.exception.CadastroException;
 
-public class CadastroValidacao {
+public class CadastroValidation {
 
     public static void validarNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             throw CadastroException.nomeVazio();
         }
 
-        // se tiver num
+        // Verifica se contém números
         Pattern pattern = Pattern.compile(".*\\d.*");
         Matcher matcher = pattern.matcher(nome);
         if (matcher.matches()) {
@@ -69,7 +69,7 @@ public class CadastroValidacao {
             throw CadastroException.senhaInvalida();
         }
 
-        // regex do maiusculo minusculo e numero
+        // Senha precisa ter pelo menos uma letra minúscula, uma maiúscula e um número
         Pattern pattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
         Matcher matcher = pattern.matcher(senha);
         if (!matcher.matches()) {
@@ -77,27 +77,41 @@ public class CadastroValidacao {
         }
     }
 
-    public static void validarMatriz(String matricula) {
+    public static void validarEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new CadastroException("Email não pode ser vazio.");
+        }
+
+        // Regex básica para validar email
+        Pattern pattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
+            throw new CadastroException("Email inválido.");
+        }
+    }
+
+    public static void validarMatricula(String matricula) {
         if (matricula == null || matricula.trim().isEmpty()) {
             throw new CadastroException("Matrícula não pode ser vazia.");
         }
     }
 
-    public static void validarUnicidade(String cpf, String matricula, List<Cadastro> cadastros) {
-        for (Cadastro cadastro : cadastros) {
-            if (cadastro.getCpf().equals(cpf)) {
+    public static void validarUnicidade(String cpf, String matricula, List<Funcionario> funcionarios) {
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario.getCpf().equals(cpf)) {
                 throw CadastroException.cpfJaExistente();
             }
-            if (cadastro.getMatricula().equals(matricula)) {
+            if (funcionario.getMatricula().equals(matricula)) {
                 throw CadastroException.matriculaJaExistente();
             }
         }
     }
 
-    public static void validarCamposObrigatorios(Cadastro cadastro) {
-        validarNome(cadastro.getNome());
-        validarCPF(cadastro.getCpf());
-        validarMatriz(cadastro.getMatricula());
-        validarSenha(cadastro.getSenha());
+    public static void validarCamposObrigatorios(Funcionario funcionario) {
+        validarNome(funcionario.getNome());
+        validarCPF(funcionario.getCpf());
+        validarMatricula(funcionario.getMatricula());
+        validarSenha(funcionario.getSenha());
+        validarEmail(funcionario.getEmail());
     }
 }

@@ -6,6 +6,7 @@ package view;
 
 import controller.GerenciadorCadastros;
 import javax.swing.JOptionPane;
+import model.Funcionario;
 
 /**
  *
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 public class FrHome extends javax.swing.JFrame {
 
     private GerenciadorCadastros cadastro;
-    
+
     public FrHome() {
         initComponents();
         jPasswordField_Password.setEnabled(false);
@@ -204,11 +205,11 @@ public class FrHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_LoginMouseClicked
-        
+
     }//GEN-LAST:event_jTextField_LoginMouseClicked
 
     private void jPasswordField_PasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField_PasswordMouseClicked
-        
+
     }//GEN-LAST:event_jPasswordField_PasswordMouseClicked
 
     private void jTextField_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_LoginActionPerformed
@@ -228,14 +229,34 @@ public class FrHome extends javax.swing.JFrame {
         if (resposta == JOptionPane.YES_OPTION) {
             jTextField_Login.setText("");
             jPasswordField_Password.setText("");
-            jButton_Confirmar.setEnabled(false);
             jTextField_Login.setEnabled(true);
         }
     }//GEN-LAST:event_jButton_CancelarActionPerformed
 
     private void jButton_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfirmarActionPerformed
-        DlgMenu tela2 = new DlgMenu(true);
-        tela2.setVisible(true);
+        // Recupera os dados digitados
+        String matricula = jTextField_Login.getText().trim();
+        String senha = new String(jPasswordField_Password.getPassword());
+
+        // Usa o Gerenciador de Cadastros para buscar o funcionário pela matrícula
+        GerenciadorCadastros gerenciador = new GerenciadorCadastros();
+        Funcionario funcionario = gerenciador.buscarCadastro(matricula);
+
+        if (funcionario != null) {
+            // Verifica se a senha informada confere com a senha armazenada
+            if (funcionario.getSenha().equals(senha)) {
+                JOptionPane.showMessageDialog(this, "Login realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                // Se o login for válido, abre a tela do menu
+                DlgMenu tela2 = new DlgMenu(true);
+                tela2.setVisible(true);
+                // Opcional: fecha a tela de login
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Senha incorreta.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Matrícula não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_ConfirmarActionPerformed
 
     private void jButton_Criar_CadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Criar_CadastroActionPerformed

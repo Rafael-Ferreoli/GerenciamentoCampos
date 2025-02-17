@@ -2,30 +2,31 @@ package controller;
 
 import factory.Persistencia;
 import java.util.List;
-import model.Cadastro;
+import model.Funcionario;
 import model.DAO.IDAO;
-import model.validation.CadastroValidacao;
+import model.validation.CadastroValidation;
 
 public class GerenciadorCadastros {
 
-    private IDAO<Cadastro> cadastroDAO;
+    private IDAO<Funcionario> funcionarioDAO;
 
     public GerenciadorCadastros() {
-        this.cadastroDAO = Persistencia.getCadastroDAO();
+        Persistencia.closeConnection();
+        this.funcionarioDAO = Persistencia.getFuncionarioDAO();
     }
 
-    public void adicionarCadastro(Cadastro cadastro) {
-        List<Cadastro> lista = cadastroDAO.findAll();
-        CadastroValidacao.validarCamposObrigatorios(cadastro);
-        CadastroValidacao.validarUnicidade(cadastro.getCpf(), cadastro.getMatricula(), lista);
-        cadastroDAO.save(cadastro);
+    public void adicionarCadastro(Funcionario funcionario) {
+        List<Funcionario> lista = funcionarioDAO.findAll();
+        CadastroValidation.validarCamposObrigatorios(funcionario);
+        CadastroValidation.validarUnicidade(funcionario.getCpf(), funcionario.getMatricula(), lista);
+        funcionarioDAO.save(funcionario);
         System.out.println("Cadastro adicionado com sucesso.");
     }
 
     public boolean removerCadastro(String matricula) {
-        Cadastro cadastro = buscarCadastro(matricula);
-        if (cadastro != null) {
-            cadastroDAO.delete(matricula);
+        Funcionario funcionario = buscarCadastro(matricula);
+        if (funcionario != null) {
+            funcionarioDAO.delete(matricula);
             System.out.println("Cadastro removido");
             return true;
         }
@@ -33,25 +34,29 @@ public class GerenciadorCadastros {
         return false;
     }
 
-    public Cadastro buscarCadastro(String matricula) {
-        return cadastroDAO.findById(matricula);
+    public Funcionario buscarCadastro(String matricula) {
+        return funcionarioDAO.findById(matricula);
     }
 
-    public void atualizarCadastro(String matricula, Cadastro cadastroNovo) {
+    public void atualizarCadastro(String matricula, Funcionario funcionarioNovo) {
         if (buscarCadastro(matricula) != null) {
-            cadastroDAO.update(matricula, cadastroNovo);
+            funcionarioDAO.update(matricula, funcionarioNovo);
             System.out.println("Cadastro atualizado");
         } else {
             System.out.println("Cadastro não encontrado");
         }
     }
 
+    public List<Funcionario> getFuncionarios() {
+        return funcionarioDAO.findAll();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        List<Cadastro> cadastros = cadastroDAO.findAll();
-        for (Cadastro cadastro : cadastros) {
-            sb.append(cadastro.toString()).append("\n");
+        List<Funcionario> funcionarios = funcionarioDAO.findAll();
+        for (Funcionario funcionario : funcionarios) {
+            sb.append(funcionario.toString()).append("\n");
         }
         return sb.toString();
     }

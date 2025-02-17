@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import model.DAO.IDAO;
 import model.Produto;
 import model.exception.ProdutoException;
-import model.validation.ProdutoValidacao;
+import model.validation.ProdutoValidation;
 
 public class GerenciadorProdutos extends AbstractTableModel {
 
@@ -30,14 +30,14 @@ public class GerenciadorProdutos extends AbstractTableModel {
         if (produto == null) {
             throw ProdutoException.camposInvalidos("Produto");
         }
-        ProdutoValidacao.validarCamposObrigatorios(produto, this.produtos, null); // código atual é null na adição
+        ProdutoValidation.validarCamposObrigatorios(produto, this.produtos, null); // código atual é null na adição
         this.produtoDAO.save(produto);
         this.produtos = this.produtoDAO.findAll();
         fireTableDataChanged();
     }
 
     public boolean removerProduto(String codigoInterno) {
-        ProdutoValidacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ProdutoValidation.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
         Produto produto = buscarProduto(codigoInterno);
 
         if (produto != null) {
@@ -50,7 +50,7 @@ public class GerenciadorProdutos extends AbstractTableModel {
     }
 
     public Produto buscarProduto(String codigoInterno) {
-        ProdutoValidacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ProdutoValidation.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
         Produto produto = this.produtoDAO.findById(codigoInterno);
         if (produto == null) {
             throw ProdutoException.produtoNaoEncontrado(codigoInterno);
@@ -59,13 +59,13 @@ public class GerenciadorProdutos extends AbstractTableModel {
     }
 
     public boolean atualizarProduto(String codigoInterno, Produto produtoNovo) {
-        ProdutoValidacao.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
+        ProdutoValidation.validarStringNaoVazia(codigoInterno, "Código interno não pode ser vazio.");
 
         if (produtoNovo == null) {
             throw ProdutoException.camposInvalidos("Produto novo");
         }
 
-        ProdutoValidacao.validarCodBarra(produtoNovo.getCodigoBarra());
+        ProdutoValidation.validarCodBarra(produtoNovo.getCodigoBarra());
         Produto produtoExistente = buscarProduto(codigoInterno);
         if (produtoExistente == null) {
             throw ProdutoException.produtoNaoEncontrado(codigoInterno);
@@ -75,7 +75,7 @@ public class GerenciadorProdutos extends AbstractTableModel {
         List<Produto> listaSemAtual = new ArrayList<>(this.produtos);
         listaSemAtual.remove(produtoExistente);
 
-        ProdutoValidacao.validarCamposObrigatorios(produtoNovo, listaSemAtual, produtoExistente.getCodigoInterno());
+        ProdutoValidation.validarCamposObrigatorios(produtoNovo, listaSemAtual, produtoExistente.getCodigoInterno());
 
         // Atualiza o produto
         this.produtoDAO.update(codigoInterno, produtoNovo);

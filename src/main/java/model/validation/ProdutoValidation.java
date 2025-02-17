@@ -4,7 +4,7 @@ import model.Produto;
 import model.exception.ProdutoException;
 import java.util.List;
 
-public class ProdutoValidacao {
+public class ProdutoValidation {
 
     public static void validarStringNaoVazia(String valor, String mensagemErro) {
         if (valor == null || valor.trim().isEmpty()) {
